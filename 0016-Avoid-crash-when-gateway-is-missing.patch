@@ -1,0 +1,65 @@
+From de2084e488239f501b4d7a27e9138812a7156753 Mon Sep 17 00:00:00 2001
+From: "Daniel P. Berrange" <berrange@redhat.com>
+Date: Wed, 2 Oct 2013 15:32:41 +0100
+Subject: [PATCH] Avoid crash when gateway is missing
+
+For
+
+  https://bugzilla.redhat.com/show_bug.cgi?id=993557
+
+The gateway parameter is required, but the docs mistakenly said
+it was optional. Leaving it out lead to a crash in the parser.
+
+Signed-off-by: Daniel P. Berrange <berrange@redhat.com>
+(cherry picked from commit 90792581a9d2c3be66bb084525080dc29f83413a)
+---
+ bin/virt-sandbox-service-create.pod      | 4 ++--
+ bin/virt-sandbox.c                       | 4 ++--
+ libvirt-sandbox/libvirt-sandbox-config.c | 4 ++++
+ 3 files changed, 8 insertions(+), 4 deletions(-)
+
+diff --git a/bin/virt-sandbox-service-create.pod b/bin/virt-sandbox-service-create.pod
+index 2ab289a..3dc7085 100644
+--- a/bin/virt-sandbox-service-create.pod
++++ b/bin/virt-sandbox-service-create.pod
+@@ -164,8 +164,8 @@ specifies the broadcast address. Some examples
+ 
+ Configure the network interface with the static IPv4 or IPv6 route
+ B<IP-NETWORK>. The B<PREFIX> value is the length of the network
+-prefix in B<IP-NETWORK>. The optional B<GATEWAY> parameter
+-specifies the address of the gateway. Some examples
++prefix in B<IP-NETWORK>. The B<GATEWAY> parameter specifies the
++address of the gateway for the route. Some examples
+ 
+   route=192.168.122.255/24%192.168.1.1
+ 
+diff --git a/bin/virt-sandbox.c b/bin/virt-sandbox.c
+index a4479ec..3b8dd72 100644
+--- a/bin/virt-sandbox.c
++++ b/bin/virt-sandbox.c
+@@ -380,8 +380,8 @@ specifies the broadcast address. Some examples
+ 
+ Configure the network interface with the static IPv4 or IPv6 route
+ B<IP-NETWORK>. The B<PREFIX> value is the length of the network
+-prefix in B<IP-NETWORK>. The optional B<GATEWAY> parameter
+-specifies the address of the gateway. Some examples
++prefix in B<IP-NETWORK>. The B<GATEWAY> parameter specifies the
++address of the gateway for the route. Some examples
+ 
+   route=192.168.122.255/24%192.168.1.1
+ 
+diff --git a/libvirt-sandbox/libvirt-sandbox-config.c b/libvirt-sandbox/libvirt-sandbox-config.c
+index 2cc4e22..f9625ce 100644
+--- a/libvirt-sandbox/libvirt-sandbox-config.c
++++ b/libvirt-sandbox/libvirt-sandbox-config.c
+@@ -1031,6 +1031,10 @@ gboolean gvir_sandbox_config_add_network_opts(GVirSandboxConfig *config,
+             if (tmp) {
+                 *tmp = '\0';
+                 gateway = tmp+1;
++            } else {
++                g_set_error(error, GVIR_SANDBOX_CONFIG_ERROR, 0,
++                            _("Missing gateway in route %s"), param);
++                goto cleanup;
+             }
+ 
+             if (!(targetaddr = g_inet_address_new_from_string(target))) {

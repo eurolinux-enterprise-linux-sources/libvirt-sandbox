@@ -1,0 +1,32 @@
+From ebd62ae73f41e1fe72419031bcd98919e2fcc009 Mon Sep 17 00:00:00 2001
+From: "Daniel P. Berrange" <berrange@redhat.com>
+Date: Thu, 15 Aug 2013 16:31:02 +0100
+Subject: [PATCH] Fix leak of file handle in libvirt-sandbox-init-qemu
+
+For https://bugzilla.redhat.com/show_bug.cgi?id=922639
+
+The 'FILE *' handle used to read /proc/cmdline was not
+closed in all codepaths. This caused coverity to identify
+a resource leak.
+
+Signed-off-by: Daniel P. Berrange <berrange@redhat.com>
+(cherry picked from commit 6f3306279faa1f2d906012cdcc74c4d1fe4ff5d1)
+---
+ libvirt-sandbox/libvirt-sandbox-init-qemu.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/libvirt-sandbox/libvirt-sandbox-init-qemu.c b/libvirt-sandbox/libvirt-sandbox-init-qemu.c
+index 44f5de0..998bd02 100644
+--- a/libvirt-sandbox/libvirt-sandbox-init-qemu.c
++++ b/libvirt-sandbox/libvirt-sandbox-init-qemu.c
+@@ -557,8 +557,9 @@ static void set_debug(void)
+     if (fp && fgets(line, sizeof line, fp)) {
+         if (strstr(line, "debug"))
+             debug=1;
+-        fclose(fp);
+     }
++    if (fp)
++        fclose(fp);
+     if (umount("/proc") < 0) {
+         fprintf(stderr, "libvirt-sandbox-init-qemu: %s: cannot unmount /proc: %s\n",
+                 __func__, strerror(errno));

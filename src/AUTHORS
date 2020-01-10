@@ -1,0 +1,23 @@
+       libvirt-sandbox Authors
+       =======================
+
+The primary maintainers of libvirt-sandbox are:
+
+   Daniel P. Berrange <berrange@redhat.com>
+   Dan Walsh <dwalsh@redhat.com>
+   Guido Günther <agx@sigxcpu.org>
+   Michal Privoznik <mprivozn@redhat.com>
+
+Patches have been received from:
+
+Alex Jia <ajia@redhat.com>
+Dan Walsh <dwalsh@redhat.com>
+Daniel P. Berrange <berrange@redhat.com>
+Guido Günther <agx@sigxcpu.org>
+Michael Scherer <misc@zarb.org>
+Michal Privoznik <mprivozn@redhat.com>
+Radu Caragea <sinaelgl@gmail.com>
+Wayne Sun <gsun@redhat.com>
+rhatdan <dwalsh@redhat.com>
+
+   ... send patches to get your name added ...

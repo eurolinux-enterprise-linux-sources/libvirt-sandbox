@@ -1,0 +1,37 @@
+From ec79a44c76d77180815f77924b5c0a0ba63b3ffc Mon Sep 17 00:00:00 2001
+From: "Daniel P. Berrange" <berrange@redhat.com>
+Date: Thu, 15 Aug 2013 14:00:06 +0100
+Subject: [PATCH] Remove unused 'int fd' variable
+
+For https://bugzilla.redhat.com/show_bug.cgi?id=922639
+
+The 'int fd' variable in gvir_sandbox_builder_machine_mkinitrd was
+no longer used, causing a coverity warning about dead code.
+
+Signed-off-by: Daniel P. Berrange <berrange@redhat.com>
+(cherry picked from commit 2160dabc8c9260b7cc955fbbdaf00f838a0c7931)
+---
+ libvirt-sandbox/libvirt-sandbox-builder-machine.c | 3 ---
+ 1 file changed, 3 deletions(-)
+
+diff --git a/libvirt-sandbox/libvirt-sandbox-builder-machine.c b/libvirt-sandbox/libvirt-sandbox-builder-machine.c
+index 6b9b506..229a6cc 100644
+--- a/libvirt-sandbox/libvirt-sandbox-builder-machine.c
++++ b/libvirt-sandbox/libvirt-sandbox-builder-machine.c
+@@ -153,7 +153,6 @@ static gchar *gvir_sandbox_builder_machine_mkinitrd(GVirSandboxConfig *config,
+     GVirSandboxConfigInitrd *initrd = gvir_sandbox_config_initrd_new();
+     GVirSandboxBuilderInitrd *builder = gvir_sandbox_builder_initrd_new();
+     gchar *targetfile = g_strdup_printf("%s/initrd.img", statedir);
+-    int fd = -1;
+     gchar *kver = gvir_sandbox_builder_machine_get_kernrelease(config);
+     const gchar *kmodpath = gvir_sandbox_config_get_kmodpath(config);
+     if (!kmodpath)
+@@ -183,8 +182,6 @@ static gchar *gvir_sandbox_builder_machine_mkinitrd(GVirSandboxConfig *config,
+         goto cleanup;
+ 
+ cleanup:
+-    if (fd != -1)
+-        close(fd);
+     if (*error) {
+         g_free(targetfile);
+         targetfile = NULL;

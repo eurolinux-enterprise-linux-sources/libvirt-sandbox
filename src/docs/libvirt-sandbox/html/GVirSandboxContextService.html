@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>GVirSandboxContextService</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<link rel="home" href="index.html" title="Libvirt-sandbox Reference Manual">
+<link rel="up" href="ch01.html" title="Libvirt-sandbox">
+<link rel="prev" href="GVirSandboxContextInteractive.html" title="GVirSandboxContextInteractive">
+<link rel="next" href="object-tree.html" title="Object Hierarchy">
+<meta name="generator" content="GTK-Doc V1.19 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="GVirSandboxContextInteractive.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libvirt-sandbox Reference Manual</th>
+<td><a accesskey="n" href="object-tree.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#GVirSandboxContextService.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#GVirSandboxContextService.description" class="shortcut">Description</a>
+                   | 
+                  <a href="#GVirSandboxContextService.object-hierarchy" class="shortcut">Object Hierarchy</a>
+</td></tr>
+</table>
+<div class="refentry">
+<a name="GVirSandboxContextService"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="GVirSandboxContextService.top_of_page"></a>GVirSandboxContextService</span></h2>
+<p>GVirSandboxContextService — Desktop application sandbox context</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="GVirSandboxContextService.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+#include &lt;libvirt-sandbox/libvirt-sandbox.h&gt;
+
+struct              <a class="link" href="GVirSandboxContextService.html#GVirSandboxContextService-struct" title="struct GVirSandboxContextService">GVirSandboxContextService</a>;
+struct              <a class="link" href="GVirSandboxContextService.html#GVirSandboxContextServiceClass" title="struct GVirSandboxContextServiceClass">GVirSandboxContextServiceClass</a>;
+<a class="link" href="GVirSandboxContextService.html" title="GVirSandboxContextService"><span class="returnvalue">GVirSandboxContextService</span></a> * <a class="link" href="GVirSandboxContextService.html#gvir-sandbox-context-service-new" title="gvir_sandbox_context_service_new ()">gvir_sandbox_context_service_new</a>
+                                                        (<em class="parameter"><code><a href="/usr/share/gtk-doc/html/Libvirt-gobject/GVirConnection.html"><span class="type">GVirConnection</span></a> *connection</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GVirSandboxConfigService.html" title="GVirSandboxConfigService"><span class="type">GVirSandboxConfigService</span></a> *config</code></em>);
+<span class="returnvalue">gboolean</span>            <a class="link" href="GVirSandboxContextService.html#gvir-sandbox-context-service-define" title="gvir_sandbox_context_service_define ()">gvir_sandbox_context_service_define</a> (<em class="parameter"><code><a class="link" href="GVirSandboxContextService.html" title="GVirSandboxContextService"><span class="type">GVirSandboxContextService</span></a> *ctxt</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);
+<span class="returnvalue">gboolean</span>            <a class="link" href="GVirSandboxContextService.html#gvir-sandbox-context-service-undefine" title="gvir_sandbox_context_service_undefine ()">gvir_sandbox_context_service_undefine</a>
+                                                        (<em class="parameter"><code><a class="link" href="GVirSandboxContextService.html" title="GVirSandboxContextService"><span class="type">GVirSandboxContextService</span></a> *ctxt</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);
+</pre>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxContextService.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  GObject
+   +----<a class="link" href="GVirSandboxContext.html" title="GVirSandboxContext">GVirSandboxContext</a>
+         +----GVirSandboxContextService
+</pre>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxContextService.description"></a><h2>Description</h2>
+<p>
+Provides a base class for implementing service desktop application sandboxes
+</p>
+<p>
+The GVirSandboxContextService object extends the functionality provided by
+<a class="link" href="GVirSandboxContext.html" title="GVirSandboxContext"><span class="type">GVirSandboxContext</span></a> to allow the application to display output in a service
+desktop.
+</p>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxContextService.details"></a><h2>Details</h2>
+<div class="refsect2">
+<a name="GVirSandboxContextService-struct"></a><h3>struct GVirSandboxContextService</h3>
+<pre class="programlisting">struct GVirSandboxContextService;</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GVirSandboxContextServiceClass"></a><h3>struct GVirSandboxContextServiceClass</h3>
+<pre class="programlisting">struct GVirSandboxContextServiceClass {
+    GVirSandboxContextClass parent_class;
+
+    gboolean (*define)(GVirSandboxContextService *ctxt, GError **error);
+    gboolean (*undefine)(GVirSandboxContextService *ctxt, GError **error);
+
+    gpointer padding[LIBVIRT_SANDBOX_CLASS_PADDING];
+};
+</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-context-service-new"></a><h3>gvir_sandbox_context_service_new ()</h3>
+<pre class="programlisting"><a class="link" href="GVirSandboxContextService.html" title="GVirSandboxContextService"><span class="returnvalue">GVirSandboxContextService</span></a> * gvir_sandbox_context_service_new
+                                                        (<em class="parameter"><code><a href="/usr/share/gtk-doc/html/Libvirt-gobject/GVirConnection.html"><span class="type">GVirConnection</span></a> *connection</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GVirSandboxConfigService.html" title="GVirSandboxConfigService"><span class="type">GVirSandboxConfigService</span></a> *config</code></em>);</pre>
+<p>
+Create a new service application sandbox context
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
+<td>the libvirt connection. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>config</code></em> :</span></p></td>
+<td>the initial configuratoion. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>a new service sandbox context object. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-context-service-define"></a><h3>gvir_sandbox_context_service_define ()</h3>
+<pre class="programlisting"><span class="returnvalue">gboolean</span>            gvir_sandbox_context_service_define (<em class="parameter"><code><a class="link" href="GVirSandboxContextService.html" title="GVirSandboxContextService"><span class="type">GVirSandboxContextService</span></a> *ctxt</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-context-service-undefine"></a><h3>gvir_sandbox_context_service_undefine ()</h3>
+<pre class="programlisting"><span class="returnvalue">gboolean</span>            gvir_sandbox_context_service_undefine
+                                                        (<em class="parameter"><code><a class="link" href="GVirSandboxContextService.html" title="GVirSandboxContextService"><span class="type">GVirSandboxContextService</span></a> *ctxt</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);</pre>
+</div>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxContextService.see-also"></a><h2>See Also</h2>
+<a class="link" href="GVirSandboxContext.html" title="GVirSandboxContext"><span class="type">GVirSandboxContext</span></a>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.19</div>
+</body>
+</html>

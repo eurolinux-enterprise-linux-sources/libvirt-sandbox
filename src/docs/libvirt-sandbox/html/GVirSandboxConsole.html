@@ -1,0 +1,250 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>GVirSandboxConsole</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<link rel="home" href="index.html" title="Libvirt-sandbox Reference Manual">
+<link rel="up" href="ch01.html" title="Libvirt-sandbox">
+<link rel="prev" href="GVirSandboxConfigServiceSystemd.html" title="GVirSandboxConfigServiceSystemd">
+<link rel="next" href="GVirSandboxConsoleRaw.html" title="GVirSandboxConsoleRaw">
+<meta name="generator" content="GTK-Doc V1.19 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="GVirSandboxConfigServiceSystemd.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libvirt-sandbox Reference Manual</th>
+<td><a accesskey="n" href="GVirSandboxConsoleRaw.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#GVirSandboxConsole.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#GVirSandboxConsole.description" class="shortcut">Description</a>
+                   | 
+                  <a href="#GVirSandboxConsole.object-hierarchy" class="shortcut">Object Hierarchy</a>
+                   | 
+                  <a href="#GVirSandboxConsole.properties" class="shortcut">Properties</a>
+                   | 
+                  <a href="#GVirSandboxConsole.signals" class="shortcut">Signals</a>
+</td></tr>
+</table>
+<div class="refentry">
+<a name="GVirSandboxConsole"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="GVirSandboxConsole.top_of_page"></a>GVirSandboxConsole</span></h2>
+<p>GVirSandboxConsole — A text mode console</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="GVirSandboxConsole.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+#include &lt;libvirt-sandbox/libvirt-sandbox.h&gt;
+
+#define             <a class="link" href="GVirSandboxConsole.html#GVIR-SANDBOX-TYPE-CONSOLE-HANDLE:CAPS" title="GVIR_SANDBOX_TYPE_CONSOLE_HANDLE">GVIR_SANDBOX_TYPE_CONSOLE_HANDLE</a>
+struct              <a class="link" href="GVirSandboxConsole.html#GVirSandboxConsole-struct" title="struct GVirSandboxConsole">GVirSandboxConsole</a>;
+struct              <a class="link" href="GVirSandboxConsole.html#GVirSandboxConsoleClass" title="struct GVirSandboxConsoleClass">GVirSandboxConsoleClass</a>;
+<span class="returnvalue">gboolean</span>            <a class="link" href="GVirSandboxConsole.html#gvir-sandbox-console-attach-stdio" title="gvir_sandbox_console_attach_stdio ()">gvir_sandbox_console_attach_stdio</a>   (<em class="parameter"><code><a class="link" href="GVirSandboxConsole.html" title="GVirSandboxConsole"><span class="type">GVirSandboxConsole</span></a> *console</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);
+<span class="returnvalue">gboolean</span>            <a class="link" href="GVirSandboxConsole.html#gvir-sandbox-console-attach-stderr" title="gvir_sandbox_console_attach_stderr ()">gvir_sandbox_console_attach_stderr</a>  (<em class="parameter"><code><a class="link" href="GVirSandboxConsole.html" title="GVirSandboxConsole"><span class="type">GVirSandboxConsole</span></a> *console</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);
+<span class="returnvalue">gboolean</span>            <a class="link" href="GVirSandboxConsole.html#gvir-sandbox-console-attach" title="gvir_sandbox_console_attach ()">gvir_sandbox_console_attach</a>         (<em class="parameter"><code><a class="link" href="GVirSandboxConsole.html" title="GVirSandboxConsole"><span class="type">GVirSandboxConsole</span></a> *console</code></em>,
+                                                         <em class="parameter"><code><span class="type">GUnixInputStream</span> *localStdin</code></em>,
+                                                         <em class="parameter"><code><span class="type">GUnixOutputStream</span> *localStdout</code></em>,
+                                                         <em class="parameter"><code><span class="type">GUnixOutputStream</span> *localStderr</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);
+<span class="returnvalue">gboolean</span>            <a class="link" href="GVirSandboxConsole.html#gvir-sandbox-console-detach" title="gvir_sandbox_console_detach ()">gvir_sandbox_console_detach</a>         (<em class="parameter"><code><a class="link" href="GVirSandboxConsole.html" title="GVirSandboxConsole"><span class="type">GVirSandboxConsole</span></a> *console</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);
+<span class="returnvalue">gboolean</span>            <a class="link" href="GVirSandboxConsole.html#gvir-sandbox-console-isolate" title="gvir_sandbox_console_isolate ()">gvir_sandbox_console_isolate</a>        (<em class="parameter"><code><a class="link" href="GVirSandboxConsole.html" title="GVirSandboxConsole"><span class="type">GVirSandboxConsole</span></a> *console</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GVirSandboxConsole.html#gvir-sandbox-console-set-escape" title="gvir_sandbox_console_set_escape ()">gvir_sandbox_console_set_escape</a>     (<em class="parameter"><code><a class="link" href="GVirSandboxConsole.html" title="GVirSandboxConsole"><span class="type">GVirSandboxConsole</span></a> *console</code></em>,
+                                                         <em class="parameter"><code><span class="type">gchar</span> escape</code></em>);
+<span class="returnvalue">gchar</span>               <a class="link" href="GVirSandboxConsole.html#gvir-sandbox-console-get-escape" title="gvir_sandbox_console_get_escape ()">gvir_sandbox_console_get_escape</a>     (<em class="parameter"><code><a class="link" href="GVirSandboxConsole.html" title="GVirSandboxConsole"><span class="type">GVirSandboxConsole</span></a> *console</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GVirSandboxConsole.html#gvir-sandbox-console-set-direct" title="gvir_sandbox_console_set_direct ()">gvir_sandbox_console_set_direct</a>     (<em class="parameter"><code><a class="link" href="GVirSandboxConsole.html" title="GVirSandboxConsole"><span class="type">GVirSandboxConsole</span></a> *console</code></em>,
+                                                         <em class="parameter"><code><span class="type">gboolean</span> direct</code></em>);
+<span class="returnvalue">gboolean</span>            <a class="link" href="GVirSandboxConsole.html#gvir-sandbox-console-get-direct" title="gvir_sandbox_console_get_direct ()">gvir_sandbox_console_get_direct</a>     (<em class="parameter"><code><a class="link" href="GVirSandboxConsole.html" title="GVirSandboxConsole"><span class="type">GVirSandboxConsole</span></a> *console</code></em>);
+</pre>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxConsole.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  GObject
+   +----GVirSandboxConsole
+         +----<a class="link" href="GVirSandboxConsoleRaw.html" title="GVirSandboxConsoleRaw">GVirSandboxConsoleRaw</a>
+         +----<a class="link" href="GVirSandboxConsoleRpc.html" title="GVirSandboxConsoleRpc">GVirSandboxConsoleRpc</a>
+</pre>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxConsole.properties"></a><h2>Properties</h2>
+<pre class="synopsis">
+  "<a class="link" href="GVirSandboxConsole.html#GVirSandboxConsole--connection" title='The "connection" property'>connection</a>"               <a href="/usr/share/gtk-doc/html/Libvirt-gobject/GVirConnection.html"><span class="type">GVirConnection</span></a>*       : Read / Write / Construct Only
+  "<a class="link" href="GVirSandboxConsole.html#GVirSandboxConsole--devname" title='The "devname" property'>devname</a>"                  <span class="type">gchar</span>*                : Read / Write / Construct Only
+  "<a class="link" href="GVirSandboxConsole.html#GVirSandboxConsole--direct" title='The "direct" property'>direct</a>"                   <span class="type">gboolean</span>              : Read / Write / Construct Only
+  "<a class="link" href="GVirSandboxConsole.html#GVirSandboxConsole--domain" title='The "domain" property'>domain</a>"                   <a href="/usr/share/gtk-doc/html/Libvirt-gobject/GVirDomain.html"><span class="type">GVirDomain</span></a>*           : Read / Write / Construct Only
+  "<a class="link" href="GVirSandboxConsole.html#GVirSandboxConsole--escape" title='The "escape" property'>escape</a>"                   <span class="type">gchar</span>                 : Read / Write / Construct Only
+</pre>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxConsole.signals"></a><h2>Signals</h2>
+<pre class="synopsis">
+  "<a class="link" href="GVirSandboxConsole.html#GVirSandboxConsole-closed" title='The "closed" signal'>closed</a>"                                         : <code class="literal">Run First</code>
+</pre>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxConsole.description"></a><h2>Description</h2>
+<p>
+Provides an object to interface to the text mode console of the sandbox
+</p>
+<p>
+The GVirSandboxConsole object provides support for interfacing to the
+text mode console of the sandbox. It forwards I/O between the <a href="/usr/share/gtk-doc/html/Libvirt-gobject/GVirStream.html"><span class="type">GVirStream</span></a>
+associated with the virtual machine's console and a local console
+represented by <span class="type">GUnixInputStream</span> and <span class="type">GUnixOutputStream</span> objects.
+</p>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxConsole.details"></a><h2>Details</h2>
+<div class="refsect2">
+<a name="GVIR-SANDBOX-TYPE-CONSOLE-HANDLE:CAPS"></a><h3>GVIR_SANDBOX_TYPE_CONSOLE_HANDLE</h3>
+<pre class="programlisting">#define GVIR_SANDBOX_TYPE_CONSOLE_HANDLE      (gvir_sandbox_console_handle_get_type ())
+</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GVirSandboxConsole-struct"></a><h3>struct GVirSandboxConsole</h3>
+<pre class="programlisting">struct GVirSandboxConsole;</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GVirSandboxConsoleClass"></a><h3>struct GVirSandboxConsoleClass</h3>
+<pre class="programlisting">struct GVirSandboxConsoleClass {
+    GObjectClass parent_class;
+
+    /* signals */
+    void (*closed)(GVirSandboxConsole *console, gboolean err);
+
+    /* class methods */
+    gboolean (*attach)(GVirSandboxConsole *console,
+                       GUnixInputStream *localStdin,
+                       GUnixOutputStream *localStdout,
+                       GUnixOutputStream *localStderr,
+                       GError **error);
+    gboolean (*detach)(GVirSandboxConsole *console,
+                       GError **error);
+
+    gpointer padding[LIBVIRT_SANDBOX_CLASS_PADDING];
+};
+</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-console-attach-stdio"></a><h3>gvir_sandbox_console_attach_stdio ()</h3>
+<pre class="programlisting"><span class="returnvalue">gboolean</span>            gvir_sandbox_console_attach_stdio   (<em class="parameter"><code><a class="link" href="GVirSandboxConsole.html" title="GVirSandboxConsole"><span class="type">GVirSandboxConsole</span></a> *console</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-console-attach-stderr"></a><h3>gvir_sandbox_console_attach_stderr ()</h3>
+<pre class="programlisting"><span class="returnvalue">gboolean</span>            gvir_sandbox_console_attach_stderr  (<em class="parameter"><code><a class="link" href="GVirSandboxConsole.html" title="GVirSandboxConsole"><span class="type">GVirSandboxConsole</span></a> *console</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-console-attach"></a><h3>gvir_sandbox_console_attach ()</h3>
+<pre class="programlisting"><span class="returnvalue">gboolean</span>            gvir_sandbox_console_attach         (<em class="parameter"><code><a class="link" href="GVirSandboxConsole.html" title="GVirSandboxConsole"><span class="type">GVirSandboxConsole</span></a> *console</code></em>,
+                                                         <em class="parameter"><code><span class="type">GUnixInputStream</span> *localStdin</code></em>,
+                                                         <em class="parameter"><code><span class="type">GUnixOutputStream</span> *localStdout</code></em>,
+                                                         <em class="parameter"><code><span class="type">GUnixOutputStream</span> *localStderr</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-console-detach"></a><h3>gvir_sandbox_console_detach ()</h3>
+<pre class="programlisting"><span class="returnvalue">gboolean</span>            gvir_sandbox_console_detach         (<em class="parameter"><code><a class="link" href="GVirSandboxConsole.html" title="GVirSandboxConsole"><span class="type">GVirSandboxConsole</span></a> *console</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-console-isolate"></a><h3>gvir_sandbox_console_isolate ()</h3>
+<pre class="programlisting"><span class="returnvalue">gboolean</span>            gvir_sandbox_console_isolate        (<em class="parameter"><code><a class="link" href="GVirSandboxConsole.html" title="GVirSandboxConsole"><span class="type">GVirSandboxConsole</span></a> *console</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-console-set-escape"></a><h3>gvir_sandbox_console_set_escape ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                gvir_sandbox_console_set_escape     (<em class="parameter"><code><a class="link" href="GVirSandboxConsole.html" title="GVirSandboxConsole"><span class="type">GVirSandboxConsole</span></a> *console</code></em>,
+                                                         <em class="parameter"><code><span class="type">gchar</span> escape</code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-console-get-escape"></a><h3>gvir_sandbox_console_get_escape ()</h3>
+<pre class="programlisting"><span class="returnvalue">gchar</span>               gvir_sandbox_console_get_escape     (<em class="parameter"><code><a class="link" href="GVirSandboxConsole.html" title="GVirSandboxConsole"><span class="type">GVirSandboxConsole</span></a> *console</code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-console-set-direct"></a><h3>gvir_sandbox_console_set_direct ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                gvir_sandbox_console_set_direct     (<em class="parameter"><code><a class="link" href="GVirSandboxConsole.html" title="GVirSandboxConsole"><span class="type">GVirSandboxConsole</span></a> *console</code></em>,
+                                                         <em class="parameter"><code><span class="type">gboolean</span> direct</code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-console-get-direct"></a><h3>gvir_sandbox_console_get_direct ()</h3>
+<pre class="programlisting"><span class="returnvalue">gboolean</span>            gvir_sandbox_console_get_direct     (<em class="parameter"><code><a class="link" href="GVirSandboxConsole.html" title="GVirSandboxConsole"><span class="type">GVirSandboxConsole</span></a> *console</code></em>);</pre>
+</div>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxConsole.property-details"></a><h2>Property Details</h2>
+<div class="refsect2">
+<a name="GVirSandboxConsole--connection"></a><h3>The <code class="literal">"connection"</code> property</h3>
+<pre class="programlisting">  "connection"               <a href="/usr/share/gtk-doc/html/Libvirt-gobject/GVirConnection.html"><span class="type">GVirConnection</span></a>*       : Read / Write / Construct Only</pre>
+<p>The sandbox connection.</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GVirSandboxConsole--devname"></a><h3>The <code class="literal">"devname"</code> property</h3>
+<pre class="programlisting">  "devname"                  <span class="type">gchar</span>*                : Read / Write / Construct Only</pre>
+<p>Device name.</p>
+<p>Default value: NULL</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GVirSandboxConsole--direct"></a><h3>The <code class="literal">"direct"</code> property</h3>
+<pre class="programlisting">  "direct"                   <span class="type">gboolean</span>              : Read / Write / Construct Only</pre>
+<p>Direct pty access.</p>
+<p>Default value: FALSE</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GVirSandboxConsole--domain"></a><h3>The <code class="literal">"domain"</code> property</h3>
+<pre class="programlisting">  "domain"                   <a href="/usr/share/gtk-doc/html/Libvirt-gobject/GVirDomain.html"><span class="type">GVirDomain</span></a>*           : Read / Write / Construct Only</pre>
+<p>The sandbox domain.</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GVirSandboxConsole--escape"></a><h3>The <code class="literal">"escape"</code> property</h3>
+<pre class="programlisting">  "escape"                   <span class="type">gchar</span>                 : Read / Write / Construct Only</pre>
+<p>Escape character.</p>
+<p>Allowed values: &gt;= 0</p>
+<p>Default value: 93</p>
+</div>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxConsole.signal-details"></a><h2>Signal Details</h2>
+<div class="refsect2">
+<a name="GVirSandboxConsole-closed"></a><h3>The <code class="literal">"closed"</code> signal</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="GVirSandboxConsole.html" title="GVirSandboxConsole"><span class="type">GVirSandboxConsole</span></a> *gvirsandboxconsole,
+                                                        <span class="type">gboolean</span>            arg1,
+                                                        <span class="type">gpointer</span>            user_data)               : <code class="literal">Run First</code></pre>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.19</div>
+</body>
+</html>

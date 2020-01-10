@@ -1,0 +1,197 @@
+      libvirt Sandbox News
+      ====================
+
+0.5.0 - "Sahara Desert" - 2013-08-01
+------------------------------------
+
+ - Switch to use persistent libvirt configuration files for
+   service sandboxes
+ - Store service configs in /etc/libvirt-sandbox/services/$NAME/
+   instead of /etc/libvirt-sandbox/services/$NAME.sandbox to
+   allow storage of multiple files per sandbox
+ - Add a new 'virt-sandbox-service upgrade NAME' command,
+   to be run by admin for all existing service sandboxes to
+   upgrade their configuration to be compatible with the new
+   release
+ - Remove start, stop, list commands from virt-sandbox-service,
+   with recomendation to use start, destroy & list commands in
+   virsh instead.
+ - Remove duplicate -u option in man page
+ - Update man page examples
+ - Stop generating a UNIT_sandbox.target unit, instead letting
+   the sandbox unit tie into multi-user.target as normal
+ - Remove unimplemented APIs for graphical sandboxes, to be
+   re-added at a later date when actually functional
+ - Add padding to public structs, to facilitate preservation
+   of public ABI compatibility in future
+ - Add note about default libvirt URIs in man page
+ - Fix cloning of sandboxes
+
+
+0.2.1 - "Owami Desert" - 2013-07-09
+-----------------------------------
+
+ - Requires libvirt-glib >= 0.1.7
+ - ABI change: Removed GVirSandboxCleaner class
+ - Don't add link in /var/log/journal for image based containers
+ - Don't hold open libvirt connection when displaying service
+   sandbox consoles
+ - Record container UUID in config for service sandboxes
+ - Add missing RPMs deps
+ - Allow custom mounts to be specified to virt-sandbox-service
+ - Fix misc bugs in sandbox creation/deletion
+ - Use 'guest bind' for configuring image based service sandboxes
+ - Allow NIC MAC address to be chosen
+ - Include systemd-initctl.socket in service sandboxes by default
+   to allow libvirt initiated graceful shutdown
+
+
+0.2.0 - "Nubian Desert" - 2013-05-07
+------------------------------------
+
+ - Requires systemd >= 198
+ - Fix termination of interactive sandbox client to
+   avoid loosing final I/O
+ - Stop hardcoding default security label
+ - Misc docs typos / fixes
+ - Fix infinite loop handling security opts
+ - Mandate enablement of introspection
+ - Handle NULL broadcast address for NICs
+ - Don't assume /var/log/journal exists
+ - Improve rollback if creation of service sandbox fails
+ - Block host NICs from sandbox
+ - Sanity check requested network config
+ - Fix sandbox journal location to be a dir not a file
+ - Fix parsing of --security option
+ - Change virt-sandbox-service to use --security opts
+   instead of SELinux specific -l/-t/-d args
+ - Replace use of YUM with RPM to improve performance
+ - Send dhclient output to /dev/null
+ - Avoid getting stuck in waitpid if non-primary process
+   exits
+ - Allow choice of host virtual networks
+ - Support network config with virt-sandbox-service
+ - Do not create any NIC in service sandbox by default
+ - Cope with SELinux label lacking a category pair
+ - Delay dropping credentials until after ttys are opened
+ - Fix tty permissions in QEMU init helper to be 0700 instead
+   of 0777
+ - Add support for non-systemd service containers
+ - Add support for i18n of all output strings
+ - Remove hardcoding of lxc:/// in virt-sandbox-service
+ - Correctly handle EOF from raw console
+ - Improve I/O performance of virt-sandbox
+ - Allow custom uid/gid for generic service sandboxes
+ - Do not run debug shell in service sandboxes
+ - Add --package option to virt-sandbox-service for cases
+   where the unit file is not owned by an RPM
+ - Use drop in systemd service override, instead of
+   includes
+ - Support templated systemd service units
+
+
+0.1.2 - "Namib Desert" - 2013-03-05
+-----------------------------------
+
+ - Requires libvirt >= 1.0.2
+ - Split virt-sandbox-service manpage into separate docs,
+   one for each sub-command
+ - Fix handling of GLib.GError exceptions
+ - Containerize /var/lib/nfs/rpc_pipefs too
+ - Add ability to execute arbitrary commands inside the
+   container using namespace attach
+ - Fix docs for virt-sandbox mount options
+ - Better wording about escape sequence for consoles
+ - Create journal file if it doesn't already exist
+ - Create /etc/rc.d/init.d inside container to block
+   legacy init scripts starting
+ - Skip binding files/dirs which don't exist in host
+
+
+0.1.1 - "Libyan Desert" - 2012-12-10
+------------------------------------
+
+ - Fix typos in POD docs for some classes
+ - Only depend on libvirt-daemon-{kvm,qemu,lxc}, not
+   full libvirt RPM.
+ - Switch to YUM for extracting package file list
+ - Bind mount whole of /var rather than only some subdirs
+ - Validate unit files exist before creating sandbox
+ - Fixes to population of files in /etc and /var
+ - Finish 'clone' command for copying sandboxes
+ - Populate /etc/machine-id file
+ - Fix systemd dependancies for bulk start/stop of containers
+ - Symlink container journal directory into host filesystem
+ - Rename sandbox.target to multi-user.target
+ - Fix attachment to running containers
+
+
+0.1.0 - "Karoo" - 2012-08-10
+----------------------------
+
+ - ABI+API incompatible with previous library, so new soname
+ - Some changes to CLI args for virt-sandbox command
+ - Many fixes to virt-sandbox-service
+ - Use /run/libvirt-sandbox instead of /root/.cache/libvirt
+   when run as root
+ - Fix typo setting RUNDIR
+ - Re-add /kernel suffix to kmod search dir
+ - Add APIs to select kernel version
+ - Fix SEGV when attaching consoles to NULL stdin
+ - Add logrotate script for virt-sandbox-service
+ - Turn GVirSandboxConsole into an abstract class
+ - Configurable keysequence for breaking out of console
+   (defaults to Ctrl+])
+ - Fix handling of strace debugging
+ - Add APIs to select kmod directory prefix
+ - Require glib >= 2.32
+ - Refactor APIs for configuring sandbox mounts
+ - Maintain a single sorted list of mounts
+ - Add support for RAM filesystems
+ - Setup tmpfs for /run and /tmp in sandbox services
+ - Remove need to provide executable for sandbox services,
+   just rely on systemd unit filename
+ - Enable admin customization of systemd services in sandbox
+   services
+ - Rewrite part of virt-sandbox-service in C to reduce
+   long term memory overhead
+ - Create custom systemd startup sequence
+
+
+0.0.3 - "Kalahari Desert" - 2012-04-13
+--------------------------------------
+
+ - Ensure root/config filesystems are readonly in KVM
+ - Add support for mounting host disk images in guests
+ - Add support for binding guest filesystems to new locations
+ - Add support for an optional interactive shell for debugging
+   or administrative purposes
+ - Add a virt-sandbox-service script for preparing sandboxes
+   for system services, integrating with systemd
+ - Misc compiler warning fixes
+ - Replace invocation of insmod with direct syscalls
+ - Refactor API to separate interactive sandbox functionality
+   from base class & service sandbox functionality
+ - Rewrite host/guest I/O handling to separate stdout from
+   stderr correctly, improve reliability of startup/shutdown
+   handshakes and propagate exit status back to host
+ - Exec away the first hypervisor specific init process,
+   so generic init process get PID 1
+ - Turn on reboot-on-panic in KVM to ensure guest exists on
+   fatal problems
+
+
+0.0.2 - "Blue Desert" - 2012-01-12
+----------------------------------
+
+ - Add ability to attach to an existing sandbox
+ - Update to require libvirt-gobject 0.0.4
+ - Add ability to run privileged apps
+ - Add support for an admin debug shell
+ - Switch to use /etc/libvirt-sandbox/scratch for config
+
+
+0.0.1 - "Tatti Desert" - 2012-01-11
+-----------------------------------
+
+ - First release

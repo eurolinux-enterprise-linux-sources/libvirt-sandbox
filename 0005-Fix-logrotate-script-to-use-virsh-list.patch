@@ -1,0 +1,32 @@
+From 3487f03ffa42ffbf01f4ad7e42ac826119815e6f Mon Sep 17 00:00:00 2001
+From: "Daniel P. Berrange" <berrange@redhat.com>
+Date: Tue, 13 Aug 2013 17:44:21 +0100
+Subject: [PATCH] Fix logrotate script to use virsh list
+
+For https://bugzilla.redhat.com/show_bug.cgi?id=994311
+
+The 'virt-sandbox-service list' command was removed, so the
+logrotate script must use 'virsh list' instead
+
+Signed-off-by: Daniel P. Berrange <berrange@redhat.com>
+(cherry picked from commit 828f4dec9310a742ccd50aa808eb96cd06ae03fa)
+---
+ bin/virt-sandbox-service.logrotate | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/bin/virt-sandbox-service.logrotate b/bin/virt-sandbox-service.logrotate
+index a052c76..6bb7d68 100644
+--- a/bin/virt-sandbox-service.logrotate
++++ b/bin/virt-sandbox-service.logrotate
+@@ -1,5 +1,9 @@
+ #!/bin/sh
+-for i in `/usr/bin/virt-sandbox-service list --running`; do
+-    /usr/bin/virt-sandbox-service execute $i -- /etc/cron.daily/logrotate
++for name in `/usr/bin/virsh -c lxc:/// -q list | awk '{print $2}'`
++do
++    if test -d "/etc/libvirt-sandbox/services/$name"
++    then
++        /usr/bin/virt-sandbox-service -c lxc:/// execute $name -- /etc/cron.daily/logrotate
++    fi
+ done
+ exit 0

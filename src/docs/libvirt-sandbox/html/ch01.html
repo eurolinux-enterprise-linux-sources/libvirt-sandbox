@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Libvirt-sandbox</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<link rel="home" href="index.html" title="Libvirt-sandbox Reference Manual">
+<link rel="up" href="index.html" title="Libvirt-sandbox Reference Manual">
+<link rel="prev" href="index.html" title="Libvirt-sandbox Reference Manual">
+<link rel="next" href="GVirSandboxBuilder.html" title="GVirSandboxBuilder">
+<meta name="generator" content="GTK-Doc V1.19 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2"><tr valign="middle">
+<td><a accesskey="p" href="index.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td> </td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libvirt-sandbox Reference Manual</th>
+<td><a accesskey="n" href="GVirSandboxBuilder.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr></table>
+<div class="chapter">
+<div class="titlepage"><div><div><h1 class="title">
+<a name="id-1.2"></a>Libvirt-sandbox</h1></div></div></div>
+<div class="toc"><dl class="toc">
+<dt>
+<span class="refentrytitle"><a href="GVirSandboxBuilder.html">GVirSandboxBuilder</a></span><span class="refpurpose"> — Sandbox construction base class</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="GVirSandboxBuilderContainer.html">GVirSandboxBuilderContainer</a></span><span class="refpurpose"> — Sandbox container construction</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="GVirSandboxBuilderInitrd.html">GVirSandboxBuilderInitrd</a></span><span class="refpurpose"> — Kernel ramdisk construction</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="GVirSandboxBuilderMachine.html">GVirSandboxBuilderMachine</a></span><span class="refpurpose"> — Sandbox virtual machine construction</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="GVirSandboxConfig.html">GVirSandboxConfig</a></span><span class="refpurpose"> — Basic sandbox configuration details</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="GVirSandboxConfigInitrd.html">GVirSandboxConfigInitrd</a></span><span class="refpurpose"> — Kernel ramdisk configuration details</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="GVirSandboxConfigMount.html">GVirSandboxConfigMount</a></span><span class="refpurpose"> — Filesystem attachment configuration details</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="GVirSandboxConfigMount.html">GVirSandboxConfigMount</a></span><span class="refpurpose"> — Filesystem attachment configuration details</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="GVirSandboxConfigMountGuestBind.html">GVirSandboxConfigMountGuestBind</a></span><span class="refpurpose"> — Bindsystem attachment configuration details</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="GVirSandboxConfigMountHostBind.html">GVirSandboxConfigMountHostBind</a></span><span class="refpurpose"> — Bindsystem attachment configuration details</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="GVirSandboxConfigMountHostImage.html">GVirSandboxConfigMountHostImage</a></span><span class="refpurpose"></span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="GVirSandboxConfigMountRam.html">GVirSandboxConfigMountRam</a></span><span class="refpurpose"> — Filesystem attachment configuration details</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="GVirSandboxConfigNetwork.html">GVirSandboxConfigNetwork</a></span><span class="refpurpose"> — Kernel ramdisk configuration details</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="GVirSandboxConfigNetworkAddress.html">GVirSandboxConfigNetworkAddress</a></span><span class="refpurpose"></span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="GVirSandboxConfigNetworkRoute.html">GVirSandboxConfigNetworkRoute</a></span><span class="refpurpose"></span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="GVirSandboxConfigService.html">GVirSandboxConfigService</a></span><span class="refpurpose"> — Service sandbox configuration details</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="GVirSandboxConfigServiceGeneric.html">GVirSandboxConfigServiceGeneric</a></span><span class="refpurpose"> — ServiceGeneric sandbox configuration details</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="GVirSandboxConfigServiceSystemd.html">GVirSandboxConfigServiceSystemd</a></span><span class="refpurpose"> — ServiceSystemd sandbox configuration details</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="GVirSandboxConsole.html">GVirSandboxConsole</a></span><span class="refpurpose"> — A text mode console</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="GVirSandboxConsoleRaw.html">GVirSandboxConsoleRaw</a></span><span class="refpurpose"> — A text mode raw console</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="GVirSandboxConsoleRpc.html">GVirSandboxConsoleRpc</a></span><span class="refpurpose"> — A text mode rpc console</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="GVirSandboxContext.html">GVirSandboxContext</a></span><span class="refpurpose"> — Application sandbox context</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="GVirSandboxContextInteractive.html">GVirSandboxContextInteractive</a></span><span class="refpurpose"> — Desktop application sandbox context</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="GVirSandboxContextService.html">GVirSandboxContextService</a></span><span class="refpurpose"> — Desktop application sandbox context</span>
+</dt>
+</dl></div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.19</div>
+</body>
+</html>

@@ -1,0 +1,181 @@
+From 1e6360036e43e95351d42a281a3c6e0c67aa6718 Mon Sep 17 00:00:00 2001
+From: "Daniel P. Berrange" <berrange@redhat.com>
+Date: Wed, 2 Oct 2013 17:37:06 +0100
+Subject: [PATCH] Only allow lxc:/// URI usage with virt-sandbox-service
+
+For
+
+  https://bugzilla.redhat.com/show_bug.cgi?id=967772
+
+While the goal is to allow use of qemu with
+virt-sandbox-service, this is not currently possible.
+To prevent users creating trouble for themselves, add
+a check for lxc:/// URI.
+
+Signed-off-by: Daniel P. Berrange <berrange@redhat.com>
+(cherry picked from commit c4c57eecd397130ae8f9112cfa5faf342ca85419)
+---
+ bin/virt-sandbox-service             | 3 +++
+ bin/virt-sandbox-service-clone.pod   | 4 ++--
+ bin/virt-sandbox-service-connect.pod | 6 +++---
+ bin/virt-sandbox-service-create.pod  | 4 ++--
+ bin/virt-sandbox-service-delete.pod  | 4 ++--
+ bin/virt-sandbox-service-execute.pod | 4 ++--
+ bin/virt-sandbox-service-reload.pod  | 8 ++++----
+ bin/virt-sandbox-service-upgrade.pod | 6 +++---
+ bin/virt-sandbox-service.pod         | 6 +++---
+ 9 files changed, 24 insertions(+), 21 deletions(-)
+
+diff --git a/bin/virt-sandbox-service b/bin/virt-sandbox-service
+index 5c337e1..9c68e4f 100755
+--- a/bin/virt-sandbox-service
++++ b/bin/virt-sandbox-service
+@@ -1200,6 +1200,9 @@ if __name__ == '__main__':
+ 
+     try:
+         args = parser.parse_args()
++        if args.uri[0:3] != "lxc":
++            sys.stderr.write("%s: only lxc:/// URIs are currently supported\n" % sys.argv[0])
++            sys.exit(1)
+         args.func(args)
+         sys.exit(0)
+     except KeyboardInterrupt, e:
+diff --git a/bin/virt-sandbox-service-clone.pod b/bin/virt-sandbox-service-clone.pod
+index 7896509..e9d997b 100644
+--- a/bin/virt-sandbox-service-clone.pod
++++ b/bin/virt-sandbox-service-clone.pod
+@@ -28,8 +28,8 @@ Display help message
+ 
+ =item B<-c> URI, B<--connect URI>
+ 
+-The connection URI for the hypervisor (only LXC or QEMU are
+-supported currently).
++The connection URI for the hypervisor (currently only LXC URIs are
++supported).
+ 
+ =item B<-p PATH>, B<--path PATH>
+ 
+diff --git a/bin/virt-sandbox-service-connect.pod b/bin/virt-sandbox-service-connect.pod
+index 738b406..cefa37a 100644
+--- a/bin/virt-sandbox-service-connect.pod
++++ b/bin/virt-sandbox-service-connect.pod
+@@ -24,10 +24,10 @@ The connect command will connect to the security sandbox container console NAME.
+ 
+ Display help message
+ 
+-=item B<-c> URI, B<--connect URI>
++=item B<-c URI>, B<--connect URI>
+ 
+-The connection URI for the hypervisor (only LXC or QEMU are
+-supported currently).
++The connection URI for the hypervisor (currently only LXC URIs are
++supported).
+ 
+ =back
+ 
+diff --git a/bin/virt-sandbox-service-create.pod b/bin/virt-sandbox-service-create.pod
+index 9826412..d2f5fdb 100644
+--- a/bin/virt-sandbox-service-create.pod
++++ b/bin/virt-sandbox-service-create.pod
+@@ -35,8 +35,8 @@ Display help message
+ 
+ =item B<-c URI>, B<--connect URI>
+ 
+-The connection URI for the hypervisor (only LXC or QEMU are
+-supported currently).
++The connection URI for the hypervisor (currently only LXC URIs are
++supported).
+ 
+ =item B<-u UNIT_FILE>, B<--unitfile UNIT_FILE>
+ 
+diff --git a/bin/virt-sandbox-service-delete.pod b/bin/virt-sandbox-service-delete.pod
+index b741f56..3b17b97 100644
+--- a/bin/virt-sandbox-service-delete.pod
++++ b/bin/virt-sandbox-service-delete.pod
+@@ -26,8 +26,8 @@ Display help message
+ 
+ =item B<-c URI>, B<--connect URI>
+ 
+-The connection URI for the hypervisor (only LXC or QEMU are
+-supported currently).
++The connection URI for the hypervisor (currently only LXC URIs are
++supported).
+ 
+ =item B<-p PATH>, B<--path PATH>
+ 
+diff --git a/bin/virt-sandbox-service-execute.pod b/bin/virt-sandbox-service-execute.pod
+index 55c9d1c..62771eb 100644
+--- a/bin/virt-sandbox-service-execute.pod
++++ b/bin/virt-sandbox-service-execute.pod
+@@ -28,8 +28,8 @@ Display help message
+ 
+ =item B<-c> URI, B<--connect URI>
+ 
+-The connection URI for the hypervisor (only LXC or QEMU are
+-supported currently).
++The connection URI for the hypervisor (currently only LXC URIs are
++supported).
+ 
+ =item B<-N>, B<--noseclabel>
+ 
+diff --git a/bin/virt-sandbox-service-reload.pod b/bin/virt-sandbox-service-reload.pod
+index b4919be..fe6fbcc 100644
+--- a/bin/virt-sandbox-service-reload.pod
++++ b/bin/virt-sandbox-service-reload.pod
+@@ -24,16 +24,16 @@ The reload command will reload a sandbox container.  This is used when software
+ 
+ Display help message
+ 
+-=item B<-c> URI, B<--connect URI>
++=item B<-c URI>, B<--connect URI>
++
++The connection URI for the hypervisor (currently only LXC URIs are
++supported).
+ 
+ =item B<-u UNIT_FILE>, B<--unitfile UNIT_FILE>
+ 
+ Name of the systemd unit file to reload within the container. Can be repeated
+ if multiple unit files need to be reloaded within the sandbox.
+ 
+-The connection URI for the hypervisor (only LXC or QEMU are
+-supported currently).
+-
+ =back
+ 
+ =head1 EXAMPLE
+diff --git a/bin/virt-sandbox-service-upgrade.pod b/bin/virt-sandbox-service-upgrade.pod
+index fae4b21..dbc4a71 100644
+--- a/bin/virt-sandbox-service-upgrade.pod
++++ b/bin/virt-sandbox-service-upgrade.pod
+@@ -29,10 +29,10 @@ and use this command to downgrade the configs.
+ 
+ Display help message
+ 
+-=item B<-c> URI, B<--connect URI>
++=item B<-c URI>, B<--connect URI>
+ 
+-The connection URI for the hypervisor (only LXC or QEMU are
+-supported currently).
++The connection URI for the hypervisor (currently only LXC URIs are
++supported).
+ 
+ =back
+ 
+diff --git a/bin/virt-sandbox-service.pod b/bin/virt-sandbox-service.pod
+index 7752145..f40d597 100644
+--- a/bin/virt-sandbox-service.pod
++++ b/bin/virt-sandbox-service.pod
+@@ -45,10 +45,10 @@ file C</etc/libvirt/libvirt.conf> can have a default URI set.
+ 
+ Display help message
+ 
+-=item B<-c> URI, B<--connect URI>
++=item B<-c URI>, B<--connect URI>
+ 
+-The connection URI for the hypervisor (only LXC or QEMU are
+-supported currently).
++The connection URI for the hypervisor (currently only LXC URIs are
++supported).
+ 
+ =back
+ 

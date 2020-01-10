@@ -1,0 +1,1779 @@
+2013-08-01  Daniel P. Berrange  <berrange@redhat.com>
+
+	Update for 0.5.0 release
+	To reflect major changed functionality, update to 0.5.0 version
+	number. Also bump soname ABI
+
+	Add support for upgrading sandbox configs
+	To enable migration from earlier versions, add support for
+	upgrading sandbox config files.
+
+	Add man page note about default URIs in libvirt
+
+	Misc man page fixes
+	Wrap long lines in the man pages. Make it clearer how to provide
+	args to commands. Fix path of example config file.
+
+	Use /etc/libvirt-sandbox/services/$NAME/ to store configs
+	The service sandbox currently puts configs in /var/run/libvirt-sandbox
+	duplicating /etc/libvirt-sandbox/services/$NAME.cfg. In addition the
+	/var/run directory is not persistent across host restarts. Move all the
+	persistent configs in /etc/libvirt-sandbox/services/$NAME/
+
+	Add ability to load/save config to in-memory data
+	In addition to supporting load/save to a file, also allow
+	for use of in memory data blob.
+
+	Fix cloning of containers
+	We must ensure the new container has the full config when
+	cloning.
+
+	Remove stop/start/list commands from virsh-sandbox-service
+	The stop/start/list commands duplicate functionality
+	provided by virsh. Remove them in favour of having
+	users use the latter.
+
+	Improve error message from 'virt-sandbox-service delete'
+	When the sandbox was already deleted, the virt-sandbox-service
+	returned a "no such file or directory" error message. Change
+	that to explicitly tell the user the sandbox was deleted.
+
+	Convert virt-sandbox-service to create/delete persistent guests
+	When creating a service sandbox, define a persistent guest config
+	and when deleting it, undefine the guest config.
+
+	Remove obsolete 'autodestroy' property
+	The 'autodestroy' property was added based on the flawed
+	assumption that all the stop/start logic could be kept
+	in the based sandbox context class. Now that the start
+	and stop methods are overridable in subclasses, the
+	property has no vale. Delete it.
+
+	Switch service sandboxes to use persistent libvirt configs
+	Move all the start/stop code out of the base sandbox context,
+	into the sub-classes. The current code using transient guests
+	is used for the interactive context, while the service context
+	is changed to use persistent guests.
+
+2013-07-31  Daniel P. Berrange  <berrange@redhat.com>
+
+	Remove use of 'active' flag in sandbox context
+	Instead of using a 'gboolean active' flag to track if the
+	sandbox is active, just rely on 'domain != NULL'. This
+	facilitates overriding start/stop methods in subclasses
+
+	Don't store a builder object in the sandbox context
+	There's no need to store a builder object in the sandbox context
+	object. It can be re-created whenever needed at time of use.
+
+	Rename tmpdir to statedir in sandbox builder classes
+	The directory where we store sandbox state files is not really
+	a temporary directory, but rather a state directory, which is
+	cleaned up based on some arbitrary rules. Rename the parameter
+	pass to the sandbox builders from 'tmpdir' to 'statedir' to
+	reflect this. Also stop explicitly passing around 'configdir'
+	since this can be derived from 'statedir' when needed
+
+	Make sandbox context start/stop/attach/detach methods virtual
+	Make the start/stop/attach/detach methods virtual in the
+	sandbox context class to allow overriding in subclasses.
+
+	Make domain property in sandbox context writable
+	Allow subclasses to set the 'domain' property in the sandbox
+	context.
+
+	Add padding to all public structs
+
+	Remove unimplemented graphical sandbox classes
+	The support for graphical sandboxes has never been properly
+	implemented. Delete all the related classes. They can be
+	re-introduced at a later date, as & when support for graphical
+	sanboxes is actually done for real.
+
+	Remove obsolete 'prestart' hook in sandbox context class
+	The 'prestart' hook was invented to allow subclasses to
+	extend startup code, but has proved insufficiently
+	flexible to be useful. Remove it.
+
+	Fix indentation of RPM arch conditional
+
+2013-07-29  Daniel P. Berrange  <berrange@redhat.com>
+
+	Avoid dep on qemu if kvm is available
+	We don't want to depend on libvirt-daemon-qemu by default
+	if KVM available, since the former pulls in every known
+	QEMU emulator
+
+2013-07-18  Dan Walsh  <dwalsh@redhat.com>
+
+	Stop generating UNIT_sandbox.target with virt-sandbox-service.
+	We have decided to require the admin to generate a target for all of his
+	sandboxes, so that he can start them all at once.
+
+	systemd enable FOOBAR_sandbox.service will now enable in the multi-user target.
+
+2013-07-18  Alex Jia  <ajia@redhat.com>
+
+	Docs: update EXAMPLES section of virt-sandbox man page
+
+2013-07-18  Wayne Sun  <gsun@redhat.com>
+
+	Docs: remove duplicate -u item in create man page
+	This related to bug:
+	https://bugzilla.redhat.com/show_bug.cgi?id=916651#c11
+
+2013-07-10  Daniel P. Berrange  <berrange@redhat.com>
+
+	Remove duplicate typedef of GVirSandboxProtocolHeader
+
+2013-07-09  Daniel P. Berrange  <berrange@redhat.com>
+
+	Add transifex config file
+
+	Import translations from transifex
+
+	Post release version bump
+
+	Remove '-lselinux' from virt-sandbox-service-util linker flags
+
+	Update for 0.1.8 release
+
+	Update libvirt-glib dep to 0.1.7
+	Recently added APIs from libvirt-gconfig are required to configure
+	sandboxes, so update dep to version 0.1.7
+
+	Fix removing journal if image creation fails.
+	Cope with 'uuid' being None when removing journal when image
+	creation fails.
+
+	Don't add link in /var/log/journal for image based containers
+	A container using an image for content does not have a journal
+	which is accessible to the host, so don't create a link in
+	/var/log/journal for it
+
+	Don't hold open connection when showing console output
+
+	Refactor virt-sandbox-service-util.c startup code
+	Move creation of sandbox context & libvirt connection opening
+	into individual command helpers. This will allow them to decide
+	exactly when the context/connection should be released/closed.
+
+	Add missing source files to gtk docs
+
+	Remove obsolete code for joining a container
+	virt-sandbox-service now uses virsh lxc-namespace-enter,
+	so there is no need for code todo this manually. Delete
+	it all
+
+	Add API for releasing connection/domain for a console
+	Allow for a console to release the connection/domain object
+	it has internally. This is to allow the libvirt connection
+	to be dropped when using a direct mode console.
+
+	Don't cache log console in context object
+	Create the log console on demand, as is done with the other
+	types of console, instead of caching it ahead of time.
+
+	Ignore .gmo files in po/ directory
+
+	Add ability to directly open console pty device paths
+	Using a libvirt stream object for accessing the console is good
+	for privilege separated environments, or remote connections, but
+	it requires that each sandbox hold open a libvirt connection
+	for its lifetime. This quickly hits the libvirt connection limit
+	of 20.
+
+	Add an option to directly open the PTY device associated with
+	the console, instead of using the stream object. This will (later)
+	allow the connection to be closed while the sandbox is running.
+
+	Add support for changing autodestroy behaviour
+	Service containers need to exist across libvirtd restarts, so
+	they should not be set to auto-destroy
+
+	Include systemd-initctl.socket by default
+	The /dev/initctl device must exist so that 'virsh shutdown'
+	is able to trigger graceful shutdown of containers
+
+	Refactor way file cleanup is performed
+	Remove the separate GVirSandboxCleaner class and instead introduce
+	some cleanup virtual methods on GVirSandboxBuilder. This avoids
+	needing to maintain state in memory for cleanup. This in turn
+	allows the process doing cleanup to be different from the one
+	that launches the sandbox
+
+	Use 'os.path.lexists' when removing journal file link
+	The target of the symlink in /var/log/journal may not exist
+	when we come to delete it, so use os.path.lexists, instead
+	of os.path.exists
+
+	Auto-generate AUTHORS file from GIT logs during make dist
+	Instead of manually keeping the AUTHORS file in sync with
+	GIT, auto-generate it during make dist phase
+
+	Use config for recording UUID in virt-sandbox-service
+	Record the UUID in the config, avoiding the need to use the
+	/var/lib/libvirt/filesystems/$NAME/etc/machine-id file when
+	deleting the container, which does not exist for image based
+	containers
+
+	Allow container UUID to be controlled
+	Extend GVirSandboxConfig to record the container UUID, allowing
+	it to be persisted for later use
+
+	Avoid error about missing machine-id file
+	If creation of a container fails, we must tolerate a missing
+	/etc/machine-id file from the container filesystem
+
+	Remove 'return' statement from two method calls in virt-sandbox-service
+	Neither the set_security_opts or add_network_opts methods have
+	a return value that virt-sandbox-service cares about.
+
+	Use 'guest bind' for mount overrides with image based containers
+	When creating a sandboxed service using an image, the bind mounts
+	must be done in guest context, rather than host context.
+
+	Add support for configuring NIC mac addresses
+	Allow config of NIC mac addresses via a 'mac' parameter on
+	the command line eg
+
+	  virt-sandbox -c qemu:///session -N mac=02:04:05:05:05:06 /bin/sh
+
+	(and also for virt-sandbox-service)
+
+	Add missing deps on pygobject3-base & libselinux-python
+	virt-sandbox-service requires pygobject3-base and libselinux-python
+	to be installed on a host.
+
+	s/Requires/BuildRequires/ for glib-devel
+
+2013-07-09  Wayne Sun  <gsun@redhat.com>
+
+	Fix formatting in virt-sandbox-service when raising ValueError
+	ValueError expects the argument to be a string list, not a
+	plain string. Using a plain string results in bad formatting
+	when printing the error later
+
+	/usr/bin/virt-sandbox-service: C
+	/usr/bin/virt-sandbox-service: a
+	/usr/bin/virt-sandbox-service: n
+	/usr/bin/virt-sandbox-service:
+	/usr/bin/virt-sandbox-service: o
+	/usr/bin/virt-sandbox-service: n
+	/usr/bin/virt-sandbox-service: l
+	/usr/bin/virt-sandbox-service: y
+	/usr/bin/virt-sandbox-service:
+	/usr/bin/virt-sandbox-service: e
+	/usr/bin/virt-sandbox-service: x
+	/usr/bin/virt-sandbox-service: e
+	/usr/bin/virt-sandbox-service: c
+	/usr/bin/virt-sandbox-service: u
+	/usr/bin/virt-sandbox-service: t
+	/usr/bin/virt-sandbox-service: e
+	/usr/bin/virt-sandbox-service:
+	/usr/bin/virt-sandbox-service: c
+	/usr/bin/virt-sandbox-service: o
+	/usr/bin/virt-sandbox-service: m
+	/usr/bin/virt-sandbox-service: m
+	/usr/bin/virt-sandbox-service: a
+	/usr/bin/virt-sandbox-service: n
+	/usr/bin/virt-sandbox-service: d
+	/usr/bin/virt-sandbox-service: s
+	/usr/bin/virt-sandbox-service:
+	/usr/bin/virt-sandbox-service: i
+	/usr/bin/virt-sandbox-service: n
+	/usr/bin/virt-sandbox-service: s
+	/usr/bin/virt-sandbox-service: i
+	/usr/bin/virt-sandbox-service: d
+	/usr/bin/virt-sandbox-service: e
+	/usr/bin/virt-sandbox-service:
+	/usr/bin/virt-sandbox-service: o
+	/usr/bin/virt-sandbox-service: f
+	/usr/bin/virt-sandbox-service:
+	/usr/bin/virt-sandbox-service: l
+	/usr/bin/virt-sandbox-service: i
+	/usr/bin/virt-sandbox-service: n
+	/usr/bin/virt-sandbox-service: u
+	/usr/bin/virt-sandbox-service: x
+	/usr/bin/virt-sandbox-service:
+	/usr/bin/virt-sandbox-service: c
+	/usr/bin/virt-sandbox-service: o
+	/usr/bin/virt-sandbox-service: n
+	/usr/bin/virt-sandbox-service: t
+	/usr/bin/virt-sandbox-service: a
+	/usr/bin/virt-sandbox-service: i
+	/usr/bin/virt-sandbox-service: n
+	/usr/bin/virt-sandbox-service: e
+	/usr/bin/virt-sandbox-service: r
+	/usr/bin/virt-sandbox-service: s
+	/usr/bin/virt-sandbox-service: .
+
+2013-06-07  Dan Walsh  <dwalsh@redhat.com>
+
+	Only create the tmpfs file systems in the systemd containers.
+	Openshift wants /tmp, /dev/shm and /var/tmp mounted from the users homedir.
+
+	Allow user to specify additional rpm packages to be run within the container.
+	Example would be I want to run cron with sendmail.
+
+	virt-sandbox-service create -u crond.service -P sendmail mycron
+
+2013-05-10  Dan Walsh  <dwalsh@redhat.com>
+
+	Add support for virt-sandbox-service to add additional mount points.
+	Add similar support to virt-sandbox-service that is in virt-sandbox
+	to add guest-bind, host-bind and host-image mount points on the command
+	line.  Openshift needs feature.
+
+2013-05-07  Daniel P. Berrange  <berrange@redhat.com>
+
+	Import initial translations from transifex
+
+	Bump soname for changes in ABI
+
+	Update for 0.2.0 release "Nubian Desert"
+
+	Add release names based on names of deserts
+
+2013-05-07  Michael Scherer  <misc@zarb.org>
+
+	Add support for templated unit in virt-sandbox
+	This permit to create a templated unit inside the sandbox,
+	using the sandbox name as a variable and so running the same
+	unit with a different configuration without too much hassle.
+
+	For example, someone could have several different configuration of
+	website in /etc/nginx/websites.d/ and have each of them started in
+	a different sandbox, with a sample templated unit using the sandbox
+	name as a option to read the proper configuration file directly.
+
+	One could take the following file in /etc/systemd/system/nginx_lxc@.service :
+
+	  [Unit]
+	  Description=Test of a specific nginx running in lxc
+	  After=syslog.target network.target remote-fs.target nss-lookup.target
+
+	  [Service]
+	  PIDFile=/run/nginx.%i.pid
+	  ExecStartPre=/usr/sbin/nginx -t -c /etc/nginx/nginx.%i.conf
+	  ExecStart=/usr/sbin/nginx -c /etc/nginx/nginx.%i.conf
+	  Type=forking
+	  ExecReload=/bin/kill -s HUP $MAINPID
+	  ExecStop=/bin/kill -s QUIT $MAINPID
+
+	  [Install]
+	  WantedBy=multi-user.target
+
+	Then create a container like this:
+
+	  # virt-sandbox-service  create -u nginx_lxc@  test.example.org --package nginx
+
+	And then we will have nginx running in a container, using the specific
+	config file /etc/nginx/nginx.test.example.org.conf
+
+	Use drop-in configuration file instead of creating a custom file
+	This permit to no longer track the source, to use a custom file
+	in /etc without conflict. This change requires a version of
+	systemd >= 198
+
+2013-05-02  Michael Scherer  <misc@zarb.org>
+
+	Add a --package option to virt-sandbox-service
+	If someone usex a custom unit file for the sandbox, the rpm
+	autodetection fail with a exception. Now, this will show
+	a error message, asking to use --package to specify what
+	RPM to clone
+
+2013-04-22  Dan Walsh  <dwalsh@redhat.com>
+
+	Whitespace cleanup
+
+	 Do not run a shell within a lxc container by default.
+	We want to make sure we use as little overhead as possible.
+	If a user connects to a lxc container, it will be the same as executing
+	a shell within the container.
+
+	Only create the destination path if it does not exist.
+	OpenShift will be creating the path within its management layer.
+
+2013-04-18  Dan Walsh  <dwalsh@redhat.com>
+
+	Add UID/GID support for use with interactive containers.
+	Openshift Containers will be run with a unique UID and GID
+
+2013-04-12  Daniel P. Berrange  <berrange@redhat.com>
+
+	Remove obsolete / commented out code
+	The start/stop/console methods all use virt-sandbox-service-util
+	so the corresponding obsolete python code can be deleted.
+
+	Honour uri in start/stop/connect methods
+	The virt-sandbox-service command was not passing through the
+	URI to virt-sandbox-service-util
+
+	Switch virt-sandbox-service to use new generic service config
+	Replace use of interactive sandbox config with the new
+	generic service config for non-systemd containers
+
+	Introduce a new service sandbox for running adhoc commands
+	Introduce GVirSandboxServiceGeneric which can be used to run
+	adhoc commands, much like the interactive config can do.
+
+	Turn GVirSandboxConfigService into an abstract class
+	Remove the hardcoded dep between GVirSandboxConfigService and
+	systemd, by turning it into an abstract class and introduce a
+	systemd specific GVirSandboxConfigServiceSystemd subclass
+
+	Add an abstract gvir_sandbox_config_get_command method
+	To allow access to the CLI args, regardless of subclass,
+	introduce a gvir_sandbox_config_get_command
+	to replace gvir_sandbox_config_interactive_get_command.
+	Each subclass must implement this method to return their
+	desired command line args
+
+2013-04-11  Daniel P. Berrange  <berrange@redhat.com>
+
+	Connect up the primary console of the interactive containers
+	Both the log + app console must be connected for interactive
+	containers to work
+
+	Remove broken duplicated code for deleting image files
+
+	Ensure list of unit files defaults to []
+
+	Remove bogus code which prevented deletion of container filesystems
+	The following refactoring
+
+	  commit 9921bb29ed55769c8396a1a30da4c67b3e6624c0
+	  Author: Dan Walsh <dwalsh@redhat.com>
+	  Date:   Wed Apr 3 18:45:59 2013 -0400
+
+	    Add support for InteractiveContainer
+
+	included a semantic which which prevent deletion of container
+	filesystems
+
+	Fix VPATH install of bash completion file & RPM spec filepath
+
+	Rewrite RPC console I/O state machine
+	More clearly specify the RPC console I/O state machine and then
+	re-write code to follow the transition rules accurately. This
+	should fix shutdown synchronization avoiding lost data.
+
+	Use \n\r for log messages
+	Since the terminal is likely in raw mode, we should use
+	\n\r for log messages printing
+
+	Tweak debug settings
+	Require LIBVIRT_SANDBOX_DEBUG=2 for tracing inside the sandbox,
+	so the default only traces outside the sandbox.
+
+2013-04-09  Daniel P. Berrange  <berrange@redhat.com>
+
+	Read stream I/O in batches to improve performance
+	Instead of only reading a single stream packet at a time,
+	reading as many packets as are available until 1024 bytes
+	of data is available to write to local console. This
+	improves performance when the sandbox app writes data in
+	small chunks
+
+	Correctly handle EOF from raw console
+	If getting ret==0 from the raw console, we must trigger the
+	'closed' signal
+
+	Fix missing error domain when reporting RPC error messages
+
+	Fix syntax-check  s/can not/cannot/
+
+	Re-enable support for debug mode in LXC init helper
+
+	Remove bogus code shutting down console prematurely
+	The console loop should only exit when the host OS signals
+	that it is ok todo so via a "QUIT" command.
+
+	Add basic support for i18n
+	Add intltool/gettext framework and marked all strings for
+	translation
+
+2013-04-08  Dan Walsh  <dwalsh@redhat.com>
+
+	Change to the more normal for loop, where you count up.
+
+	White space cleanup.
+
+	--network short qualifier should be -N to match virt-sandbox option.
+	This was changed mistakenly in virt-sandbox-service
+
+	Create new /etc/rc.d directory to bind mount over system.
+	We need to prevent SYSVInit scripts from running by default in the
+	ServiceContainer.  The so we recreate all of the directories under /etc/rc.d
+	and copy the functions file over.
+
+	Check for LXC if virt-sandbox-service execute command specified
+	virt-sandbox-service execute is not supported on qemu sandboxes.
+
+	Use args.uri rather then hard coding lxc:///
+
+	Add support for InteractiveContainer
+	First use case will be OpenShift
+
+	Differentiate on create based on whether one or more unit files specified
+	(ServiceContainer), or a command is specified (Interactive Container).
+
+	Refactor Container class into Container and ServiceContainer Class.
+	This way we can share common methods between the ServiceContainer and the
+	InteractiveContainer (Patch to be added)
+
+	Change variable config to config_path to avoid confusion.
+	save_config uses an internal variable to indicate the path to the virt-sandbox
+	configuration file, this path renames this variable to prevent confusion.
+
+	Add exception handler GlibGerror to virt-sandbox-service
+	GlibGerror can be raised by virt-sandbox-service, this patch will catch
+	the exception and write the error to stderr.
+
+	Make CONFIG_PATH external to the Container Class
+	This patch moves CONFIG_PATH external from the Container Class.  This will
+	eliminate the need to create a container to get this constant.
+
+	Remove distinction from Internal vs External Functions.
+	This patch removes all __METHOD and _METHOD functions calls.  Since it is not
+	intended that virt-sandbox-service will be imported into another python module,
+	there is limited value to using the internal indicators.
+
+	Internationalize all output strings in virt-sandbox-service
+	Wrap all output strings with _() to make sure we get proper translations.
+
+	Change virt-sandbox-service-create.pod to use correct command --copy
+	Current the documentation says that you use --clone while the code uses --copy
+	when you are createing a sandbox service container.
+
+	Add -u UNITFILE option to virt-sandbox-service reload command
+	The command will allow administrators or the systemd service to reload units
+	which are running within a container.  If you have one or more units defined
+	for a container, then just those units will get the reloads, as opposed to
+	stopping and restarting the container.
+
+	Move virt-sandbox-service bash completion script to default directory.
+	bash_completion scripts have added a new way to do completions, where you
+	place you scripts in /usr/share/bash_completion/completions rather then
+	/etc/bash_completions.d.
+
+	We should follow the new standard, and this patch moves our bash_completion
+	script to the proper location with the proper name.
+
+	Add support for InteractiveContainers to virt-sandbox-service-util
+	We need to add support for interactive sandbox/containers for OpenShift.
+
+	This patch will create the correct container type based off the /etc/libvirt-sandbox/service/*
+
+	virt-sandbox-service-util needs to free allocated memory.
+	Coverity found that we could be leaking memory with virt-sandbox-service-util -e
+
+2013-04-05  Daniel P. Berrange  <berrange@redhat.com>
+
+	Fix tty permissions setup in QEMU init helper
+	The tty permissions should be 0700 not 0777, since the tty
+	devices should only be opened by root.
+
+	Delay dropping credentials until after console is opened
+	If running an LXC sandbox from a non-root user, we'd drop
+	privileges before the console device was opened. We'd then
+	be unable to open /dev/tty2 which is owned by root.
+
+2013-03-28  Alex Jia  <ajia@redhat.com>
+
+	Sync lxc-enter-namespace options with libvirt
+
+	Docs: update network options configuration
+
+	Avoid segfault in gvir_sandbox_config_add_host_include_file
+	RHBZ: https://bugzilla.redhat.com/show_bug.cgi?id=924574
+
+	Valgrind defects memory error:
+
+	==19297== Invalid free() / delete / delete[] / realloc()
+	==19297==    at 0x4A077A6: free (vg_replace_malloc.c:446)
+	==19297==    by 0x350F24D79E: g_free (in /usr/lib64/libglib-2.0.so.0.3400.2)
+	==19297==    by 0x4C2C03F: gvir_sandbox_config_add_host_include_file (libvirt-sandbox-config.c:1319)
+	==19297==    by 0x401FB7: main (virt-sandbox.c:171)
+	==19297==  Address 0x4f2094c is 12 bytes inside a block of size 18 alloc'd
+	==19297==    at 0x4A0883C: malloc (vg_replace_malloc.c:270)
+	==19297==    by 0x350F24D68E: g_malloc (in /usr/lib64/libglib-2.0.so.0.3400.2)
+	==19297==    by 0x350F263F0B: g_strdup (in /usr/lib64/libglib-2.0.so.0.3400.2)
+	==19297==    by 0x4C2BF95: gvir_sandbox_config_add_host_include_file (libvirt-sandbox-config.c:1292)
+	==19297==    by 0x401FB7: main (virt-sandbox.c:171)
+
+2013-03-27  Daniel P. Berrange  <berrange@redhat.com>
+
+	Cope with SELinux label that does not have a category pair set
+
+	Ensure args to ValueError are a list
+
+	Correctly cope with args.network being None
+
+	Fix typo in test suite breaking network config parsing
+
+2013-03-22  Daniel P. Berrange  <berrange@redhat.com>
+
+	Add support for configuring networks with virt-sandbox-service
+	Instead of creating a single NIC by default, don't create any
+	NICs at all to allow for a sandbox completely isolated from
+	any neworks. Add a '-N network-opts' option to configure NICs
+	as required. eg
+
+	   -N dhcp,source=default
+	   --network dhcp,source=lan
+
+	where 'source' is the name of any libvirt virtual network
+
+	Add support for choosing source network for interfaces
+	Allow sandboxes to be connected to any libvirt virtual network,
+	which opens up choice of nat/bridging/vepa/sriov and more
+
+	Don't get stuck in waitpid loop
+	If a daemonized process quit, libvirt-sandbox-init-common
+	got stuck in waitpid. Reap & ignore any processes we don't
+	expect, only exiting when our leader quits
+
+	Send dhclient output to /dev/null
+	dhclient will spew rubbish to stdout/stderr in many cases
+	since we're making areas of /var readonly by default. Send
+	its output to /dev/null to get rid of these messages.
+
+	Replace yum API usage with RPM python API usage
+	There is no need to use the yum APIs for setting up sandboxes,
+	since all the info required is already provided by RPM. YUM
+	will print random garbage to stdout that we don't want, so
+	using RPM is preferrable.
+
+	Fix broken scenario in test case
+
+	Fix virt-sandbox-service args to not be SELinux specific
+	Remove the '-l','-t', '-d' args to virt-sandbox-service and
+	replace them with a generic '-s SECURITY-OPTS' args, which
+	has the same syntax as virt-sandbox. This makes it portable
+	to the AppArmour security model.
+
+	Remove some bogus text from virt-sandbox manpage
+
+	Fix parsing of --security option in virt-sandbox
+	The SELinux label may contain a ',', so we cannot blindly
+	split the string on ','. Instead incrementally parse the
+	value
+
+2013-03-20  Daniel P. Berrange  <berrange@redhat.com>
+
+	Ensure the journal location is a directory not a file
+	The /var/lib/libvirt/filesystems/demo2/var/log/journal/bc3823d901134ac1ac91903020e2690e/
+	location was being created as a plain file, when it should have
+	been a directory
+
+	Ensure DHCP is disabled by default & report invalid net config
+
+	Fix leak in error path of parsing network config
+
+	Sanity check requested network config
+	Make sure static addresses are set, if any routes are requested.
+	Don't allow DHCP to be mixed with static addresses/routes
+
+	Set <privnet/> feature flag for LXC
+	Block host network interfaces from container by setting the
+	<privnet/> feature flag for LXC
+
+	Fully rollback if creation of sandbox fails
+	If there is an error part way through creating a sandbox, some
+	directories / files may get left partially created. Catch any
+	exception during creation, and invoke 'delete' to clean up any
+	work we have done so far
+
+	Don't assume /var/log/journal exists
+	When creating the journal symlink, create /var/log/journal if
+	it does not already exist. Also handle fact that the journal
+	symlink might have been removed, when deleting a sandbox.
+
+	Cope with a undefined security label in config
+	virt-sandbox-service mistakenly assumes that get_security_label()
+	will always return a non-NULL value.
+
+	Properly handle a NULL broadcast address
+	The broadcast address parameter for a network was allowed to
+	be NULL, but this was not handled correctly in all codepaths.
+
+	Fix misc problems in virt-sandbox-service create man page
+
+	Disable KVM on RHEL entirely. Always enable introspection
+
+2013-03-18  Alex Jia  <ajia@redhat.com>
+
+	Docs: fix a typo in help documents
+
+	Add missing break statements
+
+2013-03-15  Alex Jia  <ajia@redhat.com>
+
+	Docs: Fix security options wrongs in man page
+
+	Avoid infinite loop in gvir_sandbox_config_set_security_opts()
+
+	Docs: fix typos in IPv6 address
+
+2013-03-14  Alex Jia  <ajia@redhat.com>
+
+	Add myself into AUTHORS
+
+	Fix copy&paste error in autogen.sh
+
+	docs: correct libvirt sandbox command naming
+
+	docs: fix some typos in TODO
+
+	docs: fix some typos in architecture.txt
+
+2013-03-07  Daniel P. Berrange  <berrange@redhat.com>
+
+	Stop hardcoding the default security label
+	Hardcoding a default static security label offers no meaningful
+	security separation. Switch to default to a dynamic label and
+	choose the base label according to the type of virtual machine
+	being created
+
+2013-03-06  Daniel P. Berrange  <berrange@redhat.com>
+
+	Fix termination handling of child
+	If poll on the application FD returned  POLLIN|POLLHUP we would
+	shutdown the connection to the host too early. If we have got
+	POLLIN, then we must mask out POLLHUP. We'll get a later POLLHUP
+	on its own which we can handle properly
+
+	Also adds more debugging to help diagnose this kind of problem
+	in the future
+
+2013-03-05  Daniel P. Berrange  <berrange@redhat.com>
+
+	Update for 1.0.2 release
+
+	Remove references to virt-sandbox-service-machineid.{pod,1}
+
+	Require libvirt 1.0.2
+	The lxc-enter-namespace command to virsh requires libvirt
+	version 1.0.2 minimum
+
+	Fix typo in virt-sandbox manpage
+
+2013-02-25  Dan Walsh  <dwalsh@redhat.com>
+
+	Remove unneeded function, since we no longer support virt-machine-serice machineid
+
+	Remove machineid call from tool,  better to just
+	virt-sandbox-service execute NAME -- cat /etc/machineid
+
+	Also main reason for this was to allow journalctl to read journal within the
+	container,  easier to just execute.
+
+	virt-sandbox-service execute NAME -- journalctl
+
+2013-02-22  Daniel P. Berrange  <berrange@redhat.com>
+
+	Don't add bind overrides for files/dirs which don't exist
+	If the sandbox is told to bind directories which don't exist,
+	it will get a failure at startup attempting to create the
+	target dir/file on a read-only filesystem. Check that each
+	target exists before adding it to the config
+
+	Fix typo s/journam/journal/
+
+	Add dep on pod2man
+
+2013-02-20  Daniel P. Berrange  <berrange@redhat.com>
+
+	Remove TAB from shell script
+
+	Ignore all man pages & virt-sandbox-service-util
+
+	Avoid kernel info getting into config files by default
+
+2013-02-20  Dan Walsh  <dwalsh@redhat.com>
+
+	White space cleanup
+
+	Change the default label for sandbox to virtd_lxc_t rather then svirt_t, virtd_lxc_t is an unconfined domain by default so this should work for most users.
+
+2013-02-15  Dan Walsh  <dwalsh@redhat.com>
+
+	Cleanup handling of virt-sandbox-service execute
+
+	Needs to create the journal file if it does not exist
+
+2013-02-12  Dan Walsh  <dwalsh@redhat.com>
+
+	Create enty /etc/rc.d/init.d directory so that systemd does not start any services, but also copy in /etc/rc.d/init.d/functions, needed if customer plans on using SysVinit script and by dhclient.
+	When executing a command, figure out the path if the user does not specify it.
+
+	Fix help message
+
+2013-02-08  Dan Walsh  <dwalsh@redhat.com>
+
+	better wording when connecting to a console patch from  Michael Scherer.
+	"Escape character is '^]'." is the message show by telnet as well as the one of virt-sandbox-service when connecting to the console of a service. But the keyboard shortcut doesn't do the same thing ( ie, on telnet, you have a prompt ).
+
+	While telnet is likely to be unheard from newer admins, I think a better message could be :
+	Type 'Ctrl + ]' to detach from the console.
+
+2013-01-29  Daniel P. Berrange  <berrange@redhat.com>
+
+	Fix docs for virt-sandbox mount command
+
+2013-01-29  Michal Privoznik  <mprivozn@redhat.com>
+
+	Don't redefine _FORTIFY_SOURCE macro
+	If the _FORTIFY_SOURCE has been already defined, we unconditionally
+	redefine it, leaving us with warning/error thrown at compilation time.
+
+2013-01-29  Daniel P. Berrange  <berrange@redhat.com>
+
+	Remove bogus 'container.c' file reference from bin/Makefile.am
+
+2013-01-24  Dan Walsh  <dwalsh@redhat.com>
+
+	Whitespace cleanup
+
+	Add virt-sandbox-service-machineid to display the /etc/machine-id of any container. Fix virt-sandbox-service parsing of the name to be a function call Also fix up building of man pages in Makefile.am
+
+	Cleanup white space
+
+2013-01-23  Dan Walsh  <dwalsh@redhat.com>
+
+	Cleanup white space
+
+	Cleanup white space
+
+	Change the mechanism to execute command within the container. Basically remove -C and put commands at end of command line
+
+	Create /etc/hostname as opposed to /etc/network/config, which is the new way of assiging namespaces
+
+	For now we will just execute virsh for entering the container, also added --nolabel qualifier, if you want to execute a command within the container with the current label.
+
+	Add /var/lib/nfs/rpc_pipefs in case nfs is running on the host
+
+	Clean up parser to use individual methods for each command
+
+	One more GLib.GError exception
+
+	Use exported GLib.GError rather then internal exception name
+
+	Add missing virt-sandbox-service-start pod file
+
+	Split the virt-sandbox-service man page into several man pages based on commands
+
+2013-01-17  Daniel P. Berrange  <berrange@redhat.com>
+
+	Don't add libvirt-daemon-qemu dep on RHEL
+
+	Fix Source0 url in RPM specfile
+
+2012-12-10  Daniel P. Berrange  <berrange@redhat.com>
+
+	Update for 0.1.1 release
+
+	Tweak docs to avoid < and > characters
+
+	Fix VPATH build of docs
+
+	Add python demo program
+
+2012-11-29  Daniel P. Berrange  <berrange@redhat.com>
+
+	Change deps to require specific libvirt daemon RPMs
+
+2012-11-20  Dan Walsh  <dwalsh@redhat.com>
+
+	Whitespace cleanup
+
+	Precreate multi-user.target.wants directory
+
+	/var/log/journal/UID needs to point at CONTAINER/var/log/journal/UID
+
+	opening ns files have to happen before setns() calls or the pid namespace changin could cause the open calls to fail.
+	Setting up the SELinux context needs to happen before joining the namespaces for
+	the same reason.
+
+	Fixed the handling of selinux being disabled or in permissive mode, as well as used the
+	proper HAVE_LIBSELINUX call.
+
+2012-11-06  Dan Walsh  <dwalsh@redhat.com>
+
+	Rename sandbox.target to multi-user.target within the container.
+	This avoids confusing Admins, and allows an admin within a container to execute
+
+	systemctl enable foobar.service
+
+	And  it will do the right thing.
+
+	Whitespace cleanup
+
+	It is desirable if journald admin commands on the host can view data from the containers' journald instances. For this, the host needs to know wherei to find the journald logs from the containers.
+	Make /var/log/journal/$MACHINE-ID be a symlink to the corresponding /var/lib/libvirt/filesystemsi/$NAME/var/log/journal directory. $MACHINE-ID in this case matches the container's /etc/machine-id file, which in turn matches the libvirt VM UUID
+
+	We currently do not have a way to set the UUID within the libvirt-sandbox call.
+
+	Need to add this to complete this task.
+
+2012-11-05  Dan Walsh  <dwalsh@redhat.com>
+
+	White space cleanup
+
+	Setup container target to be allowed to start in multi-user target, Fix Description
+
+	Fix handling of targets so we can start and stop all containers with a single command.
+
+	Fix SECTION heading on libvirt-sandbox.h to be accurate
+
+2012-10-02  rhatdan  <dwalsh@redhat.com>
+
+	Simplify creating a uuid, and make gen_machine_id a method. Finally when we clone, need to replace machine-id file
+
+2012-09-28  rhatdan  <dwalsh@redhat.com>
+
+	Whitespace cleanup
+
+	Complete clone interface, so it fully copies and modifies an existing sandbox
+
+2012-08-17  rhatdan  <dwalsh@redhat.com>
+
+	whitespace cleanup
+
+	Fix to handle hire level directories within the container.  We should only Mount at the highest level of the container.
+	/etc/httpd /etc/httpd/modules,
+
+	Should only mount /etc/httpd
+
+	Switch to using yum to get listing of unitfile rpm contents and the contents of the parent source package if it exists
+
+2012-08-16  rhatdan  <dwalsh@redhat.com>
+
+	Verify unit files entered on the command line, if the unit file does not exist throw and exception.
+	This patch causes virt-sandbox-service to  copy files or create empty files that are referenced within the rpm spec file, Currently ignoreing paths beginning with /var/run or /etc/logrotate.d
+
+	This patch causes virt-sandbox-service to fix the permissions on the container
+	to match the permissions on the system.
+
+	With this patch I have gotten
+
+	virt-sandbox-service create -C -u mysqld.service -u httpd.service mysql
+	virt-sandbox-service start mysql
+
+	To start both services within a container.
+
+2012-08-15  rhatdan  <dwalsh@redhat.com>
+
+	white-space-cleanup, using emacs
+
+	Make sure directories have the proper ownership and permissions.  Mount at /var rather then lower level directories, but create all the lower level directories.
+
+2012-08-13  Daniel P. Berrange  <berrange@redhat.com>
+
+	Update for 0.1.0 release
+
+	Update soname to reflect changed ABI/API
+
+2012-08-10  Daniel P. Berrange  <berrange@redhat.com>
+
+	Update RPM spec with virt-sandbox-service-util program & more deps
+
+	Move virt-sandbox-service-util to /usr/libexec
+	The virt-sandbox-service-util command should only be run by the
+	virt-sandbox-service command. Thus it should be hidden away in
+	libexec, rather than exposed to users in bin
+
+	Note increased min version requires in README
+
+	Add configure check for libselinux & link virt-sandbox-service-util
+	The virt-sandbox-service-util command uses a few functions from
+	libselinux, and newer LD does not allow for implicit linkage.
+	Thus we must explicitly link to libselinux
+
+2012-08-02  Dan Walsh  <dwalsh@redhat.com>
+
+	Many fixes found by syntax check
+
+	Add a little doc to test script to explain how to use it
+
+	Updated latest status of project
+
+2012-08-01  Dan Walsh  <dwalsh@redhat.com>
+
+	Stop mounting over /etc/resolv.conf Need to create unit files based off the specified unit files which disable containers in the unit file.
+
+	Need to help user out by getting full path to command to be executed in the container. Also need to ask for the pid file for now.
+	Added prompt to remind user about ^] So he knows how to exit the container.
+
+	Add execute to virt-sandbox-service, needs to be able to connect to the container namespaces. Also needs to run with the same SELinux context as the container.
+
+2012-07-26  Dan Walsh  <dwalsh@redhat.com>
+
+	Move g_main_loop_run into attach and start, since stop does not need it, and stop was hanging forever when I called the loop
+
+2012-07-25  Dan Walsh  <dwalsh@redhat.com>
+
+	Add support for /etc/resolv.conf and switch to using virt-sandbox-service-util in order to not use huge amounts of memory
+
+	New C Utility Program to handle starting, stopping attaching to containers.
+
+2012-07-17  Dan Walsh  <dwalsh@redhat.com>
+
+	White space cleanup
+
+	Add wants directories to get systemd to only start necessary services for the container, 	systemd-tmpfiles, systemd-journald, dbus-daemon
+	Create /etc/sysconfig/network so that the hostname is set to the name of the container
+
+		Change the interface __gen_dirs to __gen_content, since it is creating more then just directories.
+
+	Add get_all_running_containers so that we can command complete for
+	start, stop, reload
+
+	Add get_all_unit_files so that we can command completion on
+
+	virt-sandbox-service create -u
+
+	Fix virt-sandbox-service list --running
+	Init script should begin with SERVICE@name.service, if at all possible since
+	this would allow an admin on the host to execute
+
+	systemctl start httpd@.service
+
+	And all services beginning with httpd@ will start.
+
+	Update documentation to match latest description
+
+2012-07-16  Daniel P. Berrange  <berrange@redhat.com>
+
+	Re-add /etc/systemd/system, mistakenly removed. Blacklist /etc/fstab
+	The previous commit accidentally removed /etc/systemd/system from
+	the SYSTEM_DIRS list. We need to blacklist /etc/fstab, otherwise
+	systemd will auto-generated lots of XXX.mount units that don't
+	apply inside the container
+
+	Make systemd log to console, not syslog by default
+
+2012-07-16  Dan Walsh  <dwalsh@redhat.com>
+
+	Remove --executable from virt-sandbox-service, we will just be using unit files
+
+	Add /dev/shm as a tmpfs file system, TMPFS_DIRS does not exists, so need to remove it. Change short name of --clone to -C, since I can never remember -n, update the bash_completion script to match the latest virt-sandbox-service changes, and to get a list of unit files automagically.
+
+2012-07-16  Daniel P. Berrange  <berrange@redhat.com>
+
+	Move systemd setup into virt-sandbox-service
+	Switch to have the /etc/systemd/system directory be located
+	under /var/lib/libvirt/filesystems. This will allow the
+	sandbox admin to customize it post-creation.
+
+2012-07-13  Daniel P. Berrange  <berrange@redhat.com>
+
+	Remove need to provide an executable for system services
+	Rely exclusively on the list of unit files to setup a service
+	sandbox. Allow the default host systemd files to appear in the
+	sandbox, only overriding /etc/systemd/system
+
+2012-07-06  Daniel P. Berrange  <berrange@redhat.com>
+
+	Remove rpm_name
+	Can't assume only one RPM
+
+2012-06-29  Daniel P. Berrange  <berrange@redhat.com>
+
+	Add Michal Privoznik to AUTHORS
+
+	Ensure virt-sandbox-service  sets up tmpfs for /run and /tmp
+	Use the new RAM filesystem support in libvirt to config a
+	10 MB tmpfs on /run, and 100 MB tmpfs on /tmp. Also bind
+	mount /var/run to /run
+
+	Add support for RAM based filesystems
+	Allow configuration of a tmpfs inside the guest virtual
+	machines.
+
+	Preserve user-specified ordering when mounting filesystems
+	Since there is now a single API for configuring mounts it
+	is now possible to maintain this order when mounting the
+	filesystems inside the sandbox. Remove the bind mount code
+	from init-common and let libvirt handled LXC and make the
+	init-qemu binary handle QEMU/KVM
+
+	Maintain only one list of all mount types
+	Currently there are seprate lists maintained for host bind
+	mounts, host image mounts and guest bind mounts. This means
+	that mounts can't be processed in the order the user
+	requested, which means a host bind mount can't be made on
+	top of a host image mount.
+
+	Switch to only having one single list of mounts in the
+	config API
+
+2012-06-27  Daniel P. Berrange  <berrange@redhat.com>
+
+	Refactor the GVirSandboxConfigMount class
+	The current GVirSandboxConfigMount classs is too inflexible,
+	since it specialized to deal with mounts that have a file
+	source. RAM filesystems do not, nor do various network FS.
+	Split it into two parsts, the base GVirSandboxConfigMount
+	holding the mount target info, and a subclass for the file
+	specific data GVirSandboxConfigMountFile.
+
+	Further specialize this to provide one subclass per type
+	of mount GVirSandboxConfigMountHostBind,
+	GVirSandboxConfigMountHostImage and GVirSandboxConfigMountGuestBind
+
+2012-06-22  Michal Privoznik  <mprivozn@redhat.com>
+
+	configure: Require higher version of glib
+	Since commit cfd4460b we must require glib-2.32.0 at least
+	because we are using g_value_set_schar which was introduced
+	in that release.
+
+2012-06-20  Radu Caragea  <sinaelgl@gmail.com>
+
+	Add module directory prefix selection feature
+	This is useful when running as a non-privileged user if we want to
+	boot a custom compiled kernel: we might not have rights to install in
+	/lib/modules/<kernel release> so when compiling the kernel we can use
+	"make modules_install INSTALL_MOD_PATH=/path" which installs in
+	/path/lib/modules/<kernel release>. By setting with
+	gvir_sandbox_config_set_kmodpath(cfg, "/path/lib/modules") we can
+	now achieve just that.
+
+2012-06-19  Radu Caragea  <sinaelgl@gmail.com>
+
+	Typo and example fix
+	I fixed a typo in the strace debug feature, if you specified
+	LIBVIRT_SANDBOX_STRACE=poll it would write "strace =poll" in the
+	kernel command line and consequently it wouldn't get picked up because
+	of that extra space.
+	Also, the example virt-sandbox.py was a bit outdated so I updated it.
+	The shell.py doesn't work as it has serial1 hardcoded for qemu. I
+	haven't checked the rest.
+
+	commit c9258ea3485a20c0b02f261fd9b8de4af32bf201
+	Author: Radu Caragea <sinaelgl@gmail.com>
+	Date:   Tue Jun 19 12:18:02 2012 +0300
+
+	    Fix python example and typo in strace kernel cmdline
+
+2012-06-18  Daniel P. Berrange  <berrange@redhat.com>
+
+	Fix typo in docs for gvir_sandbox_config_graphical_get_window_size
+
+	Add configurable key sequence for breaking out of console
+	Add a  configurable key sequence for breaking out of console
+	defaulting to Ctrl+]
+
+	Turn GVirSandboxConsole into an abstract class instead of interface
+	To avoid duplicating alot of code between the Raw & RPC console
+	subclasses, turn the GVirSandboxConsole module into an abstract
+	class instead of an interface
+
+	Add virt-sandbox-service.logrotate to RPM spec
+
+	s/Can not/Cannot/
+
+2012-06-15  Dan Walsh  <dwalsh@redhat.com>
+
+	Whitespace cleanup
+
+	Turns out this was the wrong way to fix this problem.  The proper fix should be in libvirt's MountFSBind
+	Revert "Add in support for mounting blk-files and files within a sandbox.  Currently"
+
+	This reverts commit 21b591615f004e73739c86d04c36874963feebb9.
+
+	Revert "White space cleanup"
+	This reverts commit a2b57a9adbdd7d7cb608c7b413527f02af713e7d.
+
+	Add in support for mounting blk-files and files within a sandbox.  Currently the code defaults to a directory, if the source is a file or a blk_file, we will override this.  Otherwise we will continue to specify a directory mount.
+
+	White space cleanup
+
+	White space cleanup
+
+	Fix documentation to match current command behaviour
+
+	Fixing for rebase
+
+	Merge with original master.
+	including the following patches:
+
+	Major-rewrite-to-use-self.config-for-most-data-stora.patch
+	Add-unit-file-support-fix-formatting.patch
+	Fix-documentation-to-match-current-command-behaviour.patch
+	Add-handling-of-the-etc-machine-id-bind-mount.-This-.patch
+	Fix-bug-where-we-specified-the-unit-file-to-start-us.patch
+
+2012-06-13  Radu Caragea  <sinaelgl@gmail.com>
+
+	console-rpc: fix segfault on null stdin
+	If gvir_sandbox_console_attach is called with NULL as the stdin
+	parameter it results in a segfault in the console-rpc module from
+	libvirt-sandbox.
+	Calling with NULL is of course useful when running something
+	noninteractive and you don't want it to grab the stdin or pass any fd
+	whatsoever.
+
+	commit f94f23314ab654c13bd1e25bd9094f1687fd681a
+	Author: Radu Caragea <sinaelgl@gmail.com>
+	Date:   Tue Jun 12 21:31:09 2012 +0300
+
+	    Fix crash on null stdin
+
+	    When we don't want to run something interactive and we use NULL as the stdin
+	    the app should still work.
+
+	    Signed-off-by: Radu Caragea <sinaelgl@gmail.com>
+
+2012-06-12  Radu Caragea  <dmns_serp@yahoo.com>
+
+	Add config APIs to select specific kernel
+	Added parameters to select a kernel through the release
+	version and path to binary. When setting kernel release version,
+	the module search will be done in  /lib/modules/<release>/kernel.
+	Also, by default, after setting the kernel+release version the
+	default kernel image path will be /boot/vmlinuz-<release>. The
+	two default to the running configuration: 
+
+	  /lib/modules/`uname -r`/kernel
+	  /boot/vmlinuz-`uname -r`
+
+	kver didn't seem suggestive enough; I used kernrelease and kernpath.
+	Also removed utsname inclusion wherever it wasn't used at all anymore
+
+	Fix memory allocation when adding VM features
+	Features should be allocated with 2 elements, one to be "acpi"
+	and one to be a NULL pointer indicating string array termination.
+	Caught with valgrind
+
+2012-06-12  Daniel P. Berrange  <berrange@redhat.com>
+
+	Add Radu Caragea to AUTHORS
+
+2012-06-12  Radu Caragea  <sinaelgl@gmail.com>
+
+	Avoid finding kernel modules multiple times
+	Revert the first hunk from
+
+	 commit 05fb94d2c42abe9cfd86c3663d704c268f325503
+	 Author: Daniel P. Berrange <berrange@redhat.com>
+	 Date:   Wed Apr 4 16:30:49 2012 +0100
+
+	    Search kernel module dirs & fix mem leaks
+
+	The change to remove '/kernel' from the module directory
+	was bogus. The real fix was in the Fedora kernel RPM
+	packaging
+
+	Without the '/kernel' suffix, the same module might be
+	found multiple times. eg When /lib/modules/`uname -r`/
+	has symlinks to the compiled sources (through /build and
+	/source) it crashed virt-sandbox with the error:
+
+	   "Unable to start sandbox: Error opening file
+	   '/tmp/libvirt-sandbox-9ivpRN/9pnet.ko': File exists"
+
+	Fix typo in Makefile.am  s/RUNDIR/rundir/
+	The compiler flags use -DRUNDIR="$(rundir)", but the variable
+	being set was RUNDIR, which resulted in a bogus relative
+	path being used in the XML for the cachedir location.
+
+2012-06-12  Daniel P. Berrange  <berrange@redhat.com>
+
+	Fix typo s/mount/mounts/ when deleting sandboxes
+
+	Remove TABs from bash completion script
+
+2012-05-11  Dan Walsh  <dwalsh@redhat.com>
+
+	Clean Whitespace
+
+	Add TODO file to keep track of all the changes required for libvirt-sandbox
+
+	Fix/Add names of security options to sym file, to export them from the library.
+	gvir_sandbox_config_get_security_dynamic;
+	gvir_sandbox_config_get_security_label;
+
+	These options are needed in order to add clone option to virt-sandbox-service.
+
+2012-05-07  Dan Walsh  <dwalsh@redhat.com>
+
+	cleanup whitespace
+
+	cleanup whitespace
+
+	Add handling of execute command and list commands, update bash completions script
+
+2012-05-04  Dan Walsh  <dwalsh@redhat.com>
+
+	Fix handling of localstatdir to actually use /var/run (/run).
+
+	If libvirt-sandbox is run as root, it should use /run/libvirt-sandbox rather then ~/.cache/libvirt-sandbox.
+	This will prevent us from having to have system service sandboxes needing
+	access to the /root directory.
+
+	Remove debug print statement
+
+2012-05-02  Dan Walsh  <dwalsh@redhat.com>
+
+	Verify the type and level given by a user is valid before updating the sandbox data.  Add try block to cleanup error handling on starting a sandbox
+
+2012-05-01  Dan Walsh  <dwalsh@redhat.com>
+
+	Trim excess mounts.
+		If your parent directory was already added as a bind mount point, then
+	dont add yourself
+
+2012-04-16  Dan Walsh  <dwalsh@redhat.com>
+
+	Cleanup error handling on virt-sandbox-service
+
+	Revert "Installing the libvirt-sandbox should require that libvirt-daemon-lxc be installed"
+	This reverts commit e0803b30b3da9278567ad8b0a92f0f99fde32924.
+
+	Fix bash completion reference to -n for --clone
+
+	Installing the libvirt-sandbox should require that libvirt-daemon-lxc be installed
+
+2012-04-16  Daniel P. Berrange  <berrange@redhat.com>
+
+	Fix error message when no CLI args are given
+	Reported-by: Kashyap Chamarthy <kchamart@redhat.com>
+
+2012-04-13  Daniel P. Berrange  <berrange@redhat.com>
+
+	Update to 0.0.3 release
+
+	Create default sandbox config dirs
+
+	Update virt-sandbox & virt-sandbox-service man pages
+	Update the man page contents, and convert the virt-sandbox-service
+	man page to POD format
+
+	Remove pointless reboot code
+	The guest kernel is setup to reboot immediately upon panic. Merely
+	letting the init process exit causes a panic & thus a reboot. Thus
+	there's no need to explicitly call reboot(2). This avoids a nasty
+	privileges problem
+
+	Move interactive console to a separate console device
+	To avoid mixing the interactive console I/O with the machine
+	boot/error messages, use a dedicated console device for
+	interactive apps. Run a XDR based RPC protocol over the
+	console device to allow proper separation of stdout and
+	stderr, and passing back of command exit status
+
+	Rename gvir_sandbox_context_get_console to get_log_console
+	Prepare for splitting the interactive console off from the
+	main sandbox console, by renaming the latter to the log
+	console.
+
+	Make use of strace runtime configurable via LIBVIRT_SANDBOX_STRACE env
+	Allow setting LIBVIRT_SANDBOX_STRACE=1 to turn on strace of the
+	sandbox init processes. Instead of '1', any valid strace filter
+	can also be set
+
+	Fix object initialization
+	gvir_sandbox_init_check must initialize libvirt-gobject,
+	not libvirt-gconfig. virt-sandbox must initialize
+	libvirt-sandbox
+
+	Adapt raw console to take account that stdin&stdout might be NULL
+	If stdin & stdout are NULL, then operate the console in log
+	only mode, sending everything to stderr
+
+	Add helper API for connecting a console to stderr only
+
+2012-04-12  Daniel P. Berrange  <berrange@redhat.com>
+
+	Whitespace tweak
+
+	Turn GVirSandboxConsole into an interface
+	To allow for different console wire formats, turn the
+	GVirSandboxConsole class into an interface. Add a new
+	GVirSandboxConsoleRaw class to implement a completely
+	raw console wire format.
+
+2012-04-11  Daniel P. Berrange  <berrange@redhat.com>
+
+	Fix setuid/reboot permissions (temporary hack)
+
+2012-04-05  Daniel P. Berrange  <berrange@redhat.com>
+
+	Don't bogus debug output
+
+	Don't override /run since we must inherit the tmpfs from the host
+
+	Don't print out command line help when getting a runtime exception
+
+2012-04-04  Daniel P. Berrange  <berrange@redhat.com>
+
+	Fix access mode for 9p filesystems
+
+	Ensure secondary filesystems are mounted writable. Doh
+
+	Ensure we exit upon panic & disable SELinux inside QEMU
+
+	Add noapic flag to QEMU
+
+	Require libvirt-gobject >= 0.0.7
+
+	Factor common init program to support systemd based services
+
+	Turn on execute permission for virt-sandbox-service
+
+	Add global -c option to specify libvirt connection
+	Rename existing '-c' (clone) option to '-n'
+
+	Fix docs typo
+
+	Temp hack to detect KVM support. Replace with capabilities check later
+
+	Fix error reporting when finding kmods
+
+	Get rid of cruft related to launching graphical sandboxes
+
+	Get rid of initial init process completely
+	Things are generally less confusing if systemd can be made to
+	run as PID 1, so get rid of the original libvirt-sandbox-init-{lxc,qemu}
+	process when spawning libvirt-sandbox-init-common
+
+	Refactor classes to better support non-interactive services
+	Make the base config/context classes abstract and move stuff
+	related to interactive commands to a new subclass.
+
+	Facilitate subclasses of context class to override startup
+
+	Don't shell out to insmod, implement it natively
+
+	Add helpers to cleaner class for deleting files/dirs
+	Avoid repeated identical cleaner callback impls by providing
+	some helpers for deleting files and directories.
+
+	Search kernel module dirs & fix mem leaks
+
+	Add BR on glibc-static
+
+2012-03-22  Daniel P. Berrange  <berrange@redhat.com>
+
+	Fix building RPM
+
+	Remove tabs & use portable test checks
+
+	Fix missing NULL terminator in config test case
+
+2012-03-21  Daniel P. Berrange  <berrange@redhat.com>
+
+	Modularize the configure.ac script for easier maintainence
+
+	s/int/size_t/ for counter
+
+	Avoid jumping over declarations
+
+	Add missing configure check for capng
+
+	Pull in GNULIBs compile warning infrastructure
+
+2012-03-01  Daniel P. Berrange  <berrange@redhat.com>
+
+	Ensure we pull in libvirtd RPMs
+
+2012-02-27  Dan Walsh  <dwalsh@redhat.com>
+
+	Merge branch 'master' of ssh://libvirt.org/git/libvirt-sandbox
+
+2012-02-27  Guido Günther  <agx@sigxcpu.org>
+
+	Debug is '-d' not '-D'
+
+	main: Don't free error twice
+	It's already being cleared in cleanup. Otherwise we see:
+
+	Unknown option -D
+	Run 'libvirt-sandbox --help' to see a full list of available command line options
+	*** glibc detected *** /var/scratch/debian/libvirt-sandbox/libvirt-sandbox/bin/.libs/lt-virt-sandbox: double free or corruption (fasttop): 0x08d888b0 ***
+	======= Backtrace: =========
+	/lib/i386-linux-gnu/i686/cmov/libc.so.6(+0x6e221)[0xb7255221]
+	/lib/i386-linux-gnu/i686/cmov/libc.so.6(+0x6fa88)[0xb7256a88]
+	/lib/i386-linux-gnu/i686/cmov/libc.so.6(cfree+0x6d)[0xb7259b3d]
+	/lib/i386-linux-gnu/libglib-2.0.so.0(+0x4c38b)[0xb73c038b]
+	/lib/i386-linux-gnu/i686/cmov/libc.so.6(__libc_start_main+0xe6)[0xb71fde46]
+
+	Add myself to AUTHORS
+	to not break "make syntax-check" with the following commits.
+
+2012-02-24  Dan Walsh  <dwalsh@redhat.com>
+
+	Add reload interface and cleanup removing spaces at end of lines
+
+	Modify Makefile to install bash completion script and man page for virt-sandbox-service
+
+	Add bash-completion script for virt-sandbox-service
+
+	Add man page for virt-sandbox-service
+
+2012-02-21  Dan Walsh  <dwalsh@redhat.com>
+
+	Merge branch 'master' of git://libvirt.org/libvirt-sandbox
+
+2012-02-21  Daniel P. Berrange  <berrange@redhat.com>
+
+	Add Dan Walsh to AUTHORS
+
+2012-02-10  Dan Walsh  <dwalsh@redhat.com>
+
+	Do a better job of handling images
+
+2012-02-08  Dan Walsh  <dwalsh@redhat.com>
+
+	Start working on argparsing to make image creation sane and actually work.
+
+2012-01-19  Dan Walsh  <dwalsh@redhat.com>
+
+	Merge branch 'master' of git://libvirt.org/libvirt-sandbox
+
+	Fix white space problems
+
+	Fix white space problems
+
+2012-01-18  Daniel P. Berrange  <berrange@redhat.com>
+
+	Import script for setting up services inside sandboxes
+
+	Add support for accessing the shell console directly
+	Add a new libvirt_sandbox_context_get_shell_console() API
+	to access the console for the (optional) admin shell
+
+2012-01-17  Daniel P. Berrange  <berrange@redhat.com>
+
+	Fix compile of test suite
+
+	Add support for mounting of host image files as guest filesystems
+
+	Fix memory leaks when building sandboxes
+
+	Rename "host mount" to "host bind mount" and "bind mount" to "guest bind mount"
+	To prepare for further types of mounts, rename "host mount" to
+	"host bind mount" and "bind mount" to "guest bind mount"
+
+	Refactor code for writing out filesys.cfg
+
+2012-01-16  Daniel P. Berrange  <berrange@redhat.com>
+
+	Rename QEMU 'mounts.cfg' file to 'filesys.cfg'
+
+	Renable code to make KVM root & config filesystems as readonly
+
+2012-01-12  Daniel P. Berrange  <berrange@redhat.com>
+
+	Update for 0.0.2 release
+
+	Fix null termination of test case strings
+
+	Update to require libvirt-gobject 0.0.4
+
+	Remove debug output
+
+	Add ability to run a privileged sandbox from CLI
+
+	Add ability to start an administrative debug shell
+	Add ability to setup a second console in the sandbox which is
+	running an adminstrative debug shell, with full privileges.
+
+	Update for changes API in libvirt-gconfig
+
+	Switch from using /.config to /etc/libvirt-sandbox/scratch
+
+	Add API for attaching a context to an existing sandbox
+
+2012-01-11  Daniel P. Berrange  <berrange@redhat.com>
+
+	Temporarily revert 3c496ab2e89e1a21ecde96d2ba7c08b09f0929e4
+	Revert 3c496ab2e89e1a21ecde96d2ba7c08b09f0929e4 until the updated
+	libvirt-glib release is available.
+
+	Ensure example programs aren't executable
+	Any executable example programs result in bogus deps being added
+	to the RPMs
+
+	Fill out README file & NEWS
+
+	Update COPYING file & FSF address
+
+	Fix debug in container based guests & remove memballoon
+
+	Don't overwrite process name in LXC startup
+
+	Remove trailing blank line
+
+	Update for changes API in libvirt-gconfig
+
+2012-01-09  Daniel P. Berrange  <berrange@redhat.com>
+
+	Add protection against running init programs in wrong context
+	Attempting to run the lxc or qemu init helper programs in your
+	normal root shell will have seriously bad consequences for the
+	health of your system. Add some sanity checks to startup of
+	those programs to avoid nasty mistakes
+
+2012-01-06  Daniel P. Berrange  <berrange@redhat.com>
+
+	Add basic doc outlining core test scenarios
+
+2012-01-05  Daniel P. Berrange  <berrange@redhat.com>
+
+	Fix mounts in machine based guest
+	The mount target had a mistaken newline appended, and the config
+	file was missing the 'sandbox:' prefix for mount name.
+
+2011-12-19  Daniel P. Berrange  <berrange@redhat.com>
+
+	Mark domains as auto-destroy
+
+	Fix compile error in test suite
+
+	Fix parallel make errors
+
+	Allow bind mounts & networks to be set from CLI
+
+	Change init programs over to use config file
+
+	Add APIs for setting networks & bind mounts
+
+	Run cleaner actions in same order as they are registered
+
+	Change from using netmask to prefix in IP addresses/routes
+
+2011-12-15  Daniel P. Berrange  <berrange@redhat.com>
+
+	Fix syntax violations & update checks
+
+2011-12-07  Daniel P. Berrange  <berrange@redhat.com>
+
+	Don't hardcode console name & fix error reporting
+
+2011-12-06  Daniel P. Berrange  <berrange@redhat.com>
+
+	Ignore more generated files
+
+	Add support for loading/saving config to ini files
+
+	Fix parsing of config string lists
+
+	Fix construction of console to match the final API in libvirt-gconfig
+
+	Add network device configuration objects
+
+2011-12-05  Daniel P. Berrange  <berrange@redhat.com>
+
+	Add a few notes about  the way the sandbox works
+
+2011-12-01  Daniel P. Berrange  <berrange@redhat.com>
+
+	Enable syntax-check rules
+
+	Remove more trailing whitespace
+
+	Replace @PACKAGE@ with $(PACKAGE)
+
+	Fix typo s/the the/the/
+
+	Remove unused dirent.h include
+
+	Remove trailing whitespace
+
+	Use exit(EXIT_SUCCESS) instead of exit(0)
+
+	Replace 'Red Hat' with 'Red Hat, Inc.' in copyright
+
+	Fill in AUTHORS file
+
+	Replace tabs with spaces
+
+	Ensure command argv are encoded with length
+
+	Switch over to use libvirt-gconfig for XML generation
+
+	Fix typo in parameter annotation
+
+2011-11-29  Daniel P. Berrange  <berrange@redhat.com>
+
+	Flesh out virt-sandbox binary and add man page
+
+	Fix default target mapping for includes
+
+	Fix license header in init programs
+
+	Add helper for setting security properties
+
+	Fix parent type for GVirSandboxConfigMount
+
+	Add helper APIs for adding mounts and includes from string lists/files
+
+	Avoid crashing in cleanup if sandbox failed to start
+
+	Remove SELinux-ism in security config
+
+	Update for change in stream watch API
+
+2011-11-28  Daniel P. Berrange  <berrange@redhat.com>
+
+	Add boilerplate doc headers for all objects
+
+	Wire up support for gtk-doc
+
+2011-11-25  Daniel P. Berrange  <berrange@redhat.com>
+
+	Split libraries out into separate RPM & add examples & binary
+
+	Include examples in dist & add support CLI tool
+
+	Fix off-by-one copying command argv
+
+	Make console work
+
+2011-11-24  Daniel P. Berrange  <berrange@redhat.com>
+
+	Add HACKING file
+
+	Wire up text console I/O class
+
+	Fix encoding of command argv to include length prefix
+
+	Populate modules file with desired load order for modules
+
+2011-11-22  Daniel P. Berrange  <berrange@redhat.com>
+
+	Fix static linking for initrd init program
+
+	Update to require libvirt-gobject 0.0.2
+
+2011-11-21  Daniel P. Berrange  <berrange@redhat.com>
+
+	Add new context for graphical applications
+
+2011-11-18  Daniel P. Berrange  <berrange@redhat.com>
+
+	Add in command line argument handling
+
+	Import init binary helpers from virt-sandbox repo
+
+	Create the initrd when building the sandbox
+
+	Add objects for creating initial ramdisks
+
+2011-11-17  Daniel P. Berrange  <berrange@redhat.com>
+
+	Introduce concept of a "cleaner" class
+
+	Replace copying file with LGPL contents
+
+	Add example programs
+
+	Add classes for building & running containers
+
+	Initial commit of sandbox APIs

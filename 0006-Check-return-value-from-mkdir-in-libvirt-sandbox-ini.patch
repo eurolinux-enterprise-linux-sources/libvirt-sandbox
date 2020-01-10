@@ -1,0 +1,33 @@
+From 4fe83d03fa019fbc8d824049ed5c7159b57f9525 Mon Sep 17 00:00:00 2001
+From: "Daniel P. Berrange" <berrange@redhat.com>
+Date: Thu, 15 Aug 2013 13:58:10 +0100
+Subject: [PATCH] Check return value from mkdir in libvirt-sandbox-init-qemu
+
+For https://bugzilla.redhat.com/show_bug.cgi?id=922639
+
+Most calls to mkdir() in libvirt-sandbox-init-qemu had their
+return value checked, but one was missed.
+
+Signed-off-by: Daniel P. Berrange <berrange@redhat.com>
+(cherry picked from commit f1841835cbeb09dab7d2343f94846fefc3f25e99)
+---
+ libvirt-sandbox/libvirt-sandbox-init-qemu.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/libvirt-sandbox/libvirt-sandbox-init-qemu.c b/libvirt-sandbox/libvirt-sandbox-init-qemu.c
+index f09c6d9..012c6a2 100644
+--- a/libvirt-sandbox/libvirt-sandbox-init-qemu.c
++++ b/libvirt-sandbox/libvirt-sandbox-init-qemu.c
+@@ -541,7 +541,11 @@ print_uptime(void)
+ 
+ static void set_debug(void)
+ {
+-    mkdir("/proc", 0755);
++    if (mkdir("/proc", 0755) < 0) {
++        fprintf(stderr, "libvirt-sandbox-init-qemu: %s: cannot mkdir /proc: %s\n",
++                __func__, strerror(errno));
++        exit_poweroff();
++    }
+     if (mount("none", "/proc", "proc", 0, "") < 0) {
+         fprintf(stderr, "libvirt-sandbox-init-qemu: %s: cannot mount /proc: %s\n",
+                 __func__, strerror(errno));

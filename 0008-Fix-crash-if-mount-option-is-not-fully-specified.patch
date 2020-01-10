@@ -1,0 +1,50 @@
+From d2463a51fff78c232de310022f3e10176577fb9c Mon Sep 17 00:00:00 2001
+From: "Daniel P. Berrange" <berrange@redhat.com>
+Date: Thu, 15 Aug 2013 14:19:46 +0100
+Subject: [PATCH] Fix crash if mount option is not fully specified
+
+For https://bugzilla.redhat.com/show_bug.cgi?id=922639
+
+If the user specified '-m ram:/tmp' instead of '-m ram:/tmp=500M'
+the code would reference a NULL pointer. Fix it to return an
+error message instead. This fixes a coverity identified issue.
+
+Signed-off-by: Daniel P. Berrange <berrange@redhat.com>
+(cherry picked from commit d32fd58fdee3f47bf53de935d0d4efea26be56d1)
+---
+ libvirt-sandbox/libvirt-sandbox-config.c | 12 ++++++++----
+ 1 file changed, 8 insertions(+), 4 deletions(-)
+
+diff --git a/libvirt-sandbox/libvirt-sandbox-config.c b/libvirt-sandbox/libvirt-sandbox-config.c
+index ccdb3bc..2cc4e22 100644
+--- a/libvirt-sandbox/libvirt-sandbox-config.c
++++ b/libvirt-sandbox/libvirt-sandbox-config.c
+@@ -1222,6 +1222,7 @@ gboolean gvir_sandbox_config_add_mount_strv(GVirSandboxConfig *config,
+  * - host-bind:/tmp=/var/lib/sandbox/demo/tmp
+  * - host-image:/=/var/lib/sandbox/demo.img
+  * - guest-bind:/home=/tmp/home
++ * - ram:/tmp=500M
+  */
+ gboolean gvir_sandbox_config_add_mount_opts(GVirSandboxConfig *config,
+                                             const char *mount,
+@@ -1260,13 +1261,16 @@ gboolean gvir_sandbox_config_add_mount_opts(GVirSandboxConfig *config,
+         source = tmp + 1;
+     }
+ 
++    if (!tmp) {
++        g_set_error(error, GVIR_SANDBOX_CONFIG_ERROR, 0,
++                    _("Missing mount source string on %s"), mount);
++        return FALSE;
++    }
++
+     if (type == GVIR_SANDBOX_TYPE_CONFIG_MOUNT_RAM) {
+         gint size;
+         gchar *end;
+-        gchar *sizestr;
+-        *tmp = '\0';
+-        sizestr = tmp + 1;
+-        size = strtol(sizestr, &end, 10);
++        size = strtol(source, &end, 10);
+ 
+         if (end) {
+             if (g_str_equal(end, "KiB") || g_str_equal(end, "K"))

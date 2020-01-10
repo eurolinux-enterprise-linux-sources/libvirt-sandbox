@@ -1,0 +1,198 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>GVirSandboxConfigMountRam</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<link rel="home" href="index.html" title="Libvirt-sandbox Reference Manual">
+<link rel="up" href="ch01.html" title="Libvirt-sandbox">
+<link rel="prev" href="GVirSandboxConfigMountHostImage.html" title="GVirSandboxConfigMountHostImage">
+<link rel="next" href="GVirSandboxConfigNetwork.html" title="GVirSandboxConfigNetwork">
+<meta name="generator" content="GTK-Doc V1.19 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="GVirSandboxConfigMountHostImage.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libvirt-sandbox Reference Manual</th>
+<td><a accesskey="n" href="GVirSandboxConfigNetwork.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#GVirSandboxConfigMountRam.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#GVirSandboxConfigMountRam.description" class="shortcut">Description</a>
+                   | 
+                  <a href="#GVirSandboxConfigMountRam.object-hierarchy" class="shortcut">Object Hierarchy</a>
+                   | 
+                  <a href="#GVirSandboxConfigMountRam.properties" class="shortcut">Properties</a>
+</td></tr>
+</table>
+<div class="refentry">
+<a name="GVirSandboxConfigMountRam"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="GVirSandboxConfigMountRam.top_of_page"></a>GVirSandboxConfigMountRam</span></h2>
+<p>GVirSandboxConfigMountRam — Filesystem attachment configuration details</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="GVirSandboxConfigMountRam.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+#include &lt;libvirt-sandbox/libvirt-sandbox.h&gt;
+
+struct              <a class="link" href="GVirSandboxConfigMountRam.html#GVirSandboxConfigMountRam-struct" title="struct GVirSandboxConfigMountRam">GVirSandboxConfigMountRam</a>;
+struct              <a class="link" href="GVirSandboxConfigMountRam.html#GVirSandboxConfigMountRamClass" title="struct GVirSandboxConfigMountRamClass">GVirSandboxConfigMountRamClass</a>;
+<a class="link" href="GVirSandboxConfigMountRam.html" title="GVirSandboxConfigMountRam"><span class="returnvalue">GVirSandboxConfigMountRam</span></a> * <a class="link" href="GVirSandboxConfigMountRam.html#gvir-sandbox-config-mount-ram-new" title="gvir_sandbox_config_mount_ram_new ()">gvir_sandbox_config_mount_ram_new</a>
+                                                        (<em class="parameter"><code>const <span class="type">gchar</span> *targetdir</code></em>,
+                                                         <em class="parameter"><code><span class="type">guint64</span> usage</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GVirSandboxConfigMountRam.html#gvir-sandbox-config-mount-ram-set-usage" title="gvir_sandbox_config_mount_ram_set_usage ()">gvir_sandbox_config_mount_ram_set_usage</a>
+                                                        (<em class="parameter"><code><a class="link" href="GVirSandboxConfigMountRam.html" title="GVirSandboxConfigMountRam"><span class="type">GVirSandboxConfigMountRam</span></a> *config</code></em>,
+                                                         <em class="parameter"><code><span class="type">guint64</span> usage</code></em>);
+<span class="returnvalue">guint64</span>             <a class="link" href="GVirSandboxConfigMountRam.html#gvir-sandbox-config-mount-ram-get-usage" title="gvir_sandbox_config_mount_ram_get_usage ()">gvir_sandbox_config_mount_ram_get_usage</a>
+                                                        (<em class="parameter"><code><a class="link" href="GVirSandboxConfigMountRam.html" title="GVirSandboxConfigMountRam"><span class="type">GVirSandboxConfigMountRam</span></a> *config</code></em>);
+</pre>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxConfigMountRam.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  GObject
+   +----<a class="link" href="GVirSandboxConfigMount.html" title="GVirSandboxConfigMount">GVirSandboxConfigMount</a>
+         +----GVirSandboxConfigMountRam
+</pre>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxConfigMountRam.properties"></a><h2>Properties</h2>
+<pre class="synopsis">
+  "<a class="link" href="GVirSandboxConfigMountRam.html#GVirSandboxConfigMountRam--usage" title='The "usage" property'>usage</a>"                    <span class="type">guint64</span>               : Read / Write / Construct Only
+</pre>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxConfigMountRam.description"></a><h2>Description</h2>
+<p>
+Provides an object to store information about a filesystem attachment in the sandbox
+</p>
+<p>
+The GVirSandboxConfigMount object stores information required to attach
+a host filesystem to the application sandbox. The sandbox starts off with
+a complete view of the host filesystem. This object allows a specific
+area of the host filesystem to be hidden and replaced with alternate
+content.
+</p>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxConfigMountRam.details"></a><h2>Details</h2>
+<div class="refsect2">
+<a name="GVirSandboxConfigMountRam-struct"></a><h3>struct GVirSandboxConfigMountRam</h3>
+<pre class="programlisting">struct GVirSandboxConfigMountRam;</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GVirSandboxConfigMountRamClass"></a><h3>struct GVirSandboxConfigMountRamClass</h3>
+<pre class="programlisting">struct GVirSandboxConfigMountRamClass {
+    GVirSandboxConfigMountClass parent_class;
+
+    gpointer padding[LIBVIRT_SANDBOX_CLASS_PADDING];
+};
+</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-config-mount-ram-new"></a><h3>gvir_sandbox_config_mount_ram_new ()</h3>
+<pre class="programlisting"><a class="link" href="GVirSandboxConfigMountRam.html" title="GVirSandboxConfigMountRam"><span class="returnvalue">GVirSandboxConfigMountRam</span></a> * gvir_sandbox_config_mount_ram_new
+                                                        (<em class="parameter"><code>const <span class="type">gchar</span> *targetdir</code></em>,
+                                                         <em class="parameter"><code><span class="type">guint64</span> usage</code></em>);</pre>
+<p>
+Create a new custom mount mapped to the directory <em class="parameter"><code>targetdir</code></em>
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>targetdir</code></em> :</span></p></td>
+<td>the target directory. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>a new sandbox mount object. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-config-mount-ram-set-usage"></a><h3>gvir_sandbox_config_mount_ram_set_usage ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                gvir_sandbox_config_mount_ram_set_usage
+                                                        (<em class="parameter"><code><a class="link" href="GVirSandboxConfigMountRam.html" title="GVirSandboxConfigMountRam"><span class="type">GVirSandboxConfigMountRam</span></a> *config</code></em>,
+                                                         <em class="parameter"><code><span class="type">guint64</span> usage</code></em>);</pre>
+<p>
+Sets the memory usage limit for the RAM filesystem in Kibibytes
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>config</code></em> :</span></p></td>
+<td>the sandbox mount config. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>usage</code></em> :</span></p></td>
+<td>the memory usage limit in KiB</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-config-mount-ram-get-usage"></a><h3>gvir_sandbox_config_mount_ram_get_usage ()</h3>
+<pre class="programlisting"><span class="returnvalue">guint64</span>             gvir_sandbox_config_mount_ram_get_usage
+                                                        (<em class="parameter"><code><a class="link" href="GVirSandboxConfigMountRam.html" title="GVirSandboxConfigMountRam"><span class="type">GVirSandboxConfigMountRam</span></a> *config</code></em>);</pre>
+<p>
+Retrieves the memory usage limit for the RAM filesystem in Kibibytes
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>config</code></em> :</span></p></td>
+<td>the sandbox mount config. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the usage limit</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxConfigMountRam.property-details"></a><h2>Property Details</h2>
+<div class="refsect2">
+<a name="GVirSandboxConfigMountRam--usage"></a><h3>The <code class="literal">"usage"</code> property</h3>
+<pre class="programlisting">  "usage"                    <span class="type">guint64</span>               : Read / Write / Construct Only</pre>
+<p>The maximum ram usage (KiB).</p>
+<p>Default value: 10240</p>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.19</div>
+</body>
+</html>

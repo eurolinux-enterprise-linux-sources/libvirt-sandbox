@@ -1,0 +1,46 @@
+From 8c3b8ed32a17119c50df87cc90ffe32157f11943 Mon Sep 17 00:00:00 2001
+From: Zhe Peng <zpeng@redhat.com>
+Date: Thu, 8 Aug 2013 11:31:07 +0800
+Subject: [PATCH] Update man page about virt-sandbox-service
+
+For https://bugzilla.redhat.com/show_bug.cgi?id=996617
+
+Remove obsolete 'list', 'start', 'stop' commands and
+add new 'upgrade' command.
+
+(cherry picked from commit d38d571bccf2828d66fce98583d9c7fba779bfae)
+---
+ bin/virt-sandbox-service.pod | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/bin/virt-sandbox-service.pod b/bin/virt-sandbox-service.pod
+index 32caad9..7752145 100644
+--- a/bin/virt-sandbox-service.pod
++++ b/bin/virt-sandbox-service.pod
+@@ -4,7 +4,7 @@ virt-sandbox-service - Secure container tool
+ 
+ =head1 SYNOPSIS
+ 
+-  {create,clone,connect,delete,execute,list,reload,start,stop}
++  {create,clone,connect,delete,execute,reload,upgrade}
+ 
+   commands:
+ 
+@@ -20,6 +20,8 @@ virt-sandbox-service - Secure container tool
+ 
+     reload              Reload a running sandbox container
+ 
++    upgrade             Upgrade an existing sandbox container
++
+ =head1 DESCRIPTION
+ 
+ virt-sandbox-service is used to provision secure sandboxed system services.
+@@ -52,7 +54,7 @@ supported currently).
+ 
+ =head1 SEE ALSO
+ 
+-C<libvirt(8)>, C<selinux(8)>, C<systemd(8)>, C<virt-sandbox(1)>, C<virt-sandbox-service-create(1)>, C<virt-sandbox-service-clone(1)>, C<virt-sandbox-service-connect(1)>, C<virt-sandbox-service-delete(1)>, C<virt-sandbox-service-execute(1)>, C<virt-sandbox-service-reload(1)>
++C<libvirt(8)>, C<selinux(8)>, C<systemd(8)>, C<virt-sandbox(1)>, C<virt-sandbox-service-create(1)>, C<virt-sandbox-service-clone(1)>, C<virt-sandbox-service-connect(1)>, C<virt-sandbox-service-delete(1)>, C<virt-sandbox-service-execute(1)>, C<virt-sandbox-service-reload(1)>, C<virt-sandbox-service-upgrade(1)>
+ 
+ =head1 FILES
+ 

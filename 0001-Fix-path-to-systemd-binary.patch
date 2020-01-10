@@ -1,0 +1,29 @@
+From dd7ec1233b61a1dd89b8f54bbd9ea9186982f8dd Mon Sep 17 00:00:00 2001
+From: "Daniel P. Berrange" <berrange@redhat.com>
+Date: Thu, 1 Aug 2013 17:17:40 +0100
+Subject: [PATCH] Fix path to systemd binary
+
+For https://bugzilla.redhat.com/show_bug.cgi?id=990347
+
+Systemd's preferred path is /lib/systemd/systemd, not /bin/systemd.
+The latter was a temporary symlink, now removed.
+
+Signed-off-by: Daniel P. Berrange <berrange@redhat.com>
+(cherry picked from commit 47caee5911f3ffe7c75af1f2b18d4aa1db662533)
+---
+ libvirt-sandbox/libvirt-sandbox-config-service-systemd.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/libvirt-sandbox/libvirt-sandbox-config-service-systemd.c b/libvirt-sandbox/libvirt-sandbox-config-service-systemd.c
+index 64f7d36..b06c960 100644
+--- a/libvirt-sandbox/libvirt-sandbox-config-service-systemd.c
++++ b/libvirt-sandbox/libvirt-sandbox-config-service-systemd.c
+@@ -219,7 +219,7 @@ static gchar **gvir_sandbox_config_service_systemd_get_command(GVirSandboxConfig
+     GVirSandboxConfigServiceSystemdPrivate *priv = sconfig->priv;
+     gchar **command = g_new(gchar *, 7);
+ 
+-    command[0] = g_strdup("/bin/systemd");
++    command[0] = g_strdup("/lib/systemd/systemd");
+     command[1] = g_strdup("--unit");
+     command[2] = g_strdup(priv->bootTarget);
+     command[3] = g_strdup("--log-target");

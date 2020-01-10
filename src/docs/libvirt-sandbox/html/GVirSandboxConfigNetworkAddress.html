@@ -1,0 +1,337 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>GVirSandboxConfigNetworkAddress</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<link rel="home" href="index.html" title="Libvirt-sandbox Reference Manual">
+<link rel="up" href="ch01.html" title="Libvirt-sandbox">
+<link rel="prev" href="GVirSandboxConfigNetwork.html" title="GVirSandboxConfigNetwork">
+<link rel="next" href="GVirSandboxConfigNetworkRoute.html" title="GVirSandboxConfigNetworkRoute">
+<meta name="generator" content="GTK-Doc V1.19 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="GVirSandboxConfigNetwork.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libvirt-sandbox Reference Manual</th>
+<td><a accesskey="n" href="GVirSandboxConfigNetworkRoute.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#GVirSandboxConfigNetworkAddress.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#GVirSandboxConfigNetworkAddress.description" class="shortcut">Description</a>
+                   | 
+                  <a href="#GVirSandboxConfigNetworkAddress.object-hierarchy" class="shortcut">Object Hierarchy</a>
+                   | 
+                  <a href="#GVirSandboxConfigNetworkAddress.properties" class="shortcut">Properties</a>
+</td></tr>
+</table>
+<div class="refentry">
+<a name="GVirSandboxConfigNetworkAddress"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="GVirSandboxConfigNetworkAddress.top_of_page"></a>GVirSandboxConfigNetworkAddress</span></h2>
+<p>GVirSandboxConfigNetworkAddress</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="GVirSandboxConfigNetworkAddress.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">#define             <a class="link" href="GVirSandboxConfigNetworkAddress.html#GVIR-SANDBOX-TYPE-CONFIG-NETWORK-ADDRESS-HANDLE:CAPS" title="GVIR_SANDBOX_TYPE_CONFIG_NETWORK_ADDRESS_HANDLE">GVIR_SANDBOX_TYPE_CONFIG_NETWORK_ADDRESS_HANDLE</a>
+struct              <a class="link" href="GVirSandboxConfigNetworkAddress.html#GVirSandboxConfigNetworkAddress-struct" title="struct GVirSandboxConfigNetworkAddress">GVirSandboxConfigNetworkAddress</a>;
+struct              <a class="link" href="GVirSandboxConfigNetworkAddress.html#GVirSandboxConfigNetworkAddressClass" title="struct GVirSandboxConfigNetworkAddressClass">GVirSandboxConfigNetworkAddressClass</a>;
+<a class="link" href="GVirSandboxConfigNetworkAddress.html" title="GVirSandboxConfigNetworkAddress"><span class="returnvalue">GVirSandboxConfigNetworkAddress</span></a> * <a class="link" href="GVirSandboxConfigNetworkAddress.html#gvir-sandbox-config-network-address-new" title="gvir_sandbox_config_network_address_new ()">gvir_sandbox_config_network_address_new</a>
+                                                        (<em class="parameter"><code><span class="type">GInetAddress</span> *primary</code></em>,
+                                                         <em class="parameter"><code><span class="type">guint</span> prefix</code></em>,
+                                                         <em class="parameter"><code><span class="type">GInetAddress</span> *broadcast</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GVirSandboxConfigNetworkAddress.html#gvir-sandbox-config-network-address-set-primary" title="gvir_sandbox_config_network_address_set_primary ()">gvir_sandbox_config_network_address_set_primary</a>
+                                                        (<em class="parameter"><code><a class="link" href="GVirSandboxConfigNetworkAddress.html" title="GVirSandboxConfigNetworkAddress"><span class="type">GVirSandboxConfigNetworkAddress</span></a> *config</code></em>,
+                                                         <em class="parameter"><code><span class="type">GInetAddress</span> *addr</code></em>);
+<span class="returnvalue">GInetAddress</span> *      <a class="link" href="GVirSandboxConfigNetworkAddress.html#gvir-sandbox-config-network-address-get-primary" title="gvir_sandbox_config_network_address_get_primary ()">gvir_sandbox_config_network_address_get_primary</a>
+                                                        (<em class="parameter"><code><a class="link" href="GVirSandboxConfigNetworkAddress.html" title="GVirSandboxConfigNetworkAddress"><span class="type">GVirSandboxConfigNetworkAddress</span></a> *config</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GVirSandboxConfigNetworkAddress.html#gvir-sandbox-config-network-address-set-prefix" title="gvir_sandbox_config_network_address_set_prefix ()">gvir_sandbox_config_network_address_set_prefix</a>
+                                                        (<em class="parameter"><code><a class="link" href="GVirSandboxConfigNetworkAddress.html" title="GVirSandboxConfigNetworkAddress"><span class="type">GVirSandboxConfigNetworkAddress</span></a> *config</code></em>,
+                                                         <em class="parameter"><code><span class="type">guint</span> prefix</code></em>);
+<span class="returnvalue">guint</span>               <a class="link" href="GVirSandboxConfigNetworkAddress.html#gvir-sandbox-config-network-address-get-prefix" title="gvir_sandbox_config_network_address_get_prefix ()">gvir_sandbox_config_network_address_get_prefix</a>
+                                                        (<em class="parameter"><code><a class="link" href="GVirSandboxConfigNetworkAddress.html" title="GVirSandboxConfigNetworkAddress"><span class="type">GVirSandboxConfigNetworkAddress</span></a> *config</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GVirSandboxConfigNetworkAddress.html#gvir-sandbox-config-network-address-set-broadcast" title="gvir_sandbox_config_network_address_set_broadcast ()">gvir_sandbox_config_network_address_set_broadcast</a>
+                                                        (<em class="parameter"><code><a class="link" href="GVirSandboxConfigNetworkAddress.html" title="GVirSandboxConfigNetworkAddress"><span class="type">GVirSandboxConfigNetworkAddress</span></a> *config</code></em>,
+                                                         <em class="parameter"><code><span class="type">GInetAddress</span> *addr</code></em>);
+<span class="returnvalue">GInetAddress</span> *      <a class="link" href="GVirSandboxConfigNetworkAddress.html#gvir-sandbox-config-network-address-get-broadcast" title="gvir_sandbox_config_network_address_get_broadcast ()">gvir_sandbox_config_network_address_get_broadcast</a>
+                                                        (<em class="parameter"><code><a class="link" href="GVirSandboxConfigNetworkAddress.html" title="GVirSandboxConfigNetworkAddress"><span class="type">GVirSandboxConfigNetworkAddress</span></a> *config</code></em>);
+</pre>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxConfigNetworkAddress.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  GObject
+   +----GVirSandboxConfigNetworkAddress
+</pre>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxConfigNetworkAddress.properties"></a><h2>Properties</h2>
+<pre class="synopsis">
+  "<a class="link" href="GVirSandboxConfigNetworkAddress.html#GVirSandboxConfigNetworkAddress--broadcast" title='The "broadcast" property'>broadcast</a>"                <span class="type">GInetAddress</span>*         : Read / Write / Construct Only
+  "<a class="link" href="GVirSandboxConfigNetworkAddress.html#GVirSandboxConfigNetworkAddress--prefix" title='The "prefix" property'>prefix</a>"                   <span class="type">guint</span>                 : Read / Write / Construct Only
+  "<a class="link" href="GVirSandboxConfigNetworkAddress.html#GVirSandboxConfigNetworkAddress--primary" title='The "primary" property'>primary</a>"                  <span class="type">GInetAddress</span>*         : Read / Write / Construct Only
+</pre>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxConfigNetworkAddress.description"></a><h2>Description</h2>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxConfigNetworkAddress.details"></a><h2>Details</h2>
+<div class="refsect2">
+<a name="GVIR-SANDBOX-TYPE-CONFIG-NETWORK-ADDRESS-HANDLE:CAPS"></a><h3>GVIR_SANDBOX_TYPE_CONFIG_NETWORK_ADDRESS_HANDLE</h3>
+<pre class="programlisting">#define GVIR_SANDBOX_TYPE_CONFIG_NETWORK_ADDRESS_HANDLE      (gvir_sandbox_config_network_address_handle_get_type ())
+</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GVirSandboxConfigNetworkAddress-struct"></a><h3>struct GVirSandboxConfigNetworkAddress</h3>
+<pre class="programlisting">struct GVirSandboxConfigNetworkAddress;</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GVirSandboxConfigNetworkAddressClass"></a><h3>struct GVirSandboxConfigNetworkAddressClass</h3>
+<pre class="programlisting">struct GVirSandboxConfigNetworkAddressClass {
+    GObjectClass parent_class;
+
+    gpointer padding[LIBVIRT_SANDBOX_CLASS_PADDING];
+};
+</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-config-network-address-new"></a><h3>gvir_sandbox_config_network_address_new ()</h3>
+<pre class="programlisting"><a class="link" href="GVirSandboxConfigNetworkAddress.html" title="GVirSandboxConfigNetworkAddress"><span class="returnvalue">GVirSandboxConfigNetworkAddress</span></a> * gvir_sandbox_config_network_address_new
+                                                        (<em class="parameter"><code><span class="type">GInetAddress</span> *primary</code></em>,
+                                                         <em class="parameter"><code><span class="type">guint</span> prefix</code></em>,
+                                                         <em class="parameter"><code><span class="type">GInetAddress</span> *broadcast</code></em>);</pre>
+<p>
+Create a new network address config. Only the <em class="parameter"><code>primary</code></em> parameter
+is required to be non-NULL. The <em class="parameter"><code>broadcast</code></em> address
+will be automatically filled in, if not otherwise specified
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>primary</code></em> :</span></p></td>
+<td>the primary address</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>prefix</code></em> :</span></p></td>
+<td>the network prefix</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>broadcast</code></em> :</span></p></td>
+<td>the broadcast address (optional)</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>a new sandbox network_address object. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-config-network-address-set-primary"></a><h3>gvir_sandbox_config_network_address_set_primary ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                gvir_sandbox_config_network_address_set_primary
+                                                        (<em class="parameter"><code><a class="link" href="GVirSandboxConfigNetworkAddress.html" title="GVirSandboxConfigNetworkAddress"><span class="type">GVirSandboxConfigNetworkAddress</span></a> *config</code></em>,
+                                                         <em class="parameter"><code><span class="type">GInetAddress</span> *addr</code></em>);</pre>
+<p>
+Sets the interface primary address
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>config</code></em> :</span></p></td>
+<td>the sandbox network address config. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>addr</code></em> :</span></p></td>
+<td>the primary address. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-config-network-address-get-primary"></a><h3>gvir_sandbox_config_network_address_get_primary ()</h3>
+<pre class="programlisting"><span class="returnvalue">GInetAddress</span> *      gvir_sandbox_config_network_address_get_primary
+                                                        (<em class="parameter"><code><a class="link" href="GVirSandboxConfigNetworkAddress.html" title="GVirSandboxConfigNetworkAddress"><span class="type">GVirSandboxConfigNetworkAddress</span></a> *config</code></em>);</pre>
+<p>
+Retrieves the primary address
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>config</code></em> :</span></p></td>
+<td>the sandbox network address config. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the primary address. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-config-network-address-set-prefix"></a><h3>gvir_sandbox_config_network_address_set_prefix ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                gvir_sandbox_config_network_address_set_prefix
+                                                        (<em class="parameter"><code><a class="link" href="GVirSandboxConfigNetworkAddress.html" title="GVirSandboxConfigNetworkAddress"><span class="type">GVirSandboxConfigNetworkAddress</span></a> *config</code></em>,
+                                                         <em class="parameter"><code><span class="type">guint</span> prefix</code></em>);</pre>
+<p>
+Sets the interface network prefix
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>config</code></em> :</span></p></td>
+<td>the sandbox network address config. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>prefix</code></em> :</span></p></td>
+<td>the prefix length</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-config-network-address-get-prefix"></a><h3>gvir_sandbox_config_network_address_get_prefix ()</h3>
+<pre class="programlisting"><span class="returnvalue">guint</span>               gvir_sandbox_config_network_address_get_prefix
+                                                        (<em class="parameter"><code><a class="link" href="GVirSandboxConfigNetworkAddress.html" title="GVirSandboxConfigNetworkAddress"><span class="type">GVirSandboxConfigNetworkAddress</span></a> *config</code></em>);</pre>
+<p>
+Retrieves the network prefix
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>config</code></em> :</span></p></td>
+<td>the sandbox network address config. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the network prefix</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-config-network-address-set-broadcast"></a><h3>gvir_sandbox_config_network_address_set_broadcast ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                gvir_sandbox_config_network_address_set_broadcast
+                                                        (<em class="parameter"><code><a class="link" href="GVirSandboxConfigNetworkAddress.html" title="GVirSandboxConfigNetworkAddress"><span class="type">GVirSandboxConfigNetworkAddress</span></a> *config</code></em>,
+                                                         <em class="parameter"><code><span class="type">GInetAddress</span> *addr</code></em>);</pre>
+<p>
+Sets the interface broadcast address
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>config</code></em> :</span></p></td>
+<td>the sandbox network address config. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>addr</code></em> :</span></p></td>
+<td>the broadcast address. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-config-network-address-get-broadcast"></a><h3>gvir_sandbox_config_network_address_get_broadcast ()</h3>
+<pre class="programlisting"><span class="returnvalue">GInetAddress</span> *      gvir_sandbox_config_network_address_get_broadcast
+                                                        (<em class="parameter"><code><a class="link" href="GVirSandboxConfigNetworkAddress.html" title="GVirSandboxConfigNetworkAddress"><span class="type">GVirSandboxConfigNetworkAddress</span></a> *config</code></em>);</pre>
+<p>
+Retrieves the broadcast address
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>config</code></em> :</span></p></td>
+<td>the sandbox network address config. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the broadcast address. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxConfigNetworkAddress.property-details"></a><h2>Property Details</h2>
+<div class="refsect2">
+<a name="GVirSandboxConfigNetworkAddress--broadcast"></a><h3>The <code class="literal">"broadcast"</code> property</h3>
+<pre class="programlisting">  "broadcast"                <span class="type">GInetAddress</span>*         : Read / Write / Construct Only</pre>
+<p>Broadcast address.</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GVirSandboxConfigNetworkAddress--prefix"></a><h3>The <code class="literal">"prefix"</code> property</h3>
+<pre class="programlisting">  "prefix"                   <span class="type">guint</span>                 : Read / Write / Construct Only</pre>
+<p>Network prefix.</p>
+<p>Allowed values: &lt;= 128</p>
+<p>Default value: 24</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GVirSandboxConfigNetworkAddress--primary"></a><h3>The <code class="literal">"primary"</code> property</h3>
+<pre class="programlisting">  "primary"                  <span class="type">GInetAddress</span>*         : Read / Write / Construct Only</pre>
+<p>Primary address.</p>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.19</div>
+</body>
+</html>

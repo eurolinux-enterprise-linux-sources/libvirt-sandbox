@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>GVirSandboxConfigMountGuestBind</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<link rel="home" href="index.html" title="Libvirt-sandbox Reference Manual">
+<link rel="up" href="ch01.html" title="Libvirt-sandbox">
+<link rel="prev" href="GVirSandboxConfigMount.html" title="GVirSandboxConfigMount">
+<link rel="next" href="GVirSandboxConfigMountHostBind.html" title="GVirSandboxConfigMountHostBind">
+<meta name="generator" content="GTK-Doc V1.19 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="GVirSandboxConfigMount.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libvirt-sandbox Reference Manual</th>
+<td><a accesskey="n" href="GVirSandboxConfigMountHostBind.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#GVirSandboxConfigMountGuestBind.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#GVirSandboxConfigMountGuestBind.description" class="shortcut">Description</a>
+                   | 
+                  <a href="#GVirSandboxConfigMountGuestBind.object-hierarchy" class="shortcut">Object Hierarchy</a>
+</td></tr>
+</table>
+<div class="refentry">
+<a name="GVirSandboxConfigMountGuestBind"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="GVirSandboxConfigMountGuestBind.top_of_page"></a>GVirSandboxConfigMountGuestBind</span></h2>
+<p>GVirSandboxConfigMountGuestBind — Bindsystem attachment configuration details</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="GVirSandboxConfigMountGuestBind.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+#include &lt;libvirt-sandbox/libvirt-sandbox.h&gt;
+
+struct              <a class="link" href="GVirSandboxConfigMountGuestBind.html#GVirSandboxConfigMountGuestBind-struct" title="struct GVirSandboxConfigMountGuestBind">GVirSandboxConfigMountGuestBind</a>;
+struct              <a class="link" href="GVirSandboxConfigMountGuestBind.html#GVirSandboxConfigMountGuestBindClass" title="struct GVirSandboxConfigMountGuestBindClass">GVirSandboxConfigMountGuestBindClass</a>;
+<a class="link" href="GVirSandboxConfigMountGuestBind.html" title="GVirSandboxConfigMountGuestBind"><span class="returnvalue">GVirSandboxConfigMountGuestBind</span></a> * <a class="link" href="GVirSandboxConfigMountGuestBind.html#gvir-sandbox-config-mount-guest-bind-new" title="gvir_sandbox_config_mount_guest_bind_new ()">gvir_sandbox_config_mount_guest_bind_new</a>
+                                                        (<em class="parameter"><code>const <span class="type">gchar</span> *source</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">gchar</span> *targetdir</code></em>);
+</pre>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxConfigMountGuestBind.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  GObject
+   +----<a class="link" href="GVirSandboxConfigMount.html" title="GVirSandboxConfigMount">GVirSandboxConfigMount</a>
+         +----GVirSandboxConfigMountFile
+               +----GVirSandboxConfigMountGuestBind
+</pre>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxConfigMountGuestBind.description"></a><h2>Description</h2>
+<p>
+Provides an object to store information about a bindsystem attachment in the sandbox
+</p>
+<p>
+The GVirSandboxConfigMount object stores information required to attach
+a guest bindsystem to the application sandbox. The sandbox starts off with
+a complete view of the guest bindsystem. This object allows a specific
+area of the guest bindsystem to be hidden and replaced with alternate
+content.
+</p>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxConfigMountGuestBind.details"></a><h2>Details</h2>
+<div class="refsect2">
+<a name="GVirSandboxConfigMountGuestBind-struct"></a><h3>struct GVirSandboxConfigMountGuestBind</h3>
+<pre class="programlisting">struct GVirSandboxConfigMountGuestBind;</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GVirSandboxConfigMountGuestBindClass"></a><h3>struct GVirSandboxConfigMountGuestBindClass</h3>
+<pre class="programlisting">struct GVirSandboxConfigMountGuestBindClass {
+    GVirSandboxConfigMountFileClass parent_class;
+
+    gpointer padding[LIBVIRT_SANDBOX_CLASS_PADDING];
+};
+</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-config-mount-guest-bind-new"></a><h3>gvir_sandbox_config_mount_guest_bind_new ()</h3>
+<pre class="programlisting"><a class="link" href="GVirSandboxConfigMountGuestBind.html" title="GVirSandboxConfigMountGuestBind"><span class="returnvalue">GVirSandboxConfigMountGuestBind</span></a> * gvir_sandbox_config_mount_guest_bind_new
+                                                        (<em class="parameter"><code>const <span class="type">gchar</span> *source</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">gchar</span> *targetdir</code></em>);</pre>
+<p>
+Create a new custom mount mapped to the directory <em class="parameter"><code>targetdir</code></em>
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>targetdir</code></em> :</span></p></td>
+<td>the target directory. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>a new sandbox mount object. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.19</div>
+</body>
+</html>

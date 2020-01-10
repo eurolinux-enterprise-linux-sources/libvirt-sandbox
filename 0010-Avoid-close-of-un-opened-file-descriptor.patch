@@ -1,0 +1,31 @@
+From 9309ccc77c9ee9543994cd591d0cfc0c873026ac Mon Sep 17 00:00:00 2001
+From: "Daniel P. Berrange" <berrange@redhat.com>
+Date: Thu, 15 Aug 2013 14:23:33 +0100
+Subject: [PATCH] Avoid close of un-opened file descriptor
+
+For https://bugzilla.redhat.com/show_bug.cgi?id=922639
+
+In libvirt-sandbox-init-qemu if open() returned -1 and errno
+was set to EEXIST then close() would be called on a FD that
+was -1. This fixes a coverity identified issue.
+
+Signed-off-by: Daniel P. Berrange <berrange@redhat.com>
+(cherry picked from commit 43df8b413adcc11c9d01dcdd344337d85ebf12bc)
+---
+ libvirt-sandbox/libvirt-sandbox-init-qemu.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/libvirt-sandbox/libvirt-sandbox-init-qemu.c b/libvirt-sandbox/libvirt-sandbox-init-qemu.c
+index 012c6a2..44f5de0 100644
+--- a/libvirt-sandbox/libvirt-sandbox-init-qemu.c
++++ b/libvirt-sandbox/libvirt-sandbox-init-qemu.c
+@@ -123,7 +123,8 @@ mount_mkfile(const char *file, int mode)
+                     __func__, file, strerror(errno));
+         exit_poweroff();
+     }
+-    close(fd);
++    if (fd != -1)
++        close(fd);
+ }
+ 
+ static void

@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>GVirSandboxConsoleRaw</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<link rel="home" href="index.html" title="Libvirt-sandbox Reference Manual">
+<link rel="up" href="ch01.html" title="Libvirt-sandbox">
+<link rel="prev" href="GVirSandboxConsole.html" title="GVirSandboxConsole">
+<link rel="next" href="GVirSandboxConsoleRpc.html" title="GVirSandboxConsoleRpc">
+<meta name="generator" content="GTK-Doc V1.19 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="GVirSandboxConsole.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libvirt-sandbox Reference Manual</th>
+<td><a accesskey="n" href="GVirSandboxConsoleRpc.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#GVirSandboxConsoleRaw.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#GVirSandboxConsoleRaw.description" class="shortcut">Description</a>
+                   | 
+                  <a href="#GVirSandboxConsoleRaw.object-hierarchy" class="shortcut">Object Hierarchy</a>
+</td></tr>
+</table>
+<div class="refentry">
+<a name="GVirSandboxConsoleRaw"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="GVirSandboxConsoleRaw.top_of_page"></a>GVirSandboxConsoleRaw</span></h2>
+<p>GVirSandboxConsoleRaw — A text mode raw console</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="GVirSandboxConsoleRaw.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+#include &lt;libvirt-sandbox/libvirt-sandbox.h&gt;
+
+struct              <a class="link" href="GVirSandboxConsoleRaw.html#GVirSandboxConsoleRaw-struct" title="struct GVirSandboxConsoleRaw">GVirSandboxConsoleRaw</a>;
+struct              <a class="link" href="GVirSandboxConsoleRaw.html#GVirSandboxConsoleRawClass" title="struct GVirSandboxConsoleRawClass">GVirSandboxConsoleRawClass</a>;
+<a class="link" href="GVirSandboxConsoleRaw.html" title="GVirSandboxConsoleRaw"><span class="returnvalue">GVirSandboxConsoleRaw</span></a> * <a class="link" href="GVirSandboxConsoleRaw.html#gvir-sandbox-console-raw-new" title="gvir_sandbox_console_raw_new ()">gvir_sandbox_console_raw_new</a>    (<em class="parameter"><code><a href="/usr/share/gtk-doc/html/Libvirt-gobject/GVirConnection.html"><span class="type">GVirConnection</span></a> *connection</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/Libvirt-gobject/GVirDomain.html"><span class="type">GVirDomain</span></a> *domain</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">char</span> *devname</code></em>);
+</pre>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxConsoleRaw.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  GObject
+   +----<a class="link" href="GVirSandboxConsole.html" title="GVirSandboxConsole">GVirSandboxConsole</a>
+         +----GVirSandboxConsoleRaw
+</pre>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxConsoleRaw.description"></a><h2>Description</h2>
+<p>
+Provides an object to interface to the text mode console of the sandbox
+</p>
+<p>
+The GVirSandboxConsole object provides support for interfacing to the
+text mode console of the sandbox. It forwards I/O between the <a href="/usr/share/gtk-doc/html/Libvirt-gobject/GVirStream.html"><span class="type">GVirStream</span></a>
+associated with the virtual machine's console and a local console
+represented by <span class="type">GUnixInputStream</span> and <span class="type">GUnixOutputStream</span> objects.
+</p>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxConsoleRaw.details"></a><h2>Details</h2>
+<div class="refsect2">
+<a name="GVirSandboxConsoleRaw-struct"></a><h3>struct GVirSandboxConsoleRaw</h3>
+<pre class="programlisting">struct GVirSandboxConsoleRaw;</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GVirSandboxConsoleRawClass"></a><h3>struct GVirSandboxConsoleRawClass</h3>
+<pre class="programlisting">struct GVirSandboxConsoleRawClass {
+    GVirSandboxConsoleClass parent_class;
+
+    void (*closed)(GVirSandboxConsoleRaw *console, gboolean err);
+
+    gpointer padding[LIBVIRT_SANDBOX_CLASS_PADDING];
+};
+</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-console-raw-new"></a><h3>gvir_sandbox_console_raw_new ()</h3>
+<pre class="programlisting"><a class="link" href="GVirSandboxConsoleRaw.html" title="GVirSandboxConsoleRaw"><span class="returnvalue">GVirSandboxConsoleRaw</span></a> * gvir_sandbox_console_raw_new    (<em class="parameter"><code><a href="/usr/share/gtk-doc/html/Libvirt-gobject/GVirConnection.html"><span class="type">GVirConnection</span></a> *connection</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/Libvirt-gobject/GVirDomain.html"><span class="type">GVirDomain</span></a> *domain</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">char</span> *devname</code></em>);</pre>
+<p>
+Create a new sandbox raw console from the specified configuration
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
+<td>the libvirt connection. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>domain</code></em> :</span></p></td>
+<td>the libvirt domain whose console_raw to run. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>devname</code></em> :</span></p></td>
+<td>the console to connect to</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>a new sandbox console object. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.19</div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+From c9cfe250b7d8d84f07942e8a09edcde7085d1d09 Mon Sep 17 00:00:00 2001
+From: "Daniel P. Berrange" <berrange@redhat.com>
+Date: Thu, 15 Aug 2013 16:33:27 +0100
+Subject: [PATCH] Remove bogus check for NULL in cleanup path
+
+For https://bugzilla.redhat.com/show_bug.cgi?id=922639
+
+The 'config' object in libvirt-sandbox-context-service.c
+methods cannot be NULL, so checking 'if (config)' is
+pointless code.
+
+Signed-off-by: Daniel P. Berrange <berrange@redhat.com>
+(cherry picked from commit 846842e1ffd059c4357c7ff499c8e2d0041cc5d2)
+---
+ libvirt-sandbox/libvirt-sandbox-context-service.c | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
+
+diff --git a/libvirt-sandbox/libvirt-sandbox-context-service.c b/libvirt-sandbox/libvirt-sandbox-context-service.c
+index 0858ffb..b1ee311 100644
+--- a/libvirt-sandbox/libvirt-sandbox-context-service.c
++++ b/libvirt-sandbox/libvirt-sandbox-context-service.c
+@@ -179,8 +179,7 @@ cleanup:
+         g_object_unref(builder);
+     if (connection)
+         g_object_unref(connection);
+-    if (config)
+-        g_object_unref(config);
++    g_object_unref(config);
+ 
+     return ret;
+ }
+@@ -265,8 +264,7 @@ cleanup:
+         g_object_unref(builder);
+     if (connection)
+         g_object_unref(connection);
+-    if (config)
+-        g_object_unref(config);
++    g_object_unref(config);
+     return ret;
+ }
+ 

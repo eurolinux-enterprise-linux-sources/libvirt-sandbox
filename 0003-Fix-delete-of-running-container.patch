@@ -1,0 +1,44 @@
+From caa0560799faf01a9eab3389631ec7374caa7331 Mon Sep 17 00:00:00 2001
+From: Wayne Sun <gsun@redhat.com>
+Date: Thu, 8 Aug 2013 15:42:28 +0800
+Subject: [PATCH] Fix delete of running container
+
+For https://bugzilla.redhat.com/show_bug.cgi?id=994495
+
+Delete running container is not supprted and will report an error.
+
+Related to bug:
+https://bugzilla.redhat.com/show_bug.cgi?id=994495
+
+v1: Fix stop function and delete running container.
+v2: Delete running container is not allowed, spawn virsh to get
+domain status.
+v3: Using exist libvirt connection to get dom status.
+
+Signed-off-by: Wayne Sun <gsun@redhat.com>
+(cherry picked from commit a2662dd834a5a877fdfa0fd0adee3ace86f88646)
+---
+ bin/virt-sandbox-service | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/bin/virt-sandbox-service b/bin/virt-sandbox-service
+index 550d46c..03873c9 100755
+--- a/bin/virt-sandbox-service
++++ b/bin/virt-sandbox-service
+@@ -254,11 +254,11 @@ class Container:
+ 
+     def delete(self):
+         self.connect()
+-        # Stop service if it is running
+-        try:
+-            self.stop()
+-        except:
+-            pass
++        self.conn.fetch_domains(None)
++        dom = self.conn.find_domain_by_name(self.name)
++        info = dom.get_info()
++        if info.state == LibvirtGObject.DomainState.RUNNING:
++            raise ValueError([_("Cannot delete running container")])
+ 
+         # Not sure we should remove content
+         if os.path.exists(self.dest):

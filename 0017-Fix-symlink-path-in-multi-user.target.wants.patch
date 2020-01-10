@@ -1,0 +1,37 @@
+From ee3ad8ca607b296817bb72ebfc78942ad37d6e66 Mon Sep 17 00:00:00 2001
+From: "Daniel P. Berrange" <berrange@redhat.com>
+Date: Wed, 2 Oct 2013 16:41:19 +0100
+Subject: [PATCH] Fix symlink path in multi-user.target.wants
+
+For
+
+  https://bugzilla.redhat.com/show_bug.cgi?id=973974
+
+Sinc we switched to using a drop-in unit file override in
+change 775cebb4e2d5cd04d9c4ceb0a48dd36e22a3682c, the symlink
+from multi-user.target.wants is broken. We must link to the
+original source unit file via the fully qualified path.
+
+Systemd didn't actually mind that the symlink was dangling,
+but it is safer to ensure it is correct, in case systemd gets
+more strict in the future.
+
+Signed-off-by: Daniel P. Berrange <berrange@redhat.com>
+(cherry picked from commit 6da3e2232a4edccc6703a9e059ef70ac8988449e)
+---
+ bin/virt-sandbox-service | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/bin/virt-sandbox-service b/bin/virt-sandbox-service
+index b88b836..ab2ba53 100755
+--- a/bin/virt-sandbox-service
++++ b/bin/virt-sandbox-service
+@@ -714,7 +714,7 @@ PrivateNetwork=false
+             self.create_container_unit(src, self.dest + unitdir, i)
+             if is_template_unit(i):
+                 i = self.get_expanded_unit_template(i)
+-            os.symlink("../" + i, self.dest + tgtdir + "/" + i)
++            os.symlink(src, self.dest + tgtdir + "/" + i)
+ 
+         tgtfile = unitdir + "/multi-user.target"
+         try:

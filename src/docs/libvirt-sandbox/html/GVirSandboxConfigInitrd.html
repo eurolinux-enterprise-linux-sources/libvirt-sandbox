@@ -1,0 +1,386 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>GVirSandboxConfigInitrd</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<link rel="home" href="index.html" title="Libvirt-sandbox Reference Manual">
+<link rel="up" href="ch01.html" title="Libvirt-sandbox">
+<link rel="prev" href="GVirSandboxConfig.html" title="GVirSandboxConfig">
+<link rel="next" href="GVirSandboxConfigMount.html" title="GVirSandboxConfigMount">
+<meta name="generator" content="GTK-Doc V1.19 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="GVirSandboxConfig.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libvirt-sandbox Reference Manual</th>
+<td><a accesskey="n" href="GVirSandboxConfigMount.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#GVirSandboxConfigInitrd.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#GVirSandboxConfigInitrd.description" class="shortcut">Description</a>
+                   | 
+                  <a href="#GVirSandboxConfigInitrd.object-hierarchy" class="shortcut">Object Hierarchy</a>
+                   | 
+                  <a href="#GVirSandboxConfigInitrd.properties" class="shortcut">Properties</a>
+</td></tr>
+</table>
+<div class="refentry">
+<a name="GVirSandboxConfigInitrd"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="GVirSandboxConfigInitrd.top_of_page"></a>GVirSandboxConfigInitrd</span></h2>
+<p>GVirSandboxConfigInitrd — Kernel ramdisk configuration details</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="GVirSandboxConfigInitrd.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+#include &lt;libvirt-sandbox/libvirt-sandbox.h&gt;
+
+#define             <a class="link" href="GVirSandboxConfigInitrd.html#GVIR-SANDBOX-TYPE-CONFIG-INITRD-HANDLE:CAPS" title="GVIR_SANDBOX_TYPE_CONFIG_INITRD_HANDLE">GVIR_SANDBOX_TYPE_CONFIG_INITRD_HANDLE</a>
+struct              <a class="link" href="GVirSandboxConfigInitrd.html#GVirSandboxConfigInitrd-struct" title="struct GVirSandboxConfigInitrd">GVirSandboxConfigInitrd</a>;
+struct              <a class="link" href="GVirSandboxConfigInitrd.html#GVirSandboxConfigInitrdClass" title="struct GVirSandboxConfigInitrdClass">GVirSandboxConfigInitrdClass</a>;
+<a class="link" href="GVirSandboxConfigInitrd.html" title="GVirSandboxConfigInitrd"><span class="returnvalue">GVirSandboxConfigInitrd</span></a> * <a class="link" href="GVirSandboxConfigInitrd.html#gvir-sandbox-config-initrd-new" title="gvir_sandbox_config_initrd_new ()">gvir_sandbox_config_initrd_new</a>
+                                                        (<em class="parameter"><code><span class="type">void</span></code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GVirSandboxConfigInitrd.html#gvir-sandbox-config-initrd-set-kver" title="gvir_sandbox_config_initrd_set_kver ()">gvir_sandbox_config_initrd_set_kver</a> (<em class="parameter"><code><a class="link" href="GVirSandboxConfigInitrd.html" title="GVirSandboxConfigInitrd"><span class="type">GVirSandboxConfigInitrd</span></a> *config</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">gchar</span> *version</code></em>);
+const <span class="returnvalue">gchar</span> *       <a class="link" href="GVirSandboxConfigInitrd.html#gvir-sandbox-config-initrd-get-kver" title="gvir_sandbox_config_initrd_get_kver ()">gvir_sandbox_config_initrd_get_kver</a> (<em class="parameter"><code><a class="link" href="GVirSandboxConfigInitrd.html" title="GVirSandboxConfigInitrd"><span class="type">GVirSandboxConfigInitrd</span></a> *config</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GVirSandboxConfigInitrd.html#gvir-sandbox-config-initrd-set-kmoddir" title="gvir_sandbox_config_initrd_set_kmoddir ()">gvir_sandbox_config_initrd_set_kmoddir</a>
+                                                        (<em class="parameter"><code><a class="link" href="GVirSandboxConfigInitrd.html" title="GVirSandboxConfigInitrd"><span class="type">GVirSandboxConfigInitrd</span></a> *config</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">gchar</span> *kmoddir</code></em>);
+const <span class="returnvalue">gchar</span> *       <a class="link" href="GVirSandboxConfigInitrd.html#gvir-sandbox-config-initrd-get-kmoddir" title="gvir_sandbox_config_initrd_get_kmoddir ()">gvir_sandbox_config_initrd_get_kmoddir</a>
+                                                        (<em class="parameter"><code><a class="link" href="GVirSandboxConfigInitrd.html" title="GVirSandboxConfigInitrd"><span class="type">GVirSandboxConfigInitrd</span></a> *config</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GVirSandboxConfigInitrd.html#gvir-sandbox-config-initrd-set-init" title="gvir_sandbox_config_initrd_set_init ()">gvir_sandbox_config_initrd_set_init</a> (<em class="parameter"><code><a class="link" href="GVirSandboxConfigInitrd.html" title="GVirSandboxConfigInitrd"><span class="type">GVirSandboxConfigInitrd</span></a> *config</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">gchar</span> *hostpath</code></em>);
+const <span class="returnvalue">gchar</span> *       <a class="link" href="GVirSandboxConfigInitrd.html#gvir-sandbox-config-initrd-get-init" title="gvir_sandbox_config_initrd_get_init ()">gvir_sandbox_config_initrd_get_init</a> (<em class="parameter"><code><a class="link" href="GVirSandboxConfigInitrd.html" title="GVirSandboxConfigInitrd"><span class="type">GVirSandboxConfigInitrd</span></a> *config</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GVirSandboxConfigInitrd.html#gvir-sandbox-config-initrd-add-module" title="gvir_sandbox_config_initrd_add_module ()">gvir_sandbox_config_initrd_add_module</a>
+                                                        (<em class="parameter"><code><a class="link" href="GVirSandboxConfigInitrd.html" title="GVirSandboxConfigInitrd"><span class="type">GVirSandboxConfigInitrd</span></a> *config</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">gchar</span> *modname</code></em>);
+<span class="returnvalue">GList</span> *             <a class="link" href="GVirSandboxConfigInitrd.html#gvir-sandbox-config-initrd-get-modules" title="gvir_sandbox_config_initrd_get_modules ()">gvir_sandbox_config_initrd_get_modules</a>
+                                                        (<em class="parameter"><code><a class="link" href="GVirSandboxConfigInitrd.html" title="GVirSandboxConfigInitrd"><span class="type">GVirSandboxConfigInitrd</span></a> *config</code></em>);
+</pre>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxConfigInitrd.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  GObject
+   +----GVirSandboxConfigInitrd
+</pre>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxConfigInitrd.properties"></a><h2>Properties</h2>
+<pre class="synopsis">
+  "<a class="link" href="GVirSandboxConfigInitrd.html#GVirSandboxConfigInitrd--init" title='The "init" property'>init</a>"                     <span class="type">gchar</span>*                : Read / Write
+  "<a class="link" href="GVirSandboxConfigInitrd.html#GVirSandboxConfigInitrd--kmoddir" title='The "kmoddir" property'>kmoddir</a>"                  <span class="type">gchar</span>*                : Read / Write
+  "<a class="link" href="GVirSandboxConfigInitrd.html#GVirSandboxConfigInitrd--kver" title='The "kver" property'>kver</a>"                     <span class="type">gchar</span>*                : Read / Write
+</pre>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxConfigInitrd.description"></a><h2>Description</h2>
+<p>
+Provides an object to store information about a kernel ramdisk
+</p>
+<p>
+The GVirSandboxConfigInitrd object stores the information required
+to build a kernel ramdisk to use when booting a virtual machine
+as a sandbox.
+</p>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxConfigInitrd.details"></a><h2>Details</h2>
+<div class="refsect2">
+<a name="GVIR-SANDBOX-TYPE-CONFIG-INITRD-HANDLE:CAPS"></a><h3>GVIR_SANDBOX_TYPE_CONFIG_INITRD_HANDLE</h3>
+<pre class="programlisting">#define GVIR_SANDBOX_TYPE_CONFIG_INITRD_HANDLE      (gvir_sandbox_config_initrd_handle_get_type ())
+</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GVirSandboxConfigInitrd-struct"></a><h3>struct GVirSandboxConfigInitrd</h3>
+<pre class="programlisting">struct GVirSandboxConfigInitrd;</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GVirSandboxConfigInitrdClass"></a><h3>struct GVirSandboxConfigInitrdClass</h3>
+<pre class="programlisting">struct GVirSandboxConfigInitrdClass {
+    GObjectClass parent_class;
+
+    gpointer padding[LIBVIRT_SANDBOX_CLASS_PADDING];
+};
+</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-config-initrd-new"></a><h3>gvir_sandbox_config_initrd_new ()</h3>
+<pre class="programlisting"><a class="link" href="GVirSandboxConfigInitrd.html" title="GVirSandboxConfigInitrd"><span class="returnvalue">GVirSandboxConfigInitrd</span></a> * gvir_sandbox_config_initrd_new
+                                                        (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+<p>
+Create a new initrd config
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>a new sandbox initrd object. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-config-initrd-set-kver"></a><h3>gvir_sandbox_config_initrd_set_kver ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                gvir_sandbox_config_initrd_set_kver (<em class="parameter"><code><a class="link" href="GVirSandboxConfigInitrd.html" title="GVirSandboxConfigInitrd"><span class="type">GVirSandboxConfigInitrd</span></a> *config</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">gchar</span> *version</code></em>);</pre>
+<p>
+Sets the host kernel version to use for populating the initrd with modules.
+This defaults to the currently running kernel version
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>config</code></em> :</span></p></td>
+<td>the sandbox initrd config. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>version</code></em> :</span></p></td>
+<td>the kernel version. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-config-initrd-get-kver"></a><h3>gvir_sandbox_config_initrd_get_kver ()</h3>
+<pre class="programlisting">const <span class="returnvalue">gchar</span> *       gvir_sandbox_config_initrd_get_kver (<em class="parameter"><code><a class="link" href="GVirSandboxConfigInitrd.html" title="GVirSandboxConfigInitrd"><span class="type">GVirSandboxConfigInitrd</span></a> *config</code></em>);</pre>
+<p>
+Retrieves the path of the kver binary
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>config</code></em> :</span></p></td>
+<td>the sandbox initrd config. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the kver binary path. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-config-initrd-set-kmoddir"></a><h3>gvir_sandbox_config_initrd_set_kmoddir ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                gvir_sandbox_config_initrd_set_kmoddir
+                                                        (<em class="parameter"><code><a class="link" href="GVirSandboxConfigInitrd.html" title="GVirSandboxConfigInitrd"><span class="type">GVirSandboxConfigInitrd</span></a> *config</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">gchar</span> *kmoddir</code></em>);</pre>
+<p>
+Sets the full path to where the kernel modules will be looked up
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>config</code></em> :</span></p></td>
+<td>the sandbox initrd config. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>kmoddir</code></em> :</span></p></td>
+<td>the full path to the kernel modules directory. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-config-initrd-get-kmoddir"></a><h3>gvir_sandbox_config_initrd_get_kmoddir ()</h3>
+<pre class="programlisting">const <span class="returnvalue">gchar</span> *       gvir_sandbox_config_initrd_get_kmoddir
+                                                        (<em class="parameter"><code><a class="link" href="GVirSandboxConfigInitrd.html" title="GVirSandboxConfigInitrd"><span class="type">GVirSandboxConfigInitrd</span></a> *config</code></em>);</pre>
+<p>
+Retrieves the current kernel modules directory
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>config</code></em> :</span></p></td>
+<td>the full path to the kernel modules directory. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the full path to the kernel modules directory. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-config-initrd-set-init"></a><h3>gvir_sandbox_config_initrd_set_init ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                gvir_sandbox_config_initrd_set_init (<em class="parameter"><code><a class="link" href="GVirSandboxConfigInitrd.html" title="GVirSandboxConfigInitrd"><span class="type">GVirSandboxConfigInitrd</span></a> *config</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">gchar</span> *hostpath</code></em>);</pre>
+<p>
+Sets the host binary to be used as the init program inside
+the initrd. This defaults to /usr/bin/libvirt-sandbox-init-qemu
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>config</code></em> :</span></p></td>
+<td>the sandbox initrd config. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>hostpath</code></em> :</span></p></td>
+<td>the init binary path. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-config-initrd-get-init"></a><h3>gvir_sandbox_config_initrd_get_init ()</h3>
+<pre class="programlisting">const <span class="returnvalue">gchar</span> *       gvir_sandbox_config_initrd_get_init (<em class="parameter"><code><a class="link" href="GVirSandboxConfigInitrd.html" title="GVirSandboxConfigInitrd"><span class="type">GVirSandboxConfigInitrd</span></a> *config</code></em>);</pre>
+<p>
+Retrieves the path of the init binary
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>config</code></em> :</span></p></td>
+<td>the sandbox initrd config. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the init binary path. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-config-initrd-add-module"></a><h3>gvir_sandbox_config_initrd_add_module ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                gvir_sandbox_config_initrd_add_module
+                                                        (<em class="parameter"><code><a class="link" href="GVirSandboxConfigInitrd.html" title="GVirSandboxConfigInitrd"><span class="type">GVirSandboxConfigInitrd</span></a> *config</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">gchar</span> *modname</code></em>);</pre>
+<p>
+Request that the kernel module <em class="parameter"><code>modname</code></em> is included in the initrd,
+along with any depedent modules
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>config</code></em> :</span></p></td>
+<td>the sandbox initrd config. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>modname</code></em> :</span></p></td>
+<td>the kernel module name. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-config-initrd-get-modules"></a><h3>gvir_sandbox_config_initrd_get_modules ()</h3>
+<pre class="programlisting"><span class="returnvalue">GList</span> *             gvir_sandbox_config_initrd_get_modules
+                                                        (<em class="parameter"><code><a class="link" href="GVirSandboxConfigInitrd.html" title="GVirSandboxConfigInitrd"><span class="type">GVirSandboxConfigInitrd</span></a> *config</code></em>);</pre>
+<p>
+Retrieves the list of all modules
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>config</code></em> :</span></p></td>
+<td>the sandbox initrd config. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the module names. <span class="annotation">[<acronym title="Free data container after the code is done."><span class="acronym">transfer container</span></acronym>][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> utf8]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxConfigInitrd.property-details"></a><h2>Property Details</h2>
+<div class="refsect2">
+<a name="GVirSandboxConfigInitrd--init"></a><h3>The <code class="literal">"init"</code> property</h3>
+<pre class="programlisting">  "init"                     <span class="type">gchar</span>*                : Read / Write</pre>
+<p>The host init path.</p>
+<p>Default value: NULL</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GVirSandboxConfigInitrd--kmoddir"></a><h3>The <code class="literal">"kmoddir"</code> property</h3>
+<pre class="programlisting">  "kmoddir"                  <span class="type">gchar</span>*                : Read / Write</pre>
+<p>Kernel modules directory.</p>
+<p>Default value: NULL</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GVirSandboxConfigInitrd--kver"></a><h3>The <code class="literal">"kver"</code> property</h3>
+<pre class="programlisting">  "kver"                     <span class="type">gchar</span>*                : Read / Write</pre>
+<p>The host kernel version.</p>
+<p>Default value: NULL</p>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.19</div>
+</body>
+</html>

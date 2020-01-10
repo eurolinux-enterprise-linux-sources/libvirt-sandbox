@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>GVirSandboxBuilderInitrd</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<link rel="home" href="index.html" title="Libvirt-sandbox Reference Manual">
+<link rel="up" href="ch01.html" title="Libvirt-sandbox">
+<link rel="prev" href="GVirSandboxBuilderContainer.html" title="GVirSandboxBuilderContainer">
+<link rel="next" href="GVirSandboxBuilderMachine.html" title="GVirSandboxBuilderMachine">
+<meta name="generator" content="GTK-Doc V1.19 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="GVirSandboxBuilderContainer.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libvirt-sandbox Reference Manual</th>
+<td><a accesskey="n" href="GVirSandboxBuilderMachine.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#GVirSandboxBuilderInitrd.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#GVirSandboxBuilderInitrd.description" class="shortcut">Description</a>
+                   | 
+                  <a href="#GVirSandboxBuilderInitrd.object-hierarchy" class="shortcut">Object Hierarchy</a>
+</td></tr>
+</table>
+<div class="refentry">
+<a name="GVirSandboxBuilderInitrd"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="GVirSandboxBuilderInitrd.top_of_page"></a>GVirSandboxBuilderInitrd</span></h2>
+<p>GVirSandboxBuilderInitrd — Kernel ramdisk construction</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="GVirSandboxBuilderInitrd.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+#include &lt;libvirt-sandbox/libvirt-sandbox.h&gt;
+
+struct              <a class="link" href="GVirSandboxBuilderInitrd.html#GVirSandboxBuilderInitrd-struct" title="struct GVirSandboxBuilderInitrd">GVirSandboxBuilderInitrd</a>;
+struct              <a class="link" href="GVirSandboxBuilderInitrd.html#GVirSandboxBuilderInitrdClass" title="struct GVirSandboxBuilderInitrdClass">GVirSandboxBuilderInitrdClass</a>;
+<a class="link" href="GVirSandboxBuilderInitrd.html" title="GVirSandboxBuilderInitrd"><span class="returnvalue">GVirSandboxBuilderInitrd</span></a> * <a class="link" href="GVirSandboxBuilderInitrd.html#gvir-sandbox-builder-initrd-new" title="gvir_sandbox_builder_initrd_new ()">gvir_sandbox_builder_initrd_new</a>
+                                                        (<em class="parameter"><code><span class="type">void</span></code></em>);
+<span class="returnvalue">gboolean</span>            <a class="link" href="GVirSandboxBuilderInitrd.html#gvir-sandbox-builder-initrd-construct" title="gvir_sandbox_builder_initrd_construct ()">gvir_sandbox_builder_initrd_construct</a>
+                                                        (<em class="parameter"><code><a class="link" href="GVirSandboxBuilderInitrd.html" title="GVirSandboxBuilderInitrd"><span class="type">GVirSandboxBuilderInitrd</span></a> *builder</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GVirSandboxConfigInitrd.html" title="GVirSandboxConfigInitrd"><span class="type">GVirSandboxConfigInitrd</span></a> *config</code></em>,
+                                                         <em class="parameter"><code><span class="type">gchar</span> *outputfile</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);
+</pre>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxBuilderInitrd.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  GObject
+   +----GVirSandboxBuilderInitrd
+</pre>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxBuilderInitrd.description"></a><h2>Description</h2>
+<p>
+Provides an object for constructing kernel ramdisks
+</p>
+<p>
+The GVirSandboxBuilderInitrd object provides the support
+required to dynically creat minimal footprint kernel
+ramdisks for booting virtual machine based sandboxes.
+</p>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxBuilderInitrd.details"></a><h2>Details</h2>
+<div class="refsect2">
+<a name="GVirSandboxBuilderInitrd-struct"></a><h3>struct GVirSandboxBuilderInitrd</h3>
+<pre class="programlisting">struct GVirSandboxBuilderInitrd;</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GVirSandboxBuilderInitrdClass"></a><h3>struct GVirSandboxBuilderInitrdClass</h3>
+<pre class="programlisting">struct GVirSandboxBuilderInitrdClass {
+    GObjectClass parent_class;
+
+    gpointer padding[LIBVIRT_SANDBOX_CLASS_PADDING];
+};
+</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-builder-initrd-new"></a><h3>gvir_sandbox_builder_initrd_new ()</h3>
+<pre class="programlisting"><a class="link" href="GVirSandboxBuilderInitrd.html" title="GVirSandboxBuilderInitrd"><span class="returnvalue">GVirSandboxBuilderInitrd</span></a> * gvir_sandbox_builder_initrd_new
+                                                        (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+<p>
+Create a new initrd builder
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>a new sandbox builder object. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-builder-initrd-construct"></a><h3>gvir_sandbox_builder_initrd_construct ()</h3>
+<pre class="programlisting"><span class="returnvalue">gboolean</span>            gvir_sandbox_builder_initrd_construct
+                                                        (<em class="parameter"><code><a class="link" href="GVirSandboxBuilderInitrd.html" title="GVirSandboxBuilderInitrd"><span class="type">GVirSandboxBuilderInitrd</span></a> *builder</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GVirSandboxConfigInitrd.html" title="GVirSandboxConfigInitrd"><span class="type">GVirSandboxConfigInitrd</span></a> *config</code></em>,
+                                                         <em class="parameter"><code><span class="type">gchar</span> *outputfile</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);</pre>
+</div>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxBuilderInitrd.see-also"></a><h2>See Also</h2>
+<a class="link" href="GVirSandboxBuilderMachine.html" title="GVirSandboxBuilderMachine"><span class="type">GVirSandboxBuilderMachine</span></a>, <a class="link" href="GVirSandboxConfigInitrd.html" title="GVirSandboxConfigInitrd"><span class="type">GVirSandboxConfigInitrd</span></a>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.19</div>
+</body>
+</html>

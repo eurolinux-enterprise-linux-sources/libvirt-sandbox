@@ -1,0 +1,354 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>GVirSandboxBuilder</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<link rel="home" href="index.html" title="Libvirt-sandbox Reference Manual">
+<link rel="up" href="ch01.html" title="Libvirt-sandbox">
+<link rel="prev" href="ch01.html" title="Libvirt-sandbox">
+<link rel="next" href="GVirSandboxBuilderContainer.html" title="GVirSandboxBuilderContainer">
+<meta name="generator" content="GTK-Doc V1.19 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="ch01.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libvirt-sandbox Reference Manual</th>
+<td><a accesskey="n" href="GVirSandboxBuilderContainer.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#GVirSandboxBuilder.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#GVirSandboxBuilder.description" class="shortcut">Description</a>
+                   | 
+                  <a href="#GVirSandboxBuilder.object-hierarchy" class="shortcut">Object Hierarchy</a>
+                   | 
+                  <a href="#GVirSandboxBuilder.properties" class="shortcut">Properties</a>
+</td></tr>
+</table>
+<div class="refentry">
+<a name="GVirSandboxBuilder"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="GVirSandboxBuilder.top_of_page"></a>GVirSandboxBuilder</span></h2>
+<p>GVirSandboxBuilder — Sandbox construction base class</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="GVirSandboxBuilder.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+#include &lt;libvirt-sandbox/libvirt-sandbox.h&gt;
+
+#define             <a class="link" href="GVirSandboxBuilder.html#GVIR-SANDBOX-TYPE-BUILDER-HANDLE:CAPS" title="GVIR_SANDBOX_TYPE_BUILDER_HANDLE">GVIR_SANDBOX_TYPE_BUILDER_HANDLE</a>
+struct              <a class="link" href="GVirSandboxBuilder.html#GVirSandboxBuilder-struct" title="struct GVirSandboxBuilder">GVirSandboxBuilder</a>;
+struct              <a class="link" href="GVirSandboxBuilder.html#GVirSandboxBuilderClass" title="struct GVirSandboxBuilderClass">GVirSandboxBuilderClass</a>;
+<a class="link" href="GVirSandboxBuilder.html" title="GVirSandboxBuilder"><span class="returnvalue">GVirSandboxBuilder</span></a> * <a class="link" href="GVirSandboxBuilder.html#gvir-sandbox-builder-for-connection" title="gvir_sandbox_builder_for_connection ()">gvir_sandbox_builder_for_connection</a>
+                                                        (<em class="parameter"><code><a href="/usr/share/gtk-doc/html/Libvirt-gobject/GVirConnection.html"><span class="type">GVirConnection</span></a> *connection</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);
+<a href="/usr/share/gtk-doc/html/Libvirt-gobject/GVirConnection.html"><span class="returnvalue">GVirConnection</span></a> *    <a class="link" href="GVirSandboxBuilder.html#gvir-sandbox-builder-get-connection" title="gvir_sandbox_builder_get_connection ()">gvir_sandbox_builder_get_connection</a> (<em class="parameter"><code><a class="link" href="GVirSandboxBuilder.html" title="GVirSandboxBuilder"><span class="type">GVirSandboxBuilder</span></a> *builder</code></em>);
+<a href="/usr/share/gtk-doc/html/Libvirt-gconfig/GVirConfigDomain.html"><span class="returnvalue">GVirConfigDomain</span></a> *  <a class="link" href="GVirSandboxBuilder.html#gvir-sandbox-builder-construct" title="gvir_sandbox_builder_construct ()">gvir_sandbox_builder_construct</a>      (<em class="parameter"><code><a class="link" href="GVirSandboxBuilder.html" title="GVirSandboxBuilder"><span class="type">GVirSandboxBuilder</span></a> *builder</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GVirSandboxConfig.html" title="GVirSandboxConfig"><span class="type">GVirSandboxConfig</span></a> *config</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">gchar</span> *statedir</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);
+<span class="returnvalue">gboolean</span>            <a class="link" href="GVirSandboxBuilder.html#gvir-sandbox-builder-clean-post-start" title="gvir_sandbox_builder_clean_post_start ()">gvir_sandbox_builder_clean_post_start</a>
+                                                        (<em class="parameter"><code><a class="link" href="GVirSandboxBuilder.html" title="GVirSandboxBuilder"><span class="type">GVirSandboxBuilder</span></a> *builder</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GVirSandboxConfig.html" title="GVirSandboxConfig"><span class="type">GVirSandboxConfig</span></a> *config</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">gchar</span> *statedir</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);
+<span class="returnvalue">gboolean</span>            <a class="link" href="GVirSandboxBuilder.html#gvir-sandbox-builder-clean-post-stop" title="gvir_sandbox_builder_clean_post_stop ()">gvir_sandbox_builder_clean_post_stop</a>
+                                                        (<em class="parameter"><code><a class="link" href="GVirSandboxBuilder.html" title="GVirSandboxBuilder"><span class="type">GVirSandboxBuilder</span></a> *builder</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GVirSandboxConfig.html" title="GVirSandboxConfig"><span class="type">GVirSandboxConfig</span></a> *config</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">gchar</span> *statedir</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);
+</pre>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxBuilder.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  GObject
+   +----GVirSandboxBuilder
+         +----<a class="link" href="GVirSandboxBuilderContainer.html" title="GVirSandboxBuilderContainer">GVirSandboxBuilderContainer</a>
+         +----<a class="link" href="GVirSandboxBuilderMachine.html" title="GVirSandboxBuilderMachine">GVirSandboxBuilderMachine</a>
+</pre>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxBuilder.properties"></a><h2>Properties</h2>
+<pre class="synopsis">
+  "<a class="link" href="GVirSandboxBuilder.html#GVirSandboxBuilder--connection" title='The "connection" property'>connection</a>"               <a href="/usr/share/gtk-doc/html/Libvirt-gobject/GVirConnection.html"><span class="type">GVirConnection</span></a>*       : Read / Write / Construct Only
+</pre>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxBuilder.description"></a><h2>Description</h2>
+<p>
+Provides a base class for constructing sandboxes
+</p>
+<p>
+The GVirSandboxBuilder objects provides the basic framework for creating
+<a href="/usr/share/gtk-doc/html/Libvirt-gobject/GVirDomain.html"><span class="type">GVirDomain</span></a> instances from <a class="link" href="GVirSandboxConfig.html" title="GVirSandboxConfig"><span class="type">GVirSandboxConfig</span></a> instances.
+</p>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxBuilder.details"></a><h2>Details</h2>
+<div class="refsect2">
+<a name="GVIR-SANDBOX-TYPE-BUILDER-HANDLE:CAPS"></a><h3>GVIR_SANDBOX_TYPE_BUILDER_HANDLE</h3>
+<pre class="programlisting">#define GVIR_SANDBOX_TYPE_BUILDER_HANDLE      (gvir_sandbox_builder_handle_get_type ())
+</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GVirSandboxBuilder-struct"></a><h3>struct GVirSandboxBuilder</h3>
+<pre class="programlisting">struct GVirSandboxBuilder;</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GVirSandboxBuilderClass"></a><h3>struct GVirSandboxBuilderClass</h3>
+<pre class="programlisting">struct GVirSandboxBuilderClass {
+    GObjectClass parent_class;
+
+    gboolean (*construct_basic)(GVirSandboxBuilder *builder,
+                                GVirSandboxConfig *config,
+                                const gchar *statedir,
+                                GVirConfigDomain *domain,
+                                GError **error);
+    gboolean (*construct_os)(GVirSandboxBuilder *builder,
+                             GVirSandboxConfig *config,
+                             const gchar *statedir,
+                             GVirConfigDomain *domain,
+                             GError **error);
+    gboolean (*construct_features)(GVirSandboxBuilder *builder,
+                                   GVirSandboxConfig *config,
+                                   const gchar *statedir,
+                                   GVirConfigDomain *domain,
+                                   GError **error);
+    gboolean (*construct_devices)(GVirSandboxBuilder *builder,
+                                  GVirSandboxConfig *config,
+                                  const gchar *statedir,
+                                  GVirConfigDomain *domain,
+                                  GError **error);
+    gboolean (*construct_security)(GVirSandboxBuilder *builder,
+                                   GVirSandboxConfig *config,
+                                   const gchar *statedir,
+                                   GVirConfigDomain *domain,
+                                   GError **error);
+    gboolean (*construct_domain)(GVirSandboxBuilder *builder,
+                                 GVirSandboxConfig *config,
+                                 const gchar *statedir,
+                                 GVirConfigDomain *domain,
+                                 GError **error);
+
+    gboolean (*clean_post_start)(GVirSandboxBuilder *builder,
+                                 GVirSandboxConfig *config,
+                                 const gchar *statedir,
+                                 GError **error);
+    gboolean (*clean_post_stop)(GVirSandboxBuilder *builder,
+                                GVirSandboxConfig *config,
+                                const gchar *statedir,
+                                GError **error);
+
+    gpointer padding[LIBVIRT_SANDBOX_CLASS_PADDING];
+};
+</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-builder-for-connection"></a><h3>gvir_sandbox_builder_for_connection ()</h3>
+<pre class="programlisting"><a class="link" href="GVirSandboxBuilder.html" title="GVirSandboxBuilder"><span class="returnvalue">GVirSandboxBuilder</span></a> * gvir_sandbox_builder_for_connection
+                                                        (<em class="parameter"><code><a href="/usr/share/gtk-doc/html/Libvirt-gobject/GVirConnection.html"><span class="type">GVirConnection</span></a> *connection</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);</pre>
+<p>
+Find and instantiate a suitable builder for sandboxes to be hosted
+under the <em class="parameter"><code>connection</code></em>.
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
+<td>the connection to host the sandbox. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td>the error. <span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>a new builder or NULL. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-builder-get-connection"></a><h3>gvir_sandbox_builder_get_connection ()</h3>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/Libvirt-gobject/GVirConnection.html"><span class="returnvalue">GVirConnection</span></a> *    gvir_sandbox_builder_get_connection (<em class="parameter"><code><a class="link" href="GVirSandboxBuilder.html" title="GVirSandboxBuilder"><span class="type">GVirSandboxBuilder</span></a> *builder</code></em>);</pre>
+<p>
+Retrieves the sandbox connection
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>builder</code></em> :</span></p></td>
+<td>the sandbox builder. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the current connection. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-builder-construct"></a><h3>gvir_sandbox_builder_construct ()</h3>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/Libvirt-gconfig/GVirConfigDomain.html"><span class="returnvalue">GVirConfigDomain</span></a> *  gvir_sandbox_builder_construct      (<em class="parameter"><code><a class="link" href="GVirSandboxBuilder.html" title="GVirSandboxBuilder"><span class="type">GVirSandboxBuilder</span></a> *builder</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GVirSandboxConfig.html" title="GVirSandboxConfig"><span class="type">GVirSandboxConfig</span></a> *config</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">gchar</span> *statedir</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);</pre>
+<p>
+Create a domain configuration from the sandbox configuration
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>builder</code></em> :</span></p></td>
+<td>the sandbox builder. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>config</code></em> :</span></p></td>
+<td>the sandbox configuration. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td>the error location. <span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the newly built domain configuration. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-builder-clean-post-start"></a><h3>gvir_sandbox_builder_clean_post_start ()</h3>
+<pre class="programlisting"><span class="returnvalue">gboolean</span>            gvir_sandbox_builder_clean_post_start
+                                                        (<em class="parameter"><code><a class="link" href="GVirSandboxBuilder.html" title="GVirSandboxBuilder"><span class="type">GVirSandboxBuilder</span></a> *builder</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GVirSandboxConfig.html" title="GVirSandboxConfig"><span class="type">GVirSandboxConfig</span></a> *config</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">gchar</span> *statedir</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);</pre>
+<p>
+Cleanup temporary files which are not required once the sandbox
+has been started.
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>builder</code></em> :</span></p></td>
+<td>the sandbox builder. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>config</code></em> :</span></p></td>
+<td>the sandbox configuration. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td>the error location. <span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>TRUE on success, FALSE on error</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-builder-clean-post-stop"></a><h3>gvir_sandbox_builder_clean_post_stop ()</h3>
+<pre class="programlisting"><span class="returnvalue">gboolean</span>            gvir_sandbox_builder_clean_post_stop
+                                                        (<em class="parameter"><code><a class="link" href="GVirSandboxBuilder.html" title="GVirSandboxBuilder"><span class="type">GVirSandboxBuilder</span></a> *builder</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GVirSandboxConfig.html" title="GVirSandboxConfig"><span class="type">GVirSandboxConfig</span></a> *config</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">gchar</span> *statedir</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);</pre>
+<p>
+Cleanup temporary files which are not required once the sandbox
+has been started.
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>builder</code></em> :</span></p></td>
+<td>the sandbox builder. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>config</code></em> :</span></p></td>
+<td>the sandbox configuration. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td>the error location. <span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>TRUE on success, FALSE on error</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxBuilder.property-details"></a><h2>Property Details</h2>
+<div class="refsect2">
+<a name="GVirSandboxBuilder--connection"></a><h3>The <code class="literal">"connection"</code> property</h3>
+<pre class="programlisting">  "connection"               <a href="/usr/share/gtk-doc/html/Libvirt-gobject/GVirConnection.html"><span class="type">GVirConnection</span></a>*       : Read / Write / Construct Only</pre>
+<p>The sandbox connection.</p>
+</div>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxBuilder.see-also"></a><h2>See Also</h2>
+<a class="link" href="GVirSandboxBuilderContainer.html" title="GVirSandboxBuilderContainer"><span class="type">GVirSandboxBuilderContainer</span></a><a class="link" href="GVirSandboxBuilderMachine.html" title="GVirSandboxBuilderMachine"><span class="type">GVirSandboxBuilderMachine</span></a>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.19</div>
+</body>
+</html>

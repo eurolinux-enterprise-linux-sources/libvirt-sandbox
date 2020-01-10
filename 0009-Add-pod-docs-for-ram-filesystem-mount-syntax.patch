@@ -1,0 +1,118 @@
+From 528089f3a4accdcad51894a047f55cb734f11241 Mon Sep 17 00:00:00 2001
+From: "Daniel P. Berrange" <berrange@redhat.com>
+Date: Thu, 15 Aug 2013 14:22:40 +0100
+Subject: [PATCH] Add pod docs for 'ram' filesystem mount syntax
+
+For https://bugzilla.redhat.com/show_bug.cgi?id=922639
+
+Neither virt-sandbox or virt-sandbox-service man pages documented
+the 'ram' filesystem mount syntax. Fix that, and also add new line
+breaks in virt-sandbox-service man page.
+
+Signed-off-by: Daniel P. Berrange <berrange@redhat.com>
+(cherry picked from commit 688a9e7dccfd279c3e391e38ededed8ae620a4f0)
+---
+ bin/virt-sandbox-service-create.pod | 49 +++++++++++++++++++++----------------
+ bin/virt-sandbox.c                  |  8 ++++++
+ 2 files changed, 36 insertions(+), 21 deletions(-)
+
+diff --git a/bin/virt-sandbox-service-create.pod b/bin/virt-sandbox-service-create.pod
+index fe0226e..2ab289a 100644
+--- a/bin/virt-sandbox-service-create.pod
++++ b/bin/virt-sandbox-service-create.pod
+@@ -77,41 +77,48 @@ Default: C<UID's Homedir>.
+ 
+ =item B<-m TYPE:DST=SRC>, B<--mount TYPE:DST=SRC>
+ 
+-Sets up a mount inside the sandbox at B<DST> backed by B<SRC>. The meaning of B<SRC> depends on the value of "TYPE" specified:
++Sets up a mount inside the sandbox at B<DST> backed by B<SRC>. The
++meaning of B<SRC> depends on the value of C<TYPE> specified:
+ 
+ =over 4
+ 
+-=item host-bind
++=item B<host-bind>
+ 
+-If B<TYPE> is B<host-bind>, then B<SRC> is interpreted as the path to a directory on the host filesystem. If "SRC" is the empty string, then a temporary (empty) directory is created on the host before starting the sandbox and deleted afterwards. The "--include" option is useful for populating these temporary directories with copies of host files.
++If B<TYPE> is B<host-bind>, then B<SRC> is interpreted as the path
++to a directory on the host filesystem. If C<SRC> is the empty string,
++then a temporary (empty) directory is created on the host before
++starting the sandbox and deleted afterwards. The C<--include> option
++is useful for populating these temporary directories with copies of host
++files.
+ 
+-=back
+-
+-=over 4
++=item B<host-image>
+ 
+-=item host-image
++If B<TYPE> is B<host-image>, then B<SRC> is interpreted as the path
++to a disk image file on the host filesystem. The image should be
++formatted with a filesystem that can be auto-detected by the sandbox,
++such as B<ext3>, B<ext4>, etc. The disk image itself should be a raw
++file, not qcow2 or any other special format
+ 
+-If B<TYPE> is B<host-image>, then B<SRC> is interpreted as the path to a disk image file on the host filesystem. The image should be formatted with a filesystem that can be auto-detected by the sandbox, such as B<ext3, ext4>, etc. The disk image itself should be a raw file, not qcow2 or any other special format
+-
+-=back
++=item B<guest-bind>
+ 
+-=over 4
++If B<TYPE> is B<guest-bind>, then B<SRC> is interpreted as the path
++to another directory in the container filesystem.
+ 
+-=item guest-bind
++=item B<ram>
+ 
+-If B<TYPE> is B<guest-bind>, then B<SRC> is interpreted as the path to another directory in the container filesystem.
++If B<TYPE> is B<ram>, then B<SRC> is interpreted as specifying the
++size of the RAM disk in bytes. The suffix B<K>, B<KiB>, B<M>,
++B<MiB>, B<G>, B<GiB> can used to alter the units from bytes to a
++coarser level.
+ 
+ =back
+ 
+-=over 4
+-
+-=item Some examples
++Some examples
+ 
+-    -m host-bind:/tmp=/var/lib/sandbox/demo/tmp
+-    -m host-image:/=/var/lib/sandbox/demo.img
+-    -m guest-bind:/home=/tmp/home
+-
+-=back
++ -m host-bind:/tmp=/var/lib/sandbox/demo/tmp
++ -m host-image:/=/var/lib/sandbox/demo.img
++ -m guest-bind:/home=/tmp/home
++ -m ram:/tmp=500M
+ 
+ =item B<-N NETWORK-OPTIONS>, B<--network NETWORK-OPTIONS>
+ 
+diff --git a/bin/virt-sandbox.c b/bin/virt-sandbox.c
+index b51465d..a4479ec 100644
+--- a/bin/virt-sandbox.c
++++ b/bin/virt-sandbox.c
+@@ -317,6 +317,13 @@ file, not qcow2 or any other special format
+ If B<TYPE> is B<guest-bind>, then B<SRC> is interpreted as the path
+ to another directory in the container filesystem.
+ 
++=item B<ram>
++
++If B<TYPE> is B<ram>, then B<SRC> is interpreted as specifying the
++size of the RAM disk in bytes. The suffix B<K>, B<KiB>, B<M>,
++B<MiB>, B<G>, B<GiB> can used to alter the units from bytes to a
++coarser level.
++
+ =back
+ 
+ Some examples
+@@ -324,6 +331,7 @@ Some examples
+  -m host-bind:/tmp=/var/lib/sandbox/demo/tmp
+  -m host-image:/=/var/lib/sandbox/demo.img
+  -m guest-bind:/home=/tmp/home
++ -m ram:/tmp=500M
+ 
+ =item B<-I HOST-PATH>, B<--includefile=HOST-PATH>
+ 

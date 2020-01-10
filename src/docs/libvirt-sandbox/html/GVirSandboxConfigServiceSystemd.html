@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>GVirSandboxConfigServiceSystemd</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<link rel="home" href="index.html" title="Libvirt-sandbox Reference Manual">
+<link rel="up" href="ch01.html" title="Libvirt-sandbox">
+<link rel="prev" href="GVirSandboxConfigServiceGeneric.html" title="GVirSandboxConfigServiceGeneric">
+<link rel="next" href="GVirSandboxConsole.html" title="GVirSandboxConsole">
+<meta name="generator" content="GTK-Doc V1.19 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="GVirSandboxConfigServiceGeneric.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libvirt-sandbox Reference Manual</th>
+<td><a accesskey="n" href="GVirSandboxConsole.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#GVirSandboxConfigServiceSystemd.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#GVirSandboxConfigServiceSystemd.description" class="shortcut">Description</a>
+                   | 
+                  <a href="#GVirSandboxConfigServiceSystemd.object-hierarchy" class="shortcut">Object Hierarchy</a>
+</td></tr>
+</table>
+<div class="refentry">
+<a name="GVirSandboxConfigServiceSystemd"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="GVirSandboxConfigServiceSystemd.top_of_page"></a>GVirSandboxConfigServiceSystemd</span></h2>
+<p>GVirSandboxConfigServiceSystemd — ServiceSystemd sandbox configuration details</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="GVirSandboxConfigServiceSystemd.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+#include &lt;libvirt-sandbox/libvirt-sandbox.h&gt;
+
+struct              <a class="link" href="GVirSandboxConfigServiceSystemd.html#GVirSandboxConfigServiceSystemd-struct" title="struct GVirSandboxConfigServiceSystemd">GVirSandboxConfigServiceSystemd</a>;
+struct              <a class="link" href="GVirSandboxConfigServiceSystemd.html#GVirSandboxConfigServiceSystemdClass" title="struct GVirSandboxConfigServiceSystemdClass">GVirSandboxConfigServiceSystemdClass</a>;
+<a class="link" href="GVirSandboxConfigServiceSystemd.html" title="GVirSandboxConfigServiceSystemd"><span class="returnvalue">GVirSandboxConfigServiceSystemd</span></a> * <a class="link" href="GVirSandboxConfigServiceSystemd.html#gvir-sandbox-config-service-systemd-new" title="gvir_sandbox_config_service_systemd_new ()">gvir_sandbox_config_service_systemd_new</a>
+                                                        (<em class="parameter"><code>const <span class="type">gchar</span> *name</code></em>);
+const <span class="returnvalue">gchar</span> *       <a class="link" href="GVirSandboxConfigServiceSystemd.html#gvir-sandbox-config-service-systemd-get-boot-target" title="gvir_sandbox_config_service_systemd_get_boot_target ()">gvir_sandbox_config_service_systemd_get_boot_target</a>
+                                                        (<em class="parameter"><code><a class="link" href="GVirSandboxConfigServiceSystemd.html" title="GVirSandboxConfigServiceSystemd"><span class="type">GVirSandboxConfigServiceSystemd</span></a> *config</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GVirSandboxConfigServiceSystemd.html#gvir-sandbox-config-service-systemd-set-boot-target" title="gvir_sandbox_config_service_systemd_set_boot_target ()">gvir_sandbox_config_service_systemd_set_boot_target</a>
+                                                        (<em class="parameter"><code><a class="link" href="GVirSandboxConfigServiceSystemd.html" title="GVirSandboxConfigServiceSystemd"><span class="type">GVirSandboxConfigServiceSystemd</span></a> *config</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">gchar</span> *target</code></em>);
+</pre>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxConfigServiceSystemd.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  GObject
+   +----<a class="link" href="GVirSandboxConfig.html" title="GVirSandboxConfig">GVirSandboxConfig</a>
+         +----<a class="link" href="GVirSandboxConfigService.html" title="GVirSandboxConfigService">GVirSandboxConfigService</a>
+               +----GVirSandboxConfigServiceSystemd
+</pre>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxConfigServiceSystemd.description"></a><h2>Description</h2>
+<p>
+Provides an object to store configuration details for a systemd service config
+</p>
+<p>
+The GVirSandboxConfigServiceSystemd object extends <a class="link" href="GVirSandboxConfigService.html" title="GVirSandboxConfigService"><span class="type">GVirSandboxConfigService</span></a> to store
+the extra information required to setup a service sandbox with systemd
+</p>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxConfigServiceSystemd.details"></a><h2>Details</h2>
+<div class="refsect2">
+<a name="GVirSandboxConfigServiceSystemd-struct"></a><h3>struct GVirSandboxConfigServiceSystemd</h3>
+<pre class="programlisting">struct GVirSandboxConfigServiceSystemd;</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GVirSandboxConfigServiceSystemdClass"></a><h3>struct GVirSandboxConfigServiceSystemdClass</h3>
+<pre class="programlisting">struct GVirSandboxConfigServiceSystemdClass {
+    GVirSandboxConfigServiceClass parent_class;
+
+    gpointer padding[LIBVIRT_SANDBOX_CLASS_PADDING];
+};
+</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-config-service-systemd-new"></a><h3>gvir_sandbox_config_service_systemd_new ()</h3>
+<pre class="programlisting"><a class="link" href="GVirSandboxConfigServiceSystemd.html" title="GVirSandboxConfigServiceSystemd"><span class="returnvalue">GVirSandboxConfigServiceSystemd</span></a> * gvir_sandbox_config_service_systemd_new
+                                                        (<em class="parameter"><code>const <span class="type">gchar</span> *name</code></em>);</pre>
+<p>
+Create a new service application sandbox configuration
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
+<td>the sandbox name</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>a new service sandbox config object. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-config-service-systemd-get-boot-target"></a><h3>gvir_sandbox_config_service_systemd_get_boot_target ()</h3>
+<pre class="programlisting">const <span class="returnvalue">gchar</span> *       gvir_sandbox_config_service_systemd_get_boot_target
+                                                        (<em class="parameter"><code><a class="link" href="GVirSandboxConfigServiceSystemd.html" title="GVirSandboxConfigServiceSystemd"><span class="type">GVirSandboxConfigServiceSystemd</span></a> *config</code></em>);</pre>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the boot target name</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-config-service-systemd-set-boot-target"></a><h3>gvir_sandbox_config_service_systemd_set_boot_target ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                gvir_sandbox_config_service_systemd_set_boot_target
+                                                        (<em class="parameter"><code><a class="link" href="GVirSandboxConfigServiceSystemd.html" title="GVirSandboxConfigServiceSystemd"><span class="type">GVirSandboxConfigServiceSystemd</span></a> *config</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">gchar</span> *target</code></em>);</pre>
+</div>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxConfigServiceSystemd.see-also"></a><h2>See Also</h2>
+<a class="link" href="GVirSandboxConfigServiceSystemd.html" title="GVirSandboxConfigServiceSystemd"><span class="type">GVirSandboxConfigServiceSystemd</span></a>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.19</div>
+</body>
+</html>

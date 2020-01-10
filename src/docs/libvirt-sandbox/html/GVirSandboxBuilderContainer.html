@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>GVirSandboxBuilderContainer</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<link rel="home" href="index.html" title="Libvirt-sandbox Reference Manual">
+<link rel="up" href="ch01.html" title="Libvirt-sandbox">
+<link rel="prev" href="GVirSandboxBuilder.html" title="GVirSandboxBuilder">
+<link rel="next" href="GVirSandboxBuilderInitrd.html" title="GVirSandboxBuilderInitrd">
+<meta name="generator" content="GTK-Doc V1.19 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="GVirSandboxBuilder.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libvirt-sandbox Reference Manual</th>
+<td><a accesskey="n" href="GVirSandboxBuilderInitrd.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#GVirSandboxBuilderContainer.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#GVirSandboxBuilderContainer.description" class="shortcut">Description</a>
+                   | 
+                  <a href="#GVirSandboxBuilderContainer.object-hierarchy" class="shortcut">Object Hierarchy</a>
+</td></tr>
+</table>
+<div class="refentry">
+<a name="GVirSandboxBuilderContainer"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="GVirSandboxBuilderContainer.top_of_page"></a>GVirSandboxBuilderContainer</span></h2>
+<p>GVirSandboxBuilderContainer — Sandbox container construction</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="GVirSandboxBuilderContainer.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+#include &lt;libvirt-sandbox/libvirt-sandbox.h&gt;
+
+struct              <a class="link" href="GVirSandboxBuilderContainer.html#GVirSandboxBuilderContainer-struct" title="struct GVirSandboxBuilderContainer">GVirSandboxBuilderContainer</a>;
+struct              <a class="link" href="GVirSandboxBuilderContainer.html#GVirSandboxBuilderContainerClass" title="struct GVirSandboxBuilderContainerClass">GVirSandboxBuilderContainerClass</a>;
+<a class="link" href="GVirSandboxBuilderContainer.html" title="GVirSandboxBuilderContainer"><span class="returnvalue">GVirSandboxBuilderContainer</span></a> * <a class="link" href="GVirSandboxBuilderContainer.html#gvir-sandbox-builder-container-new" title="gvir_sandbox_builder_container_new ()">gvir_sandbox_builder_container_new</a>
+                                                        (<em class="parameter"><code><a href="/usr/share/gtk-doc/html/Libvirt-gobject/GVirConnection.html"><span class="type">GVirConnection</span></a> *connection</code></em>);
+</pre>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxBuilderContainer.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  GObject
+   +----<a class="link" href="GVirSandboxBuilder.html" title="GVirSandboxBuilder">GVirSandboxBuilder</a>
+         +----GVirSandboxBuilderContainer
+</pre>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxBuilderContainer.description"></a><h2>Description</h2>
+<p>
+Provides an object for creating sandboxes using container virtualization
+</p>
+<p>
+The GVirSandboxBuilderContainer object provides a way to builder sandboxes
+using OS container virtualization technologies such as LXC.
+</p>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxBuilderContainer.details"></a><h2>Details</h2>
+<div class="refsect2">
+<a name="GVirSandboxBuilderContainer-struct"></a><h3>struct GVirSandboxBuilderContainer</h3>
+<pre class="programlisting">struct GVirSandboxBuilderContainer;</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GVirSandboxBuilderContainerClass"></a><h3>struct GVirSandboxBuilderContainerClass</h3>
+<pre class="programlisting">struct GVirSandboxBuilderContainerClass {
+    GVirSandboxBuilderClass parent_class;
+
+    gpointer padding[LIBVIRT_SANDBOX_CLASS_PADDING];
+};
+</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-builder-container-new"></a><h3>gvir_sandbox_builder_container_new ()</h3>
+<pre class="programlisting"><a class="link" href="GVirSandboxBuilderContainer.html" title="GVirSandboxBuilderContainer"><span class="returnvalue">GVirSandboxBuilderContainer</span></a> * gvir_sandbox_builder_container_new
+                                                        (<em class="parameter"><code><a href="/usr/share/gtk-doc/html/Libvirt-gobject/GVirConnection.html"><span class="type">GVirConnection</span></a> *connection</code></em>);</pre>
+<p>
+Create a new pplication sandbox builder for containers
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
+<td>the connection. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>a new sandbox builder object. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxBuilderContainer.see-also"></a><h2>See Also</h2>
+<a class="link" href="GVirSandboxBuilder.html" title="GVirSandboxBuilder"><span class="type">GVirSandboxBuilder</span></a>, <a class="link" href="GVirSandboxBuilderMachine.html" title="GVirSandboxBuilderMachine"><span class="type">GVirSandboxBuilderMachine</span></a>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.19</div>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>GVirSandboxConfigServiceGeneric</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<link rel="home" href="index.html" title="Libvirt-sandbox Reference Manual">
+<link rel="up" href="ch01.html" title="Libvirt-sandbox">
+<link rel="prev" href="GVirSandboxConfigService.html" title="GVirSandboxConfigService">
+<link rel="next" href="GVirSandboxConfigServiceSystemd.html" title="GVirSandboxConfigServiceSystemd">
+<meta name="generator" content="GTK-Doc V1.19 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="GVirSandboxConfigService.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libvirt-sandbox Reference Manual</th>
+<td><a accesskey="n" href="GVirSandboxConfigServiceSystemd.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#GVirSandboxConfigServiceGeneric.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#GVirSandboxConfigServiceGeneric.description" class="shortcut">Description</a>
+                   | 
+                  <a href="#GVirSandboxConfigServiceGeneric.object-hierarchy" class="shortcut">Object Hierarchy</a>
+</td></tr>
+</table>
+<div class="refentry">
+<a name="GVirSandboxConfigServiceGeneric"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="GVirSandboxConfigServiceGeneric.top_of_page"></a>GVirSandboxConfigServiceGeneric</span></h2>
+<p>GVirSandboxConfigServiceGeneric — ServiceGeneric sandbox configuration details</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="GVirSandboxConfigServiceGeneric.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+#include &lt;libvirt-sandbox/libvirt-sandbox.h&gt;
+
+struct              <a class="link" href="GVirSandboxConfigServiceGeneric.html#GVirSandboxConfigServiceGeneric-struct" title="struct GVirSandboxConfigServiceGeneric">GVirSandboxConfigServiceGeneric</a>;
+struct              <a class="link" href="GVirSandboxConfigServiceGeneric.html#GVirSandboxConfigServiceGenericClass" title="struct GVirSandboxConfigServiceGenericClass">GVirSandboxConfigServiceGenericClass</a>;
+<a class="link" href="GVirSandboxConfigServiceGeneric.html" title="GVirSandboxConfigServiceGeneric"><span class="returnvalue">GVirSandboxConfigServiceGeneric</span></a> * <a class="link" href="GVirSandboxConfigServiceGeneric.html#gvir-sandbox-config-service-generic-new" title="gvir_sandbox_config_service_generic_new ()">gvir_sandbox_config_service_generic_new</a>
+                                                        (<em class="parameter"><code>const <span class="type">gchar</span> *name</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GVirSandboxConfigServiceGeneric.html#gvir-sandbox-config-service-generic-set-command" title="gvir_sandbox_config_service_generic_set_command ()">gvir_sandbox_config_service_generic_set_command</a>
+                                                        (<em class="parameter"><code><a class="link" href="GVirSandboxConfigServiceGeneric.html" title="GVirSandboxConfigServiceGeneric"><span class="type">GVirSandboxConfigServiceGeneric</span></a> *config</code></em>,
+                                                         <em class="parameter"><code><span class="type">gchar</span> **argv</code></em>);
+</pre>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxConfigServiceGeneric.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  GObject
+   +----<a class="link" href="GVirSandboxConfig.html" title="GVirSandboxConfig">GVirSandboxConfig</a>
+         +----<a class="link" href="GVirSandboxConfigService.html" title="GVirSandboxConfigService">GVirSandboxConfigService</a>
+               +----GVirSandboxConfigServiceGeneric
+</pre>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxConfigServiceGeneric.description"></a><h2>Description</h2>
+<p>
+Provides an object to store configuration details for a generic service config
+</p>
+<p>
+The GVirSandboxConfigServiceGeneric object extends <a class="link" href="GVirSandboxConfigService.html" title="GVirSandboxConfigService"><span class="type">GVirSandboxConfigService</span></a> to store
+the extra information required to setup a service sandbox with generic
+</p>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxConfigServiceGeneric.details"></a><h2>Details</h2>
+<div class="refsect2">
+<a name="GVirSandboxConfigServiceGeneric-struct"></a><h3>struct GVirSandboxConfigServiceGeneric</h3>
+<pre class="programlisting">struct GVirSandboxConfigServiceGeneric;</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GVirSandboxConfigServiceGenericClass"></a><h3>struct GVirSandboxConfigServiceGenericClass</h3>
+<pre class="programlisting">struct GVirSandboxConfigServiceGenericClass {
+    GVirSandboxConfigServiceClass parent_class;
+
+    gpointer padding[LIBVIRT_SANDBOX_CLASS_PADDING];
+};
+</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-config-service-generic-new"></a><h3>gvir_sandbox_config_service_generic_new ()</h3>
+<pre class="programlisting"><a class="link" href="GVirSandboxConfigServiceGeneric.html" title="GVirSandboxConfigServiceGeneric"><span class="returnvalue">GVirSandboxConfigServiceGeneric</span></a> * gvir_sandbox_config_service_generic_new
+                                                        (<em class="parameter"><code>const <span class="type">gchar</span> *name</code></em>);</pre>
+<p>
+Create a new service application sandbox configuration
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
+<td>the sandbox name</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>a new service sandbox config object. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-config-service-generic-set-command"></a><h3>gvir_sandbox_config_service_generic_set_command ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                gvir_sandbox_config_service_generic_set_command
+                                                        (<em class="parameter"><code><a class="link" href="GVirSandboxConfigServiceGeneric.html" title="GVirSandboxConfigServiceGeneric"><span class="type">GVirSandboxConfigServiceGeneric</span></a> *config</code></em>,
+                                                         <em class="parameter"><code><span class="type">gchar</span> **argv</code></em>);</pre>
+<p>
+Set the path of the command to be run and its arguments. The <em class="parameter"><code>argv</code></em> should
+be a NULL terminated list
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>config</code></em> :</span></p></td>
+<td>the sandbox config. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>argv</code></em> :</span></p></td>
+<td>the command path and arguments. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>][<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> zero-terminated=1]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxConfigServiceGeneric.see-also"></a><h2>See Also</h2>
+<a class="link" href="GVirSandboxConfigServiceGeneric.html" title="GVirSandboxConfigServiceGeneric"><span class="type">GVirSandboxConfigServiceGeneric</span></a>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.19</div>
+</body>
+</html>

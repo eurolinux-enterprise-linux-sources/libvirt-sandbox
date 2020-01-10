@@ -1,0 +1,47 @@
+From 478997a27cd7a350ad810a9ace5e03dca4999be9 Mon Sep 17 00:00:00 2001
+From: "Daniel P. Berrange" <berrange@redhat.com>
+Date: Thu, 15 Aug 2013 14:27:49 +0100
+Subject: [PATCH] Fix leak of file handle in libvirt-sandbox-init-common
+
+For https://bugzilla.redhat.com/show_bug.cgi?id=922639
+
+If several error cases of the run_interactive method, the
+sigpipe or host file descriptors could be leaked.
+
+Signed-off-by: Daniel P. Berrange <berrange@redhat.com>
+(cherry picked from commit b86c46f3447ed3e4074adaf01737052f70bfa550)
+---
+ libvirt-sandbox/libvirt-sandbox-init-common.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/libvirt-sandbox/libvirt-sandbox-init-common.c b/libvirt-sandbox/libvirt-sandbox-init-common.c
+index c8e8379..262f4e1 100644
+--- a/libvirt-sandbox/libvirt-sandbox-init-common.c
++++ b/libvirt-sandbox/libvirt-sandbox-init-common.c
+@@ -1076,7 +1076,7 @@ run_interactive(GVirSandboxConfig *config)
+     if ((host = open(devname, O_RDWR)) < 0) {
+         g_printerr(_("libvirt-sandbox-init-common: cannot open %s: %s"),
+                    devname, strerror(errno));
+-        return -1;
++        goto cleanup;
+     }
+ 
+     tcgetattr(STDIN_FILENO, &rawattr);
+@@ -1093,7 +1093,7 @@ run_interactive(GVirSandboxConfig *config)
+                     gvir_sandbox_config_get_userid(config),
+                     gvir_sandbox_config_get_groupid(config),
+                     gvir_sandbox_config_get_homedir(config)) < 0)
+-        return -1;
++        goto cleanup;
+ 
+     command = gvir_sandbox_config_get_command(config);
+     if (!eventloop(gvir_sandbox_config_interactive_get_tty(iconfig),
+@@ -1112,6 +1112,8 @@ cleanup:
+         close(sigpipe[0]);
+     if (sigpipe[1] != -1)
+         close(sigpipe[1]);
++    if (host != -1)
++        close(host);
+ 
+     return ret;
+ }

@@ -1,0 +1,195 @@
+LIBVIRT_SANDBOX_0.2.1 {
+   global:
+	gvir_sandbox_init;
+	gvir_sandbox_init_check;
+
+	gvir_sandbox_config_service_get_type;
+
+	gvir_sandbox_config_service_systemd_get_type;
+	gvir_sandbox_config_service_systemd_get_boot_target;
+	gvir_sandbox_config_service_systemd_new;
+	gvir_sandbox_config_service_systemd_set_boot_target;
+
+	gvir_sandbox_config_service_generic_get_type;
+	gvir_sandbox_config_service_generic_new;
+	gvir_sandbox_config_service_generic_set_command;
+
+	gvir_sandbox_config_interactive_get_type;
+	gvir_sandbox_config_interactive_get_tty;
+	gvir_sandbox_config_interactive_new;
+	gvir_sandbox_config_interactive_set_command;
+	gvir_sandbox_config_interactive_set_tty;
+
+	gvir_sandbox_config_mount_add_include;
+	gvir_sandbox_config_mount_get_includes;
+	gvir_sandbox_config_mount_get_target;
+	gvir_sandbox_config_mount_get_type;
+
+	gvir_sandbox_config_mount_file_get_source;
+	gvir_sandbox_config_mount_file_get_type;
+	gvir_sandbox_config_mount_file_set_source;
+
+	gvir_sandbox_config_mount_host_bind_get_type;
+	gvir_sandbox_config_mount_host_bind_new;
+
+	gvir_sandbox_config_mount_host_image_get_type;
+	gvir_sandbox_config_mount_host_image_new;
+
+	gvir_sandbox_config_mount_guest_bind_get_type;
+	gvir_sandbox_config_mount_guest_bind_new;
+
+	gvir_sandbox_config_mount_ram_get_usage;
+	gvir_sandbox_config_mount_ram_get_type;
+	gvir_sandbox_config_mount_ram_new;
+	gvir_sandbox_config_mount_ram_set_usage;
+
+	gvir_sandbox_config_network_add_address;
+	gvir_sandbox_config_network_add_route;
+	gvir_sandbox_config_network_get_type;
+	gvir_sandbox_config_network_get_dhcp;
+	gvir_sandbox_config_network_get_mac;
+	gvir_sandbox_config_network_get_source;
+	gvir_sandbox_config_network_get_routes;
+	gvir_sandbox_config_network_get_addresses;
+	gvir_sandbox_config_network_new;
+	gvir_sandbox_config_network_set_dhcp;
+	gvir_sandbox_config_network_set_mac;
+	gvir_sandbox_config_network_set_source;
+
+	gvir_sandbox_config_network_address_get_type;
+	gvir_sandbox_config_network_address_get_broadcast;
+	gvir_sandbox_config_network_address_get_primary;
+	gvir_sandbox_config_network_address_get_prefix;
+	gvir_sandbox_config_network_address_new;
+	gvir_sandbox_config_network_address_set_broadcast;
+	gvir_sandbox_config_network_address_set_primary;
+	gvir_sandbox_config_network_address_set_prefix;
+
+	gvir_sandbox_config_network_route_get_type;
+	gvir_sandbox_config_network_route_get_prefix;
+	gvir_sandbox_config_network_route_get_gateway;
+	gvir_sandbox_config_network_route_get_target;
+	gvir_sandbox_config_network_route_new;
+	gvir_sandbox_config_network_route_set_prefix;
+	gvir_sandbox_config_network_route_set_gateway;
+	gvir_sandbox_config_network_route_set_target;
+
+	gvir_sandbox_config_add_mount;
+	gvir_sandbox_config_add_mount_opts;
+	gvir_sandbox_config_add_mount_strv;
+	gvir_sandbox_config_add_host_include_strv;
+	gvir_sandbox_config_add_host_include_file;
+	gvir_sandbox_config_add_network;
+	gvir_sandbox_config_add_network_opts;
+	gvir_sandbox_config_add_network_strv;
+	gvir_sandbox_config_get_command;
+	gvir_sandbox_config_get_groupid;
+	gvir_sandbox_config_get_homedir;
+	gvir_sandbox_config_get_mounts;
+	gvir_sandbox_config_get_mounts_with_type;
+	gvir_sandbox_config_get_networks;
+	gvir_sandbox_config_get_name;
+	gvir_sandbox_config_get_root;
+	gvir_sandbox_config_get_security_dynamic;
+	gvir_sandbox_config_get_security_label;
+	gvir_sandbox_config_get_shell;
+	gvir_sandbox_config_get_type;
+	gvir_sandbox_config_get_userid;
+	gvir_sandbox_config_get_username;
+	gvir_sandbox_config_get_uuid;
+	gvir_sandbox_config_find_mount;
+	gvir_sandbox_config_has_networks;
+	gvir_sandbox_config_has_mounts;
+	gvir_sandbox_config_has_mounts_with_type;
+	gvir_sandbox_config_load_from_data;
+	gvir_sandbox_config_load_from_path;
+	gvir_sandbox_config_save_to_data;
+	gvir_sandbox_config_save_to_path;
+	gvir_sandbox_config_set_root;
+	gvir_sandbox_config_set_shell;
+	gvir_sandbox_config_set_arch;
+	gvir_sandbox_config_set_kernrelease;
+	gvir_sandbox_config_set_kernpath;
+	gvir_sandbox_config_set_kmodpath;
+	gvir_sandbox_config_set_userid;
+	gvir_sandbox_config_set_groupid;
+	gvir_sandbox_config_set_username;
+	gvir_sandbox_config_set_homedir;
+	gvir_sandbox_config_set_security_dynamic;
+	gvir_sandbox_config_set_security_label;
+	gvir_sandbox_config_set_security_opts;
+	gvir_sandbox_config_set_uuid;
+
+	gvir_sandbox_config_initrd_add_module;
+	gvir_sandbox_config_initrd_get_init;
+	gvir_sandbox_config_initrd_get_kver;
+	gvir_sandbox_config_initrd_get_kmoddir;
+	gvir_sandbox_config_initrd_get_modules;
+	gvir_sandbox_config_initrd_get_type;
+	gvir_sandbox_config_initrd_new;
+	gvir_sandbox_config_initrd_set_init;
+	gvir_sandbox_config_initrd_set_kver;
+	gvir_sandbox_config_initrd_set_kmoddir;
+
+	gvir_sandbox_console_get_type;
+	gvir_sandbox_console_get_direct;
+	gvir_sandbox_console_attach;
+	gvir_sandbox_console_attach_stdio;
+	gvir_sandbox_console_attach_stderr;
+	gvir_sandbox_console_detach;
+	gvir_sandbox_console_isolate;
+	gvir_sandbox_console_set_direct;
+
+	gvir_sandbox_console_raw_get_type;
+	gvir_sandbox_console_raw_new;
+
+	gvir_sandbox_console_rpc_get_type;
+	gvir_sandbox_console_rpc_new;
+
+	gvir_sandbox_context_attach;
+	gvir_sandbox_context_detach;
+	gvir_sandbox_context_get_type;
+	gvir_sandbox_context_get_config;
+	gvir_sandbox_context_get_domain;
+	gvir_sandbox_context_get_connection;
+	gvir_sandbox_context_get_log_console;
+	gvir_sandbox_context_get_shell_console;
+	gvir_sandbox_context_is_attached;
+	gvir_sandbox_context_start;
+	gvir_sandbox_context_stop;
+
+	gvir_sandbox_context_service_get_type;
+	gvir_sandbox_context_service_new;
+	gvir_sandbox_context_service_define;
+	gvir_sandbox_context_service_undefine;
+
+	gvir_sandbox_context_interactive_get_type;
+	gvir_sandbox_context_interactive_get_app_console;
+	gvir_sandbox_context_interactive_new;
+
+	gvir_sandbox_cleaner_get_type;
+	gvir_sandbox_cleaner_new;
+	gvir_sandbox_cleaner_run_post_start;
+	gvir_sandbox_cleaner_run_post_stop;
+	gvir_sandbox_cleaner_add_action_post_start;
+	gvir_sandbox_cleaner_add_action_post_stop;
+
+	gvir_sandbox_builder_construct;
+	gvir_sandbox_builder_get_config;
+	gvir_sandbox_builder_get_connection;
+	gvir_sandbox_builder_get_type;
+	gvir_sandbox_builder_new;
+
+	gvir_sandbox_builder_machine_get_type;
+	gvir_sandbox_builder_machine_new;
+
+	gvir_sandbox_builder_container_get_type;
+	gvir_sandbox_builder_container_new;
+
+	gvir_sandbox_builder_initrd_construct;
+	gvir_sandbox_builder_initrd_get_type;
+	gvir_sandbox_builder_initrd_new;
+
+    local:
+        *;
+};

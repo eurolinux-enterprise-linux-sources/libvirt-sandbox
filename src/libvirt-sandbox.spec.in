@@ -1,0 +1,129 @@
+# -*- rpm-spec -*-
+
+%define with_qemu 1
+
+# RHEL does not provide the 9p.ko kernel module
+# nor the virtio-9p KVM backend driver.
+%if 0%{?rhel}
+%define with_qemu 0
+%endif
+
+%define libvirt_version 1.0.2
+
+
+Name: @PACKAGE@
+Version: @VERSION@
+Release: 1%{?dist}%{?extra_release}
+Summary: libvirt application sandbox framework
+Group: Development/Tools
+License: LGPLv2+
+URL: http://libvirt.org/
+Source0: ftp://libvirt.org/libvirt/sandbox/%{name}-%{version}.tar.gz
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+BuildRequires: libvirt-gobject-devel >= 0.1.7
+BuildRequires: gobject-introspection-devel
+BuildRequires: glibc-static
+BuildRequires: /usr/bin/pod2man
+BuildRequires: intltool
+BuildRequires: glib2-devel >= 2.32.0
+Requires: rpm-python
+# For virsh lxc-enter-namespace command
+Requires: libvirt-client >= %{libvirt_version}
+Requires: systemd >= 198
+Requires: pygobject3-base
+Requires: libselinux-python
+
+%package libs
+Group: Development/Libraries
+Summary: libvirt application sandbox framework libraries
+# So we get the full libvirtd daemon, not just client libs
+%if %{with_qemu}
+ %ifarch %{ix86} x86_64
+Requires: libvirt-daemon-kvm >= %{libvirt_version}
+ %else
+Requires: libvirt-daemon-qemu >= %{libvirt_version}
+ %endif
+%endif
+Requires: libvirt-daemon-lxc >= %{libvirt_version}
+
+%package devel
+Group: Development/Libraries
+Summary: libvirt application sandbox framework development files
+Requires: %{name}-libs = %{version}-%{release}
+
+%description
+This package provides a command for running applications within
+a sandbox using libvirt.
+
+%description libs
+This package provides a framework for building application sandboxes
+using libvirt.
+
+%description devel
+This package provides development header files and libraries for
+the libvirt sandbox
+
+%prep
+%setup -q
+
+%build
+
+%configure --enable-introspection
+%__make %{?_smp_mflags}
+
+
+%install
+rm -rf $RPM_BUILD_ROOT
+chmod a-x examples/*.py examples/*.pl examples/*.js
+%__make install  DESTDIR=$RPM_BUILD_ROOT
+rm -f $RPM_BUILD_ROOT%{_libdir}/libvirt-sandbox-1.0.a
+rm -f $RPM_BUILD_ROOT%{_libdir}/libvirt-sandbox-1.0.la
+
+%find_lang %{name}
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%post libs -p /sbin/ldconfig
+%postun libs -p /sbin/ldconfig
+
+%files
+%defattr(-,root,root,-)
+%{_datadir}/bash-completion/completions/virt-sandbox-service
+%config(noreplace) %{_sysconfdir}/cron.daily/virt-sandbox-service.logrotate
+%dir %{_sysconfdir}/libvirt-sandbox/services
+%{_bindir}/virt-sandbox
+%{_bindir}/virt-sandbox-service
+%{_libexecdir}/virt-sandbox-service-util
+%{_mandir}/man1/virt-sandbox.1*
+%{_mandir}/man1/virt-sandbox-service.1*
+%{_mandir}/man1/virt-sandbox-service-*.1*
+
+%files libs -f %{name}.lang
+%defattr(-,root,root,-)
+%doc README COPYING AUTHORS ChangeLog NEWS
+%dir %{_sysconfdir}/libvirt-sandbox
+%dir %{_sysconfdir}/libvirt-sandbox/scratch
+%config %{_sysconfdir}/libvirt-sandbox/scratch/README
+%{_libexecdir}/libvirt-sandbox-init-common
+%{_libexecdir}/libvirt-sandbox-init-lxc
+%{_libexecdir}/libvirt-sandbox-init-qemu
+%{_libdir}/libvirt-sandbox-1.0.so.*
+%{_libdir}/girepository-1.0/LibvirtSandbox-1.0.typelib
+
+%files devel
+%defattr(-,root,root,-)
+%doc examples/virt-sandbox.pl
+%doc examples/virt-sandbox.py
+%doc examples/virt-sandbox.js
+%doc examples/virt-sandbox-mkinitrd.py
+%{_libdir}/libvirt-sandbox-1.0.so
+%{_libdir}/pkgconfig/libvirt-sandbox-1.0.pc
+%dir %{_includedir}/libvirt-sandbox-1.0
+%dir %{_includedir}/libvirt-sandbox-1.0/libvirt-sandbox
+%{_includedir}/libvirt-sandbox-1.0/libvirt-sandbox/libvirt-sandbox.h
+%{_includedir}/libvirt-sandbox-1.0/libvirt-sandbox/libvirt-sandbox-*.h
+%{_datadir}/gir-1.0/LibvirtSandbox-1.0.gir
+%{_datadir}/gtk-doc/html/Libvirt-sandbox
+
+%changelog

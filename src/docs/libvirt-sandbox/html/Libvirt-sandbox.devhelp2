@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE book PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "">
+<book xmlns="http://www.devhelp.net/book" title="Libvirt-sandbox Reference Manual" link="index.html" author="" name="Libvirt-sandbox" version="2" language="c">
+  <chapters>
+    <sub name="Libvirt-sandbox" link="ch01.html">
+      <sub name="GVirSandboxBuilder" link="GVirSandboxBuilder.html"/>
+      <sub name="GVirSandboxBuilderContainer" link="GVirSandboxBuilderContainer.html"/>
+      <sub name="GVirSandboxBuilderInitrd" link="GVirSandboxBuilderInitrd.html"/>
+      <sub name="GVirSandboxBuilderMachine" link="GVirSandboxBuilderMachine.html"/>
+      <sub name="GVirSandboxConfig" link="GVirSandboxConfig.html"/>
+      <sub name="GVirSandboxConfigInitrd" link="GVirSandboxConfigInitrd.html"/>
+      <sub name="GVirSandboxConfigMount" link="GVirSandboxConfigMount.html"/>
+      <sub name="GVirSandboxConfigMount" link="GVirSandboxConfigMount.html"/>
+      <sub name="GVirSandboxConfigMountGuestBind" link="GVirSandboxConfigMountGuestBind.html"/>
+      <sub name="GVirSandboxConfigMountHostBind" link="GVirSandboxConfigMountHostBind.html"/>
+      <sub name="GVirSandboxConfigMountHostImage" link="GVirSandboxConfigMountHostImage.html"/>
+      <sub name="GVirSandboxConfigMountRam" link="GVirSandboxConfigMountRam.html"/>
+      <sub name="GVirSandboxConfigNetwork" link="GVirSandboxConfigNetwork.html"/>
+      <sub name="GVirSandboxConfigNetworkAddress" link="GVirSandboxConfigNetworkAddress.html"/>
+      <sub name="GVirSandboxConfigNetworkRoute" link="GVirSandboxConfigNetworkRoute.html"/>
+      <sub name="GVirSandboxConfigService" link="GVirSandboxConfigService.html"/>
+      <sub name="GVirSandboxConfigServiceGeneric" link="GVirSandboxConfigServiceGeneric.html"/>
+      <sub name="GVirSandboxConfigServiceSystemd" link="GVirSandboxConfigServiceSystemd.html"/>
+      <sub name="GVirSandboxConsole" link="GVirSandboxConsole.html"/>
+      <sub name="GVirSandboxConsoleRaw" link="GVirSandboxConsoleRaw.html"/>
+      <sub name="GVirSandboxConsoleRpc" link="GVirSandboxConsoleRpc.html"/>
+      <sub name="GVirSandboxContext" link="GVirSandboxContext.html"/>
+      <sub name="GVirSandboxContextInteractive" link="GVirSandboxContextInteractive.html"/>
+      <sub name="GVirSandboxContextService" link="GVirSandboxContextService.html"/>
+    </sub>
+    <sub name="Object Hierarchy" link="object-tree.html"/>
+    <sub name="API Index" link="api-index-full.html"/>
+    <sub name="Annotation Glossary" link="annotation-glossary.html"/>
+  </chapters>
+  <functions>
+    <keyword type="macro" name="GVIR_SANDBOX_TYPE_BUILDER_HANDLE" link="GVirSandboxBuilder.html#GVIR-SANDBOX-TYPE-BUILDER-HANDLE:CAPS"/>
+    <keyword type="struct" name="struct GVirSandboxBuilder" link="GVirSandboxBuilder.html#GVirSandboxBuilder-struct"/>
+    <keyword type="struct" name="struct GVirSandboxBuilderClass" link="GVirSandboxBuilder.html#GVirSandboxBuilderClass"/>
+    <keyword type="function" name="gvir_sandbox_builder_for_connection ()" link="GVirSandboxBuilder.html#gvir-sandbox-builder-for-connection"/>
+    <keyword type="function" name="gvir_sandbox_builder_get_connection ()" link="GVirSandboxBuilder.html#gvir-sandbox-builder-get-connection"/>
+    <keyword type="function" name="gvir_sandbox_builder_construct ()" link="GVirSandboxBuilder.html#gvir-sandbox-builder-construct"/>
+    <keyword type="function" name="gvir_sandbox_builder_clean_post_start ()" link="GVirSandboxBuilder.html#gvir-sandbox-builder-clean-post-start"/>
+    <keyword type="function" name="gvir_sandbox_builder_clean_post_stop ()" link="GVirSandboxBuilder.html#gvir-sandbox-builder-clean-post-stop"/>
+    <keyword type="property" name="The &quot;connection&quot; property" link="GVirSandboxBuilder.html#GVirSandboxBuilder--connection"/>
+    <keyword type="struct" name="struct GVirSandboxBuilderContainer" link="GVirSandboxBuilderContainer.html#GVirSandboxBuilderContainer-struct"/>
+    <keyword type="struct" name="struct GVirSandboxBuilderContainerClass" link="GVirSandboxBuilderContainer.html#GVirSandboxBuilderContainerClass"/>
+    <keyword type="function" name="gvir_sandbox_builder_container_new ()" link="GVirSandboxBuilderContainer.html#gvir-sandbox-builder-container-new"/>
+    <keyword type="struct" name="struct GVirSandboxBuilderInitrd" link="GVirSandboxBuilderInitrd.html#GVirSandboxBuilderInitrd-struct"/>
+    <keyword type="struct" name="struct GVirSandboxBuilderInitrdClass" link="GVirSandboxBuilderInitrd.html#GVirSandboxBuilderInitrdClass"/>
+    <keyword type="function" name="gvir_sandbox_builder_initrd_new ()" link="GVirSandboxBuilderInitrd.html#gvir-sandbox-builder-initrd-new"/>
+    <keyword type="function" name="gvir_sandbox_builder_initrd_construct ()" link="GVirSandboxBuilderInitrd.html#gvir-sandbox-builder-initrd-construct"/>
+    <keyword type="struct" name="struct GVirSandboxBuilderMachine" link="GVirSandboxBuilderMachine.html#GVirSandboxBuilderMachine-struct"/>
+    <keyword type="struct" name="struct GVirSandboxBuilderMachineClass" link="GVirSandboxBuilderMachine.html#GVirSandboxBuilderMachineClass"/>
+    <keyword type="function" name="gvir_sandbox_builder_machine_new ()" link="GVirSandboxBuilderMachine.html#gvir-sandbox-builder-machine-new"/>
+    <keyword type="struct" name="struct GVirSandboxConfig" link="GVirSandboxConfig.html#GVirSandboxConfig-struct"/>
+    <keyword type="struct" name="struct GVirSandboxConfigClass" link="GVirSandboxConfig.html#GVirSandboxConfigClass"/>
+    <keyword type="function" name="gvir_sandbox_config_load_from_path ()" link="GVirSandboxConfig.html#gvir-sandbox-config-load-from-path"/>
+    <keyword type="function" name="gvir_sandbox_config_load_from_data ()" link="GVirSandboxConfig.html#gvir-sandbox-config-load-from-data"/>
+    <keyword type="function" name="gvir_sandbox_config_save_to_path ()" link="GVirSandboxConfig.html#gvir-sandbox-config-save-to-path"/>
+    <keyword type="function" name="gvir_sandbox_config_save_to_data ()" link="GVirSandboxConfig.html#gvir-sandbox-config-save-to-data"/>
+    <keyword type="function" name="gvir_sandbox_config_get_name ()" link="GVirSandboxConfig.html#gvir-sandbox-config-get-name"/>
+    <keyword type="function" name="gvir_sandbox_config_set_uuid ()" link="GVirSandboxConfig.html#gvir-sandbox-config-set-uuid"/>
+    <keyword type="function" name="gvir_sandbox_config_get_uuid ()" link="GVirSandboxConfig.html#gvir-sandbox-config-get-uuid"/>
+    <keyword type="function" name="gvir_sandbox_config_set_root ()" link="GVirSandboxConfig.html#gvir-sandbox-config-set-root"/>
+    <keyword type="function" name="gvir_sandbox_config_get_root ()" link="GVirSandboxConfig.html#gvir-sandbox-config-get-root"/>
+    <keyword type="function" name="gvir_sandbox_config_set_arch ()" link="GVirSandboxConfig.html#gvir-sandbox-config-set-arch"/>
+    <keyword type="function" name="gvir_sandbox_config_get_arch ()" link="GVirSandboxConfig.html#gvir-sandbox-config-get-arch"/>
+    <keyword type="function" name="gvir_sandbox_config_set_kernrelease ()" link="GVirSandboxConfig.html#gvir-sandbox-config-set-kernrelease"/>
+    <keyword type="function" name="gvir_sandbox_config_get_kernrelease ()" link="GVirSandboxConfig.html#gvir-sandbox-config-get-kernrelease"/>
+    <keyword type="function" name="gvir_sandbox_config_set_kernpath ()" link="GVirSandboxConfig.html#gvir-sandbox-config-set-kernpath"/>
+    <keyword type="function" name="gvir_sandbox_config_get_kernpath ()" link="GVirSandboxConfig.html#gvir-sandbox-config-get-kernpath"/>
+    <keyword type="function" name="gvir_sandbox_config_set_kmodpath ()" link="GVirSandboxConfig.html#gvir-sandbox-config-set-kmodpath"/>
+    <keyword type="function" name="gvir_sandbox_config_get_kmodpath ()" link="GVirSandboxConfig.html#gvir-sandbox-config-get-kmodpath"/>
+    <keyword type="function" name="gvir_sandbox_config_set_shell ()" link="GVirSandboxConfig.html#gvir-sandbox-config-set-shell"/>
+    <keyword type="function" name="gvir_sandbox_config_get_shell ()" link="GVirSandboxConfig.html#gvir-sandbox-config-get-shell"/>
+    <keyword type="function" name="gvir_sandbox_config_set_userid ()" link="GVirSandboxConfig.html#gvir-sandbox-config-set-userid"/>
+    <keyword type="function" name="gvir_sandbox_config_get_userid ()" link="GVirSandboxConfig.html#gvir-sandbox-config-get-userid"/>
+    <keyword type="function" name="gvir_sandbox_config_set_groupid ()" link="GVirSandboxConfig.html#gvir-sandbox-config-set-groupid"/>
+    <keyword type="function" name="gvir_sandbox_config_get_groupid ()" link="GVirSandboxConfig.html#gvir-sandbox-config-get-groupid"/>
+    <keyword type="function" name="gvir_sandbox_config_set_username ()" link="GVirSandboxConfig.html#gvir-sandbox-config-set-username"/>
+    <keyword type="function" name="gvir_sandbox_config_get_username ()" link="GVirSandboxConfig.html#gvir-sandbox-config-get-username"/>
+    <keyword type="function" name="gvir_sandbox_config_set_homedir ()" link="GVirSandboxConfig.html#gvir-sandbox-config-set-homedir"/>
+    <keyword type="function" name="gvir_sandbox_config_get_homedir ()" link="GVirSandboxConfig.html#gvir-sandbox-config-get-homedir"/>
+    <keyword type="function" name="gvir_sandbox_config_add_network ()" link="GVirSandboxConfig.html#gvir-sandbox-config-add-network"/>
+    <keyword type="function" name="gvir_sandbox_config_get_networks ()" link="GVirSandboxConfig.html#gvir-sandbox-config-get-networks"/>
+    <keyword type="function" name="gvir_sandbox_config_add_network_opts ()" link="GVirSandboxConfig.html#gvir-sandbox-config-add-network-opts"/>
+    <keyword type="function" name="gvir_sandbox_config_add_network_strv ()" link="GVirSandboxConfig.html#gvir-sandbox-config-add-network-strv"/>
+    <keyword type="function" name="gvir_sandbox_config_has_networks ()" link="GVirSandboxConfig.html#gvir-sandbox-config-has-networks"/>
+    <keyword type="function" name="gvir_sandbox_config_add_mount ()" link="GVirSandboxConfig.html#gvir-sandbox-config-add-mount"/>
+    <keyword type="function" name="gvir_sandbox_config_get_mounts ()" link="GVirSandboxConfig.html#gvir-sandbox-config-get-mounts"/>
+    <keyword type="function" name="gvir_sandbox_config_get_mounts_with_type ()" link="GVirSandboxConfig.html#gvir-sandbox-config-get-mounts-with-type"/>
+    <keyword type="function" name="gvir_sandbox_config_find_mount ()" link="GVirSandboxConfig.html#gvir-sandbox-config-find-mount"/>
+    <keyword type="function" name="gvir_sandbox_config_add_mount_opts ()" link="GVirSandboxConfig.html#gvir-sandbox-config-add-mount-opts"/>
+    <keyword type="function" name="gvir_sandbox_config_add_mount_strv ()" link="GVirSandboxConfig.html#gvir-sandbox-config-add-mount-strv"/>
+    <keyword type="function" name="gvir_sandbox_config_has_mounts ()" link="GVirSandboxConfig.html#gvir-sandbox-config-has-mounts"/>
+    <keyword type="function" name="gvir_sandbox_config_has_mounts_with_type ()" link="GVirSandboxConfig.html#gvir-sandbox-config-has-mounts-with-type"/>
+    <keyword type="function" name="gvir_sandbox_config_add_host_include_strv ()" link="GVirSandboxConfig.html#gvir-sandbox-config-add-host-include-strv"/>
+    <keyword type="function" name="gvir_sandbox_config_add_host_include_file ()" link="GVirSandboxConfig.html#gvir-sandbox-config-add-host-include-file"/>
+    <keyword type="function" name="gvir_sandbox_config_set_security_label ()" link="GVirSandboxConfig.html#gvir-sandbox-config-set-security-label"/>
+    <keyword type="function" name="gvir_sandbox_config_get_security_label ()" link="GVirSandboxConfig.html#gvir-sandbox-config-get-security-label"/>
+    <keyword type="function" name="gvir_sandbox_config_set_security_dynamic ()" link="GVirSandboxConfig.html#gvir-sandbox-config-set-security-dynamic"/>
+    <keyword type="function" name="gvir_sandbox_config_get_security_dynamic ()" link="GVirSandboxConfig.html#gvir-sandbox-config-get-security-dynamic"/>
+    <keyword type="function" name="gvir_sandbox_config_set_security_opts ()" link="GVirSandboxConfig.html#gvir-sandbox-config-set-security-opts"/>
+    <keyword type="function" name="gvir_sandbox_config_get_command ()" link="GVirSandboxConfig.html#gvir-sandbox-config-get-command"/>
+    <keyword type="property" name="The &quot;arch&quot; property" link="GVirSandboxConfig.html#GVirSandboxConfig--arch"/>
+    <keyword type="property" name="The &quot;gid&quot; property" link="GVirSandboxConfig.html#GVirSandboxConfig--gid"/>
+    <keyword type="property" name="The &quot;homedir&quot; property" link="GVirSandboxConfig.html#GVirSandboxConfig--homedir"/>
+    <keyword type="property" name="The &quot;kernpath&quot; property" link="GVirSandboxConfig.html#GVirSandboxConfig--kernpath"/>
+    <keyword type="property" name="The &quot;kernrelease&quot; property" link="GVirSandboxConfig.html#GVirSandboxConfig--kernrelease"/>
+    <keyword type="property" name="The &quot;kmodpath&quot; property" link="GVirSandboxConfig.html#GVirSandboxConfig--kmodpath"/>
+    <keyword type="property" name="The &quot;name&quot; property" link="GVirSandboxConfig.html#GVirSandboxConfig--name"/>
+    <keyword type="property" name="The &quot;root&quot; property" link="GVirSandboxConfig.html#GVirSandboxConfig--root"/>
+    <keyword type="property" name="The &quot;security-dynamic&quot; property" link="GVirSandboxConfig.html#GVirSandboxConfig--security-dynamic"/>
+    <keyword type="property" name="The &quot;security-label&quot; property" link="GVirSandboxConfig.html#GVirSandboxConfig--security-label"/>
+    <keyword type="property" name="The &quot;shell&quot; property" link="GVirSandboxConfig.html#GVirSandboxConfig--shell"/>
+    <keyword type="property" name="The &quot;uid&quot; property" link="GVirSandboxConfig.html#GVirSandboxConfig--uid"/>
+    <keyword type="property" name="The &quot;username&quot; property" link="GVirSandboxConfig.html#GVirSandboxConfig--username"/>
+    <keyword type="property" name="The &quot;uuid&quot; property" link="GVirSandboxConfig.html#GVirSandboxConfig--uuid"/>
+    <keyword type="macro" name="GVIR_SANDBOX_TYPE_CONFIG_INITRD_HANDLE" link="GVirSandboxConfigInitrd.html#GVIR-SANDBOX-TYPE-CONFIG-INITRD-HANDLE:CAPS"/>
+    <keyword type="struct" name="struct GVirSandboxConfigInitrd" link="GVirSandboxConfigInitrd.html#GVirSandboxConfigInitrd-struct"/>
+    <keyword type="struct" name="struct GVirSandboxConfigInitrdClass" link="GVirSandboxConfigInitrd.html#GVirSandboxConfigInitrdClass"/>
+    <keyword type="function" name="gvir_sandbox_config_initrd_new ()" link="GVirSandboxConfigInitrd.html#gvir-sandbox-config-initrd-new"/>
+    <keyword type="function" name="gvir_sandbox_config_initrd_set_kver ()" link="GVirSandboxConfigInitrd.html#gvir-sandbox-config-initrd-set-kver"/>
+    <keyword type="function" name="gvir_sandbox_config_initrd_get_kver ()" link="GVirSandboxConfigInitrd.html#gvir-sandbox-config-initrd-get-kver"/>
+    <keyword type="function" name="gvir_sandbox_config_initrd_set_kmoddir ()" link="GVirSandboxConfigInitrd.html#gvir-sandbox-config-initrd-set-kmoddir"/>
+    <keyword type="function" name="gvir_sandbox_config_initrd_get_kmoddir ()" link="GVirSandboxConfigInitrd.html#gvir-sandbox-config-initrd-get-kmoddir"/>
+    <keyword type="function" name="gvir_sandbox_config_initrd_set_init ()" link="GVirSandboxConfigInitrd.html#gvir-sandbox-config-initrd-set-init"/>
+    <keyword type="function" name="gvir_sandbox_config_initrd_get_init ()" link="GVirSandboxConfigInitrd.html#gvir-sandbox-config-initrd-get-init"/>
+    <keyword type="function" name="gvir_sandbox_config_initrd_add_module ()" link="GVirSandboxConfigInitrd.html#gvir-sandbox-config-initrd-add-module"/>
+    <keyword type="function" name="gvir_sandbox_config_initrd_get_modules ()" link="GVirSandboxConfigInitrd.html#gvir-sandbox-config-initrd-get-modules"/>
+    <keyword type="property" name="The &quot;init&quot; property" link="GVirSandboxConfigInitrd.html#GVirSandboxConfigInitrd--init"/>
+    <keyword type="property" name="The &quot;kmoddir&quot; property" link="GVirSandboxConfigInitrd.html#GVirSandboxConfigInitrd--kmoddir"/>
+    <keyword type="property" name="The &quot;kver&quot; property" link="GVirSandboxConfigInitrd.html#GVirSandboxConfigInitrd--kver"/>
+    <keyword type="macro" name="GVIR_SANDBOX_TYPE_CONFIG_MOUNT_HANDLE" link="GVirSandboxConfigMount.html#GVIR-SANDBOX-TYPE-CONFIG-MOUNT-HANDLE:CAPS"/>
+    <keyword type="struct" name="struct GVirSandboxConfigMount" link="GVirSandboxConfigMount.html#GVirSandboxConfigMount-struct"/>
+    <keyword type="struct" name="struct GVirSandboxConfigMountClass" link="GVirSandboxConfigMount.html#GVirSandboxConfigMountClass"/>
+    <keyword type="function" name="gvir_sandbox_config_mount_get_target ()" link="GVirSandboxConfigMount.html#gvir-sandbox-config-mount-get-target"/>
+    <keyword type="function" name="gvir_sandbox_config_mount_add_include ()" link="GVirSandboxConfigMount.html#gvir-sandbox-config-mount-add-include"/>
+    <keyword type="function" name="gvir_sandbox_config_mount_get_includes ()" link="GVirSandboxConfigMount.html#gvir-sandbox-config-mount-get-includes"/>
+    <keyword type="property" name="The &quot;target&quot; property" link="GVirSandboxConfigMount.html#GVirSandboxConfigMount--target"/>
+    <keyword type="macro" name="GVIR_SANDBOX_TYPE_CONFIG_MOUNT_HANDLE" link="GVirSandboxConfigMount.html#GVIR-SANDBOX-TYPE-CONFIG-MOUNT-HANDLE:CAPS"/>
+    <keyword type="struct" name="struct GVirSandboxConfigMount" link="GVirSandboxConfigMount.html#GVirSandboxConfigMount-struct"/>
+    <keyword type="struct" name="struct GVirSandboxConfigMountClass" link="GVirSandboxConfigMount.html#GVirSandboxConfigMountClass"/>
+    <keyword type="function" name="gvir_sandbox_config_mount_get_target ()" link="GVirSandboxConfigMount.html#gvir-sandbox-config-mount-get-target"/>
+    <keyword type="function" name="gvir_sandbox_config_mount_add_include ()" link="GVirSandboxConfigMount.html#gvir-sandbox-config-mount-add-include"/>
+    <keyword type="function" name="gvir_sandbox_config_mount_get_includes ()" link="GVirSandboxConfigMount.html#gvir-sandbox-config-mount-get-includes"/>
+    <keyword type="property" name="The &quot;target&quot; property" link="GVirSandboxConfigMount.html#GVirSandboxConfigMount--target"/>
+    <keyword type="struct" name="struct GVirSandboxConfigMountGuestBind" link="GVirSandboxConfigMountGuestBind.html#GVirSandboxConfigMountGuestBind-struct"/>
+    <keyword type="struct" name="struct GVirSandboxConfigMountGuestBindClass" link="GVirSandboxConfigMountGuestBind.html#GVirSandboxConfigMountGuestBindClass"/>
+    <keyword type="function" name="gvir_sandbox_config_mount_guest_bind_new ()" link="GVirSandboxConfigMountGuestBind.html#gvir-sandbox-config-mount-guest-bind-new"/>
+    <keyword type="struct" name="struct GVirSandboxConfigMountHostBind" link="GVirSandboxConfigMountHostBind.html#GVirSandboxConfigMountHostBind-struct"/>
+    <keyword type="struct" name="struct GVirSandboxConfigMountHostBindClass" link="GVirSandboxConfigMountHostBind.html#GVirSandboxConfigMountHostBindClass"/>
+    <keyword type="function" name="gvir_sandbox_config_mount_host_bind_new ()" link="GVirSandboxConfigMountHostBind.html#gvir-sandbox-config-mount-host-bind-new"/>
+    <keyword type="struct" name="struct GVirSandboxConfigMountHostImage" link="GVirSandboxConfigMountHostImage.html#GVirSandboxConfigMountHostImage-struct"/>
+    <keyword type="struct" name="struct GVirSandboxConfigMountHostImageClass" link="GVirSandboxConfigMountHostImage.html#GVirSandboxConfigMountHostImageClass"/>
+    <keyword type="function" name="gvir_sandbox_config_mount_host_image_new ()" link="GVirSandboxConfigMountHostImage.html#gvir-sandbox-config-mount-host-image-new"/>
+    <keyword type="struct" name="struct GVirSandboxConfigMountRam" link="GVirSandboxConfigMountRam.html#GVirSandboxConfigMountRam-struct"/>
+    <keyword type="struct" name="struct GVirSandboxConfigMountRamClass" link="GVirSandboxConfigMountRam.html#GVirSandboxConfigMountRamClass"/>
+    <keyword type="function" name="gvir_sandbox_config_mount_ram_new ()" link="GVirSandboxConfigMountRam.html#gvir-sandbox-config-mount-ram-new"/>
+    <keyword type="function" name="gvir_sandbox_config_mount_ram_set_usage ()" link="GVirSandboxConfigMountRam.html#gvir-sandbox-config-mount-ram-set-usage"/>
+    <keyword type="function" name="gvir_sandbox_config_mount_ram_get_usage ()" link="GVirSandboxConfigMountRam.html#gvir-sandbox-config-mount-ram-get-usage"/>
+    <keyword type="property" name="The &quot;usage&quot; property" link="GVirSandboxConfigMountRam.html#GVirSandboxConfigMountRam--usage"/>
+    <keyword type="macro" name="GVIR_SANDBOX_TYPE_CONFIG_NETWORK_HANDLE" link="GVirSandboxConfigNetwork.html#GVIR-SANDBOX-TYPE-CONFIG-NETWORK-HANDLE:CAPS"/>
+    <keyword type="struct" name="struct GVirSandboxConfigNetwork" link="GVirSandboxConfigNetwork.html#GVirSandboxConfigNetwork-struct"/>
+    <keyword type="struct" name="struct GVirSandboxConfigNetworkClass" link="GVirSandboxConfigNetwork.html#GVirSandboxConfigNetworkClass"/>
+    <keyword type="function" name="gvir_sandbox_config_network_new ()" link="GVirSandboxConfigNetwork.html#gvir-sandbox-config-network-new"/>
+    <keyword type="function" name="gvir_sandbox_config_network_set_source ()" link="GVirSandboxConfigNetwork.html#gvir-sandbox-config-network-set-source"/>
+    <keyword type="function" name="gvir_sandbox_config_network_get_source ()" link="GVirSandboxConfigNetwork.html#gvir-sandbox-config-network-get-source"/>
+    <keyword type="function" name="gvir_sandbox_config_network_set_mac ()" link="GVirSandboxConfigNetwork.html#gvir-sandbox-config-network-set-mac"/>
+    <keyword type="function" name="gvir_sandbox_config_network_get_mac ()" link="GVirSandboxConfigNetwork.html#gvir-sandbox-config-network-get-mac"/>
+    <keyword type="function" name="gvir_sandbox_config_network_set_dhcp ()" link="GVirSandboxConfigNetwork.html#gvir-sandbox-config-network-set-dhcp"/>
+    <keyword type="function" name="gvir_sandbox_config_network_get_dhcp ()" link="GVirSandboxConfigNetwork.html#gvir-sandbox-config-network-get-dhcp"/>
+    <keyword type="function" name="gvir_sandbox_config_network_add_address ()" link="GVirSandboxConfigNetwork.html#gvir-sandbox-config-network-add-address"/>
+    <keyword type="function" name="gvir_sandbox_config_network_get_addresses ()" link="GVirSandboxConfigNetwork.html#gvir-sandbox-config-network-get-addresses"/>
+    <keyword type="function" name="gvir_sandbox_config_network_add_route ()" link="GVirSandboxConfigNetwork.html#gvir-sandbox-config-network-add-route"/>
+    <keyword type="function" name="gvir_sandbox_config_network_get_routes ()" link="GVirSandboxConfigNetwork.html#gvir-sandbox-config-network-get-routes"/>
+    <keyword type="property" name="The &quot;dhcp&quot; property" link="GVirSandboxConfigNetwork.html#GVirSandboxConfigNetwork--dhcp"/>
+    <keyword type="property" name="The &quot;mac&quot; property" link="GVirSandboxConfigNetwork.html#GVirSandboxConfigNetwork--mac"/>
+    <keyword type="property" name="The &quot;source&quot; property" link="GVirSandboxConfigNetwork.html#GVirSandboxConfigNetwork--source"/>
+    <keyword type="macro" name="GVIR_SANDBOX_TYPE_CONFIG_NETWORK_ADDRESS_HANDLE" link="GVirSandboxConfigNetworkAddress.html#GVIR-SANDBOX-TYPE-CONFIG-NETWORK-ADDRESS-HANDLE:CAPS"/>
+    <keyword type="struct" name="struct GVirSandboxConfigNetworkAddress" link="GVirSandboxConfigNetworkAddress.html#GVirSandboxConfigNetworkAddress-struct"/>
+    <keyword type="struct" name="struct GVirSandboxConfigNetworkAddressClass" link="GVirSandboxConfigNetworkAddress.html#GVirSandboxConfigNetworkAddressClass"/>
+    <keyword type="function" name="gvir_sandbox_config_network_address_new ()" link="GVirSandboxConfigNetworkAddress.html#gvir-sandbox-config-network-address-new"/>
+    <keyword type="function" name="gvir_sandbox_config_network_address_set_primary ()" link="GVirSandboxConfigNetworkAddress.html#gvir-sandbox-config-network-address-set-primary"/>
+    <keyword type="function" name="gvir_sandbox_config_network_address_get_primary ()" link="GVirSandboxConfigNetworkAddress.html#gvir-sandbox-config-network-address-get-primary"/>
+    <keyword type="function" name="gvir_sandbox_config_network_address_set_prefix ()" link="GVirSandboxConfigNetworkAddress.html#gvir-sandbox-config-network-address-set-prefix"/>
+    <keyword type="function" name="gvir_sandbox_config_network_address_get_prefix ()" link="GVirSandboxConfigNetworkAddress.html#gvir-sandbox-config-network-address-get-prefix"/>
+    <keyword type="function" name="gvir_sandbox_config_network_address_set_broadcast ()" link="GVirSandboxConfigNetworkAddress.html#gvir-sandbox-config-network-address-set-broadcast"/>
+    <keyword type="function" name="gvir_sandbox_config_network_address_get_broadcast ()" link="GVirSandboxConfigNetworkAddress.html#gvir-sandbox-config-network-address-get-broadcast"/>
+    <keyword type="property" name="The &quot;broadcast&quot; property" link="GVirSandboxConfigNetworkAddress.html#GVirSandboxConfigNetworkAddress--broadcast"/>
+    <keyword type="property" name="The &quot;prefix&quot; property" link="GVirSandboxConfigNetworkAddress.html#GVirSandboxConfigNetworkAddress--prefix"/>
+    <keyword type="property" name="The &quot;primary&quot; property" link="GVirSandboxConfigNetworkAddress.html#GVirSandboxConfigNetworkAddress--primary"/>
+    <keyword type="macro" name="GVIR_SANDBOX_TYPE_CONFIG_NETWORK_ROUTE_HANDLE" link="GVirSandboxConfigNetworkRoute.html#GVIR-SANDBOX-TYPE-CONFIG-NETWORK-ROUTE-HANDLE:CAPS"/>
+    <keyword type="struct" name="struct GVirSandboxConfigNetworkRoute" link="GVirSandboxConfigNetworkRoute.html#GVirSandboxConfigNetworkRoute-struct"/>
+    <keyword type="struct" name="struct GVirSandboxConfigNetworkRouteClass" link="GVirSandboxConfigNetworkRoute.html#GVirSandboxConfigNetworkRouteClass"/>
+    <keyword type="function" name="gvir_sandbox_config_network_route_new ()" link="GVirSandboxConfigNetworkRoute.html#gvir-sandbox-config-network-route-new"/>
+    <keyword type="function" name="gvir_sandbox_config_network_route_set_prefix ()" link="GVirSandboxConfigNetworkRoute.html#gvir-sandbox-config-network-route-set-prefix"/>
+    <keyword type="function" name="gvir_sandbox_config_network_route_get_prefix ()" link="GVirSandboxConfigNetworkRoute.html#gvir-sandbox-config-network-route-get-prefix"/>
+    <keyword type="function" name="gvir_sandbox_config_network_route_set_gateway ()" link="GVirSandboxConfigNetworkRoute.html#gvir-sandbox-config-network-route-set-gateway"/>
+    <keyword type="function" name="gvir_sandbox_config_network_route_get_gateway ()" link="GVirSandboxConfigNetworkRoute.html#gvir-sandbox-config-network-route-get-gateway"/>
+    <keyword type="function" name="gvir_sandbox_config_network_route_set_target ()" link="GVirSandboxConfigNetworkRoute.html#gvir-sandbox-config-network-route-set-target"/>
+    <keyword type="function" name="gvir_sandbox_config_network_route_get_target ()" link="GVirSandboxConfigNetworkRoute.html#gvir-sandbox-config-network-route-get-target"/>
+    <keyword type="property" name="The &quot;gateway&quot; property" link="GVirSandboxConfigNetworkRoute.html#GVirSandboxConfigNetworkRoute--gateway"/>
+    <keyword type="property" name="The &quot;prefix&quot; property" link="GVirSandboxConfigNetworkRoute.html#GVirSandboxConfigNetworkRoute--prefix"/>
+    <keyword type="property" name="The &quot;target&quot; property" link="GVirSandboxConfigNetworkRoute.html#GVirSandboxConfigNetworkRoute--target"/>
+    <keyword type="struct" name="struct GVirSandboxConfigService" link="GVirSandboxConfigService.html#GVirSandboxConfigService-struct"/>
+    <keyword type="struct" name="struct GVirSandboxConfigServiceClass" link="GVirSandboxConfigService.html#GVirSandboxConfigServiceClass"/>
+    <keyword type="struct" name="struct GVirSandboxConfigServiceGeneric" link="GVirSandboxConfigServiceGeneric.html#GVirSandboxConfigServiceGeneric-struct"/>
+    <keyword type="struct" name="struct GVirSandboxConfigServiceGenericClass" link="GVirSandboxConfigServiceGeneric.html#GVirSandboxConfigServiceGenericClass"/>
+    <keyword type="function" name="gvir_sandbox_config_service_generic_new ()" link="GVirSandboxConfigServiceGeneric.html#gvir-sandbox-config-service-generic-new"/>
+    <keyword type="function" name="gvir_sandbox_config_service_generic_set_command ()" link="GVirSandboxConfigServiceGeneric.html#gvir-sandbox-config-service-generic-set-command"/>
+    <keyword type="struct" name="struct GVirSandboxConfigServiceSystemd" link="GVirSandboxConfigServiceSystemd.html#GVirSandboxConfigServiceSystemd-struct"/>
+    <keyword type="struct" name="struct GVirSandboxConfigServiceSystemdClass" link="GVirSandboxConfigServiceSystemd.html#GVirSandboxConfigServiceSystemdClass"/>
+    <keyword type="function" name="gvir_sandbox_config_service_systemd_new ()" link="GVirSandboxConfigServiceSystemd.html#gvir-sandbox-config-service-systemd-new"/>
+    <keyword type="function" name="gvir_sandbox_config_service_systemd_get_boot_target ()" link="GVirSandboxConfigServiceSystemd.html#gvir-sandbox-config-service-systemd-get-boot-target"/>
+    <keyword type="function" name="gvir_sandbox_config_service_systemd_set_boot_target ()" link="GVirSandboxConfigServiceSystemd.html#gvir-sandbox-config-service-systemd-set-boot-target"/>
+    <keyword type="macro" name="GVIR_SANDBOX_TYPE_CONSOLE_HANDLE" link="GVirSandboxConsole.html#GVIR-SANDBOX-TYPE-CONSOLE-HANDLE:CAPS"/>
+    <keyword type="struct" name="struct GVirSandboxConsole" link="GVirSandboxConsole.html#GVirSandboxConsole-struct"/>
+    <keyword type="struct" name="struct GVirSandboxConsoleClass" link="GVirSandboxConsole.html#GVirSandboxConsoleClass"/>
+    <keyword type="function" name="gvir_sandbox_console_attach_stdio ()" link="GVirSandboxConsole.html#gvir-sandbox-console-attach-stdio"/>
+    <keyword type="function" name="gvir_sandbox_console_attach_stderr ()" link="GVirSandboxConsole.html#gvir-sandbox-console-attach-stderr"/>
+    <keyword type="function" name="gvir_sandbox_console_attach ()" link="GVirSandboxConsole.html#gvir-sandbox-console-attach"/>
+    <keyword type="function" name="gvir_sandbox_console_detach ()" link="GVirSandboxConsole.html#gvir-sandbox-console-detach"/>
+    <keyword type="function" name="gvir_sandbox_console_isolate ()" link="GVirSandboxConsole.html#gvir-sandbox-console-isolate"/>
+    <keyword type="function" name="gvir_sandbox_console_set_escape ()" link="GVirSandboxConsole.html#gvir-sandbox-console-set-escape"/>
+    <keyword type="function" name="gvir_sandbox_console_get_escape ()" link="GVirSandboxConsole.html#gvir-sandbox-console-get-escape"/>
+    <keyword type="function" name="gvir_sandbox_console_set_direct ()" link="GVirSandboxConsole.html#gvir-sandbox-console-set-direct"/>
+    <keyword type="function" name="gvir_sandbox_console_get_direct ()" link="GVirSandboxConsole.html#gvir-sandbox-console-get-direct"/>
+    <keyword type="property" name="The &quot;connection&quot; property" link="GVirSandboxConsole.html#GVirSandboxConsole--connection"/>
+    <keyword type="property" name="The &quot;devname&quot; property" link="GVirSandboxConsole.html#GVirSandboxConsole--devname"/>
+    <keyword type="property" name="The &quot;direct&quot; property" link="GVirSandboxConsole.html#GVirSandboxConsole--direct"/>
+    <keyword type="property" name="The &quot;domain&quot; property" link="GVirSandboxConsole.html#GVirSandboxConsole--domain"/>
+    <keyword type="property" name="The &quot;escape&quot; property" link="GVirSandboxConsole.html#GVirSandboxConsole--escape"/>
+    <keyword type="signal" name="The &quot;closed&quot; signal" link="GVirSandboxConsole.html#GVirSandboxConsole-closed"/>
+    <keyword type="struct" name="struct GVirSandboxConsoleRaw" link="GVirSandboxConsoleRaw.html#GVirSandboxConsoleRaw-struct"/>
+    <keyword type="struct" name="struct GVirSandboxConsoleRawClass" link="GVirSandboxConsoleRaw.html#GVirSandboxConsoleRawClass"/>
+    <keyword type="function" name="gvir_sandbox_console_raw_new ()" link="GVirSandboxConsoleRaw.html#gvir-sandbox-console-raw-new"/>
+    <keyword type="struct" name="struct GVirSandboxConsoleRpc" link="GVirSandboxConsoleRpc.html#GVirSandboxConsoleRpc-struct"/>
+    <keyword type="struct" name="struct GVirSandboxConsoleRpcClass" link="GVirSandboxConsoleRpc.html#GVirSandboxConsoleRpcClass"/>
+    <keyword type="function" name="gvir_sandbox_console_rpc_new ()" link="GVirSandboxConsoleRpc.html#gvir-sandbox-console-rpc-new"/>
+    <keyword type="signal" name="The &quot;exited&quot; signal" link="GVirSandboxConsoleRpc.html#GVirSandboxConsoleRpc-exited"/>
+    <keyword type="macro" name="GVIR_SANDBOX_TYPE_CONTEXT_HANDLE" link="GVirSandboxContext.html#GVIR-SANDBOX-TYPE-CONTEXT-HANDLE:CAPS"/>
+    <keyword type="struct" name="struct GVirSandboxContext" link="GVirSandboxContext.html#GVirSandboxContext-struct"/>
+    <keyword type="struct" name="struct GVirSandboxContextClass" link="GVirSandboxContext.html#GVirSandboxContextClass"/>
+    <keyword type="function" name="gvir_sandbox_context_get_config ()" link="GVirSandboxContext.html#gvir-sandbox-context-get-config"/>
+    <keyword type="function" name="gvir_sandbox_context_start ()" link="GVirSandboxContext.html#gvir-sandbox-context-start"/>
+    <keyword type="function" name="gvir_sandbox_context_stop ()" link="GVirSandboxContext.html#gvir-sandbox-context-stop"/>
+    <keyword type="function" name="gvir_sandbox_context_attach ()" link="GVirSandboxContext.html#gvir-sandbox-context-attach"/>
+    <keyword type="function" name="gvir_sandbox_context_detach ()" link="GVirSandboxContext.html#gvir-sandbox-context-detach"/>
+    <keyword type="function" name="gvir_sandbox_context_is_attached ()" link="GVirSandboxContext.html#gvir-sandbox-context-is-attached"/>
+    <keyword type="function" name="gvir_sandbox_context_get_domain ()" link="GVirSandboxContext.html#gvir-sandbox-context-get-domain"/>
+    <keyword type="function" name="gvir_sandbox_context_get_connection ()" link="GVirSandboxContext.html#gvir-sandbox-context-get-connection"/>
+    <keyword type="function" name="gvir_sandbox_context_get_log_console ()" link="GVirSandboxContext.html#gvir-sandbox-context-get-log-console"/>
+    <keyword type="function" name="gvir_sandbox_context_get_shell_console ()" link="GVirSandboxContext.html#gvir-sandbox-context-get-shell-console"/>
+    <keyword type="property" name="The &quot;config&quot; property" link="GVirSandboxContext.html#GVirSandboxContext--config"/>
+    <keyword type="property" name="The &quot;connection&quot; property" link="GVirSandboxContext.html#GVirSandboxContext--connection"/>
+    <keyword type="property" name="The &quot;domain&quot; property" link="GVirSandboxContext.html#GVirSandboxContext--domain"/>
+    <keyword type="struct" name="struct GVirSandboxContextInteractive" link="GVirSandboxContextInteractive.html#GVirSandboxContextInteractive-struct"/>
+    <keyword type="struct" name="struct GVirSandboxContextInteractiveClass" link="GVirSandboxContextInteractive.html#GVirSandboxContextInteractiveClass"/>
+    <keyword type="function" name="gvir_sandbox_context_interactive_new ()" link="GVirSandboxContextInteractive.html#gvir-sandbox-context-interactive-new"/>
+    <keyword type="function" name="gvir_sandbox_context_interactive_get_app_console ()" link="GVirSandboxContextInteractive.html#gvir-sandbox-context-interactive-get-app-console"/>
+    <keyword type="struct" name="struct GVirSandboxContextService" link="GVirSandboxContextService.html#GVirSandboxContextService-struct"/>
+    <keyword type="struct" name="struct GVirSandboxContextServiceClass" link="GVirSandboxContextService.html#GVirSandboxContextServiceClass"/>
+    <keyword type="function" name="gvir_sandbox_context_service_new ()" link="GVirSandboxContextService.html#gvir-sandbox-context-service-new"/>
+    <keyword type="function" name="gvir_sandbox_context_service_define ()" link="GVirSandboxContextService.html#gvir-sandbox-context-service-define"/>
+    <keyword type="function" name="gvir_sandbox_context_service_undefine ()" link="GVirSandboxContextService.html#gvir-sandbox-context-service-undefine"/>
+  </functions>
+</book>

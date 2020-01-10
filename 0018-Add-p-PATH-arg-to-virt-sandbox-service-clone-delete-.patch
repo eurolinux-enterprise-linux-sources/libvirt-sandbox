@@ -1,0 +1,162 @@
+From fc5ea8d4085985c116f4dfb60c43bb8561a4fb80 Mon Sep 17 00:00:00 2001
+From: "Daniel P. Berrange" <berrange@redhat.com>
+Date: Wed, 2 Oct 2013 17:06:15 +0100
+Subject: [PATCH] Add '-p PATH' arg to virt-sandbox-service clone/delete
+ commands
+
+For
+
+  https://bugzilla.redhat.com/show_bug.cgi?id=970952
+
+The 'create' command for virt-sandbox-service accepts a '-p PATH'
+arg to override use of /var/lib/libvirt/filesystems. The 'delete'
+and 'clone' commands must also support this arg if they are to
+work.
+
+Signed-off-by: Daniel P. Berrange <berrange@redhat.com>
+(cherry picked from commit 7cead289c9162908673a4e8a4a7cc32d752c481a)
+---
+ bin/virt-sandbox-service            | 10 +++++++++-
+ bin/virt-sandbox-service-clone.pod  |  9 ++++++++-
+ bin/virt-sandbox-service-create.pod |  4 +++-
+ bin/virt-sandbox-service-delete.pod | 11 +++++++++--
+ 4 files changed, 29 insertions(+), 5 deletions(-)
+
+diff --git a/bin/virt-sandbox-service b/bin/virt-sandbox-service
+index ab2ba53..5c337e1 100755
+--- a/bin/virt-sandbox-service
++++ b/bin/virt-sandbox-service
+@@ -167,7 +167,7 @@ class Container:
+     def get_filesystem_path(self, name = None):
+         if not name:
+             name = self.get_name()
+-        return self.DEFAULT_PATH + "/" + name
++        return "%s/%s" % (self.path, name)
+ 
+     def get_image_path(self, name = None):
+         if not name:
+@@ -804,6 +804,7 @@ def delete(args):
+         container = GenericContainer(uri=args.uri, config = config)
+     else:
+         container = SystemdContainer(uri=args.uri, config = config)
++    container.set_path(args.path)
+     container.delete()
+ 
+ def create(args):
+@@ -911,6 +912,7 @@ def clone(args):
+     else:
+         container = SystemdContainer(uri=args.uri, config=config)
+ 
++    container.set_path(args.path)
+     fd = open(container.get_config_path(),"r")
+     recs = fd.read()
+     fd.close()
+@@ -932,6 +934,7 @@ def clone(args):
+ 
+     if isinstance(config, gi.repository.LibvirtSandbox.ConfigServiceGeneric):
+         container = GenericContainer(name=args.dest, uri=args.uri, create=True)
++        container.set_path(args.path)
+     else:
+         fd = open(container.get_unit_path())
+         recs = fd.read()
+@@ -946,6 +949,7 @@ def clone(args):
+ 
+         config = LibvirtSandbox.Config.load_from_data(newrec)
+         container = SystemdContainer(config=config, uri=args.uri)
++        container.set_path(args.path)
+         container.gen_machine_id()
+         container.gen_hostname()
+ 
+@@ -1153,6 +1157,8 @@ def gen_clone_args(subparser):
+     parser = subparser.add_parser("clone",
+                                   help=_("Clone an existing sandbox container"))
+     parser.set_defaults(func=clone)
++    parser.add_argument("-p", "--path", dest="path",  default=c.DEFAULT_PATH,
++                        help=_("select path to copy sandbox content from/to.  Default: %s") % c.DEFAULT_PATH)
+     parser.add_argument("-s", "--security", dest="security",
+                         default=default_security_opts(),
+                         help=_("Specify the security model configuration for the sandbox: Defaults to dynamic"))
+@@ -1165,6 +1171,8 @@ def gen_clone_args(subparser):
+ def gen_delete_args(subparser):
+     parser = subparser.add_parser("delete",
+                                    help=_("Delete a sandbox container"))
++    parser.add_argument("-p", "--path", dest="path",  default=c.DEFAULT_PATH,
++                        help=_("select path to delete sandbox content from.  Default: %s") % c.DEFAULT_PATH)
+     requires_name(parser)
+     parser.set_defaults(func=delete)
+ 
+diff --git a/bin/virt-sandbox-service-clone.pod b/bin/virt-sandbox-service-clone.pod
+index cd261c4..7896509 100644
+--- a/bin/virt-sandbox-service-clone.pod
++++ b/bin/virt-sandbox-service-clone.pod
+@@ -6,7 +6,7 @@ virt-sandbox-service clone - clone an existing Secure container
+ 
+ Clone a Security container
+ 
+-  virt-sandbox-service [-c URI] clone [-h] [-s SECURITY-OPTS] SOURCE DEST
++  virt-sandbox-service [-c URI] clone [-h] [-p PATH] [-s SECURITY-OPTS] SOURCE DEST
+ 
+ =head1 DESCRIPTION
+ 
+@@ -31,6 +31,13 @@ Display help message
+ The connection URI for the hypervisor (only LXC or QEMU are
+ supported currently).
+ 
++=item B<-p PATH>, B<--path PATH>
++
++Set path to copy container content from/to. This argument must match the value of
++the C<-p> arg given when creating the original source container.
++
++Default: C</var/lib/libvirt/filesystems>.
++
+ =item B<-s SECURITY-OPTIONS>, B<--security=SECURITY-OPTIONS>
+ 
+ Use alternative security options. SECURITY-OPTIONS is a set of key=val pairs,
+diff --git a/bin/virt-sandbox-service-create.pod b/bin/virt-sandbox-service-create.pod
+index 3dc7085..9826412 100644
+--- a/bin/virt-sandbox-service-create.pod
++++ b/bin/virt-sandbox-service-create.pod
+@@ -65,7 +65,9 @@ Default: C<svirt_lxc_file_t>.
+ 
+ =item B<-p PATH>, B<--path PATH>
+ 
+-Set path to store container content.
++Set path to store container content. NB if this argument is used when creating
++a container, the exact same argument must also be used when later cloning or
++deleting the container.
+ 
+ Default: C</var/lib/libvirt/filesystems>.
+ 
+diff --git a/bin/virt-sandbox-service-delete.pod b/bin/virt-sandbox-service-delete.pod
+index 74d0291..b741f56 100644
+--- a/bin/virt-sandbox-service-delete.pod
++++ b/bin/virt-sandbox-service-delete.pod
+@@ -4,7 +4,7 @@ virt-sandbox-service delete - Delete a security container
+ 
+ =head1 SYNOPSIS
+ 
+-  virt-sandbox-service [-c URI] delete [-h] NAME
++  virt-sandbox-service [-c URI] delete [-h] [-p PATH] NAME
+ 
+ =head1 DESCRIPTION
+ 
+@@ -24,11 +24,18 @@ The delete command will delete a sandbox container.
+ 
+ Display help message
+ 
+-=item B<-c> URI, B<--connect URI>
++=item B<-c URI>, B<--connect URI>
+ 
+ The connection URI for the hypervisor (only LXC or QEMU are
+ supported currently).
+ 
++=item B<-p PATH>, B<--path PATH>
++
++Set path to delete container content from. This argument must match the value of
++the C<-p> arg given when creating the original source container.
++
++Default: C</var/lib/libvirt/filesystems>.
++
+ =back
+ 
+ =head1 EXAMPLE

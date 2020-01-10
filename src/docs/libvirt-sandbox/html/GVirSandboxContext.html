@@ -1,0 +1,312 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>GVirSandboxContext</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<link rel="home" href="index.html" title="Libvirt-sandbox Reference Manual">
+<link rel="up" href="ch01.html" title="Libvirt-sandbox">
+<link rel="prev" href="GVirSandboxConsoleRpc.html" title="GVirSandboxConsoleRpc">
+<link rel="next" href="GVirSandboxContextInteractive.html" title="GVirSandboxContextInteractive">
+<meta name="generator" content="GTK-Doc V1.19 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="GVirSandboxConsoleRpc.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libvirt-sandbox Reference Manual</th>
+<td><a accesskey="n" href="GVirSandboxContextInteractive.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#GVirSandboxContext.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#GVirSandboxContext.description" class="shortcut">Description</a>
+                   | 
+                  <a href="#GVirSandboxContext.object-hierarchy" class="shortcut">Object Hierarchy</a>
+                   | 
+                  <a href="#GVirSandboxContext.properties" class="shortcut">Properties</a>
+</td></tr>
+</table>
+<div class="refentry">
+<a name="GVirSandboxContext"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="GVirSandboxContext.top_of_page"></a>GVirSandboxContext</span></h2>
+<p>GVirSandboxContext — Application sandbox context</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="GVirSandboxContext.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+#include &lt;libvirt-sandbox/libvirt-sandbox.h&gt;
+
+#define             <a class="link" href="GVirSandboxContext.html#GVIR-SANDBOX-TYPE-CONTEXT-HANDLE:CAPS" title="GVIR_SANDBOX_TYPE_CONTEXT_HANDLE">GVIR_SANDBOX_TYPE_CONTEXT_HANDLE</a>
+struct              <a class="link" href="GVirSandboxContext.html#GVirSandboxContext-struct" title="struct GVirSandboxContext">GVirSandboxContext</a>;
+struct              <a class="link" href="GVirSandboxContext.html#GVirSandboxContextClass" title="struct GVirSandboxContextClass">GVirSandboxContextClass</a>;
+<a class="link" href="GVirSandboxConfig.html" title="GVirSandboxConfig"><span class="returnvalue">GVirSandboxConfig</span></a> * <a class="link" href="GVirSandboxContext.html#gvir-sandbox-context-get-config" title="gvir_sandbox_context_get_config ()">gvir_sandbox_context_get_config</a>     (<em class="parameter"><code><a class="link" href="GVirSandboxContext.html" title="GVirSandboxContext"><span class="type">GVirSandboxContext</span></a> *ctxt</code></em>);
+<span class="returnvalue">gboolean</span>            <a class="link" href="GVirSandboxContext.html#gvir-sandbox-context-start" title="gvir_sandbox_context_start ()">gvir_sandbox_context_start</a>          (<em class="parameter"><code><a class="link" href="GVirSandboxContext.html" title="GVirSandboxContext"><span class="type">GVirSandboxContext</span></a> *ctxt</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);
+<span class="returnvalue">gboolean</span>            <a class="link" href="GVirSandboxContext.html#gvir-sandbox-context-stop" title="gvir_sandbox_context_stop ()">gvir_sandbox_context_stop</a>           (<em class="parameter"><code><a class="link" href="GVirSandboxContext.html" title="GVirSandboxContext"><span class="type">GVirSandboxContext</span></a> *ctxt</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);
+<span class="returnvalue">gboolean</span>            <a class="link" href="GVirSandboxContext.html#gvir-sandbox-context-attach" title="gvir_sandbox_context_attach ()">gvir_sandbox_context_attach</a>         (<em class="parameter"><code><a class="link" href="GVirSandboxContext.html" title="GVirSandboxContext"><span class="type">GVirSandboxContext</span></a> *ctxt</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);
+<span class="returnvalue">gboolean</span>            <a class="link" href="GVirSandboxContext.html#gvir-sandbox-context-detach" title="gvir_sandbox_context_detach ()">gvir_sandbox_context_detach</a>         (<em class="parameter"><code><a class="link" href="GVirSandboxContext.html" title="GVirSandboxContext"><span class="type">GVirSandboxContext</span></a> *ctxt</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);
+<span class="returnvalue">gboolean</span>            <a class="link" href="GVirSandboxContext.html#gvir-sandbox-context-is-attached" title="gvir_sandbox_context_is_attached ()">gvir_sandbox_context_is_attached</a>    (<em class="parameter"><code><a class="link" href="GVirSandboxContext.html" title="GVirSandboxContext"><span class="type">GVirSandboxContext</span></a> *ctxt</code></em>);
+<a href="/usr/share/gtk-doc/html/Libvirt-gobject/GVirDomain.html"><span class="returnvalue">GVirDomain</span></a> *        <a class="link" href="GVirSandboxContext.html#gvir-sandbox-context-get-domain" title="gvir_sandbox_context_get_domain ()">gvir_sandbox_context_get_domain</a>     (<em class="parameter"><code><a class="link" href="GVirSandboxContext.html" title="GVirSandboxContext"><span class="type">GVirSandboxContext</span></a> *ctxt</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);
+<a href="/usr/share/gtk-doc/html/Libvirt-gobject/GVirConnection.html"><span class="returnvalue">GVirConnection</span></a> *    <a class="link" href="GVirSandboxContext.html#gvir-sandbox-context-get-connection" title="gvir_sandbox_context_get_connection ()">gvir_sandbox_context_get_connection</a> (<em class="parameter"><code><a class="link" href="GVirSandboxContext.html" title="GVirSandboxContext"><span class="type">GVirSandboxContext</span></a> *ctxt</code></em>);
+<a class="link" href="GVirSandboxConsole.html" title="GVirSandboxConsole"><span class="returnvalue">GVirSandboxConsole</span></a> * <a class="link" href="GVirSandboxContext.html#gvir-sandbox-context-get-log-console" title="gvir_sandbox_context_get_log_console ()">gvir_sandbox_context_get_log_console</a>
+                                                        (<em class="parameter"><code><a class="link" href="GVirSandboxContext.html" title="GVirSandboxContext"><span class="type">GVirSandboxContext</span></a> *ctxt</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);
+<a class="link" href="GVirSandboxConsole.html" title="GVirSandboxConsole"><span class="returnvalue">GVirSandboxConsole</span></a> * <a class="link" href="GVirSandboxContext.html#gvir-sandbox-context-get-shell-console" title="gvir_sandbox_context_get_shell_console ()">gvir_sandbox_context_get_shell_console</a>
+                                                        (<em class="parameter"><code><a class="link" href="GVirSandboxContext.html" title="GVirSandboxContext"><span class="type">GVirSandboxContext</span></a> *ctxt</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);
+</pre>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxContext.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  GObject
+   +----GVirSandboxContext
+         +----<a class="link" href="GVirSandboxContextInteractive.html" title="GVirSandboxContextInteractive">GVirSandboxContextInteractive</a>
+         +----<a class="link" href="GVirSandboxContextService.html" title="GVirSandboxContextService">GVirSandboxContextService</a>
+</pre>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxContext.properties"></a><h2>Properties</h2>
+<pre class="synopsis">
+  "<a class="link" href="GVirSandboxContext.html#GVirSandboxContext--config" title='The "config" property'>config</a>"                   <a class="link" href="GVirSandboxConfig.html" title="GVirSandboxConfig"><span class="type">GVirSandboxConfig</span></a>*    : Read / Write / Construct Only
+  "<a class="link" href="GVirSandboxContext.html#GVirSandboxContext--connection" title='The "connection" property'>connection</a>"               <a href="/usr/share/gtk-doc/html/Libvirt-gobject/GVirConnection.html"><span class="type">GVirConnection</span></a>*       : Read / Write / Construct Only
+  "<a class="link" href="GVirSandboxContext.html#GVirSandboxContext--domain" title='The "domain" property'>domain</a>"                   <a href="/usr/share/gtk-doc/html/Libvirt-gobject/GVirDomain.html"><span class="type">GVirDomain</span></a>*           : Read / Write
+</pre>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxContext.description"></a><h2>Description</h2>
+<p>
+Provides a base class for implementing console based application sandboxes
+</p>
+<p>
+The GVirSandboxContext object takes a <a class="link" href="GVirSandboxConfig.html" title="GVirSandboxConfig"><span class="type">GVirSandboxConfig</span></a> instance, passing it
+to <a class="link" href="GVirSandboxBuilder.html" title="GVirSandboxBuilder"><span class="type">GVirSandboxBuilder</span></a> instance to create a virtual machine, and then provides
+access to a <a class="link" href="GVirSandboxConsole.html" title="GVirSandboxConsole"><span class="type">GVirSandboxConsole</span></a> instance for interacting with the sandboxed
+application's stdio.
+</p>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxContext.details"></a><h2>Details</h2>
+<div class="refsect2">
+<a name="GVIR-SANDBOX-TYPE-CONTEXT-HANDLE:CAPS"></a><h3>GVIR_SANDBOX_TYPE_CONTEXT_HANDLE</h3>
+<pre class="programlisting">#define GVIR_SANDBOX_TYPE_CONTEXT_HANDLE      (gvir_sandbox_context_handle_get_type ())
+</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GVirSandboxContext-struct"></a><h3>struct GVirSandboxContext</h3>
+<pre class="programlisting">struct GVirSandboxContext;</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GVirSandboxContextClass"></a><h3>struct GVirSandboxContextClass</h3>
+<pre class="programlisting">struct GVirSandboxContextClass {
+    GObjectClass parent_class;
+
+    /* Class method overrides */
+    gboolean (*start)(GVirSandboxContext *ctxt, GError **error);
+    gboolean (*stop)(GVirSandboxContext *ctxt, GError **error);
+    gboolean (*attach)(GVirSandboxContext *ctxt, GError **error);
+    gboolean (*detach)(GVirSandboxContext *ctxt, GError **error);
+
+    gpointer padding[LIBVIRT_SANDBOX_CLASS_PADDING];
+};
+</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-context-get-config"></a><h3>gvir_sandbox_context_get_config ()</h3>
+<pre class="programlisting"><a class="link" href="GVirSandboxConfig.html" title="GVirSandboxConfig"><span class="returnvalue">GVirSandboxConfig</span></a> * gvir_sandbox_context_get_config     (<em class="parameter"><code><a class="link" href="GVirSandboxContext.html" title="GVirSandboxContext"><span class="type">GVirSandboxContext</span></a> *ctxt</code></em>);</pre>
+<p>
+Retrieves the sandbox configuration
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ctxt</code></em> :</span></p></td>
+<td>the sandbox context. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the current configuration. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-context-start"></a><h3>gvir_sandbox_context_start ()</h3>
+<pre class="programlisting"><span class="returnvalue">gboolean</span>            gvir_sandbox_context_start          (<em class="parameter"><code><a class="link" href="GVirSandboxContext.html" title="GVirSandboxContext"><span class="type">GVirSandboxContext</span></a> *ctxt</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-context-stop"></a><h3>gvir_sandbox_context_stop ()</h3>
+<pre class="programlisting"><span class="returnvalue">gboolean</span>            gvir_sandbox_context_stop           (<em class="parameter"><code><a class="link" href="GVirSandboxContext.html" title="GVirSandboxContext"><span class="type">GVirSandboxContext</span></a> *ctxt</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-context-attach"></a><h3>gvir_sandbox_context_attach ()</h3>
+<pre class="programlisting"><span class="returnvalue">gboolean</span>            gvir_sandbox_context_attach         (<em class="parameter"><code><a class="link" href="GVirSandboxContext.html" title="GVirSandboxContext"><span class="type">GVirSandboxContext</span></a> *ctxt</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-context-detach"></a><h3>gvir_sandbox_context_detach ()</h3>
+<pre class="programlisting"><span class="returnvalue">gboolean</span>            gvir_sandbox_context_detach         (<em class="parameter"><code><a class="link" href="GVirSandboxContext.html" title="GVirSandboxContext"><span class="type">GVirSandboxContext</span></a> *ctxt</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-context-is-attached"></a><h3>gvir_sandbox_context_is_attached ()</h3>
+<pre class="programlisting"><span class="returnvalue">gboolean</span>            gvir_sandbox_context_is_attached    (<em class="parameter"><code><a class="link" href="GVirSandboxContext.html" title="GVirSandboxContext"><span class="type">GVirSandboxContext</span></a> *ctxt</code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-context-get-domain"></a><h3>gvir_sandbox_context_get_domain ()</h3>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/Libvirt-gobject/GVirDomain.html"><span class="returnvalue">GVirDomain</span></a> *        gvir_sandbox_context_get_domain     (<em class="parameter"><code><a class="link" href="GVirSandboxContext.html" title="GVirSandboxContext"><span class="type">GVirSandboxContext</span></a> *ctxt</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);</pre>
+<p>
+Retrieves the sandbox domain (if running)
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ctxt</code></em> :</span></p></td>
+<td>the sandbox context. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the current domain or NULL. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-context-get-connection"></a><h3>gvir_sandbox_context_get_connection ()</h3>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/Libvirt-gobject/GVirConnection.html"><span class="returnvalue">GVirConnection</span></a> *    gvir_sandbox_context_get_connection (<em class="parameter"><code><a class="link" href="GVirSandboxContext.html" title="GVirSandboxContext"><span class="type">GVirSandboxContext</span></a> *ctxt</code></em>);</pre>
+<p>
+Retrieves the sandbox connection
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ctxt</code></em> :</span></p></td>
+<td>the sandbox context. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the current connection or NULL. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-context-get-log-console"></a><h3>gvir_sandbox_context_get_log_console ()</h3>
+<pre class="programlisting"><a class="link" href="GVirSandboxConsole.html" title="GVirSandboxConsole"><span class="returnvalue">GVirSandboxConsole</span></a> * gvir_sandbox_context_get_log_console
+                                                        (<em class="parameter"><code><a class="link" href="GVirSandboxContext.html" title="GVirSandboxContext"><span class="type">GVirSandboxContext</span></a> *ctxt</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);</pre>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ctxt</code></em> :</span></p></td>
+<td>the sandbox context. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the sandbox console (or NULL). <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>][<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-sandbox-context-get-shell-console"></a><h3>gvir_sandbox_context_get_shell_console ()</h3>
+<pre class="programlisting"><a class="link" href="GVirSandboxConsole.html" title="GVirSandboxConsole"><span class="returnvalue">GVirSandboxConsole</span></a> * gvir_sandbox_context_get_shell_console
+                                                        (<em class="parameter"><code><a class="link" href="GVirSandboxContext.html" title="GVirSandboxContext"><span class="type">GVirSandboxContext</span></a> *ctxt</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);</pre>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ctxt</code></em> :</span></p></td>
+<td>the sandbox context. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the sandbox console (or NULL). <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>][<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div class="refsect1">
+<a name="GVirSandboxContext.property-details"></a><h2>Property Details</h2>
+<div class="refsect2">
+<a name="GVirSandboxContext--config"></a><h3>The <code class="literal">"config"</code> property</h3>
+<pre class="programlisting">  "config"                   <a class="link" href="GVirSandboxConfig.html" title="GVirSandboxConfig"><span class="type">GVirSandboxConfig</span></a>*    : Read / Write / Construct Only</pre>
+<p>The sandbox configuration.</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GVirSandboxContext--connection"></a><h3>The <code class="literal">"connection"</code> property</h3>
+<pre class="programlisting">  "connection"               <a href="/usr/share/gtk-doc/html/Libvirt-gobject/GVirConnection.html"><span class="type">GVirConnection</span></a>*       : Read / Write / Construct Only</pre>
+<p>The sandbox connection.</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GVirSandboxContext--domain"></a><h3>The <code class="literal">"domain"</code> property</h3>
+<pre class="programlisting">  "domain"                   <a href="/usr/share/gtk-doc/html/Libvirt-gobject/GVirDomain.html"><span class="type">GVirDomain</span></a>*           : Read / Write</pre>
+<p>The sandbox domain.</p>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.19</div>
+</body>
+</html>
